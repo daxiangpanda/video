@@ -7,9 +7,8 @@
 //
 
 #import "ViewController.h"
-#import <TZImagePickerController.h>
 
-@interface ViewController ()<TZImagePickerControllerDelegate>
+@interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *openImagePicker;
 
@@ -25,7 +24,7 @@
 
 
 - (void)openImagePickerButtonTapped{
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
+    UIImagePickerController *imagePickerVc = [[UIImagePickerController alloc] init];
     
     // You can get the photos by block, the same as by delegate.
     // 你可以通过block或者代理，来得到用户选择的照片.
