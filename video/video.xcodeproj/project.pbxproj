@@ -256,6 +256,7 @@
 				TargetAttributes = {
 					822DC7981F6FF7D600A0B21D = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 9X5SZM9LV5;
 						ProvisioningStyle = Automatic;
 					};
 					822DC7B11F6FF7D600A0B21D = {
@@ -626,6 +627,7 @@
 			baseConfigurationReference = 766EDB7004CCE4589B4F8D9B /* Pods-video.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9X5SZM9LV5;
 				INFOPLIST_FILE = video/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "lxz-.cp.video";
@@ -638,6 +640,7 @@
 			baseConfigurationReference = 4B8C65EE3A7F57EF30CA5544 /* Pods-video.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9X5SZM9LV5;
 				INFOPLIST_FILE = video/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "lxz-.cp.video";
@@ -714,6 +717,7 @@
 				822DC7C81F6FF7D600A0B21D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		822DC7C91F6FF7D600A0B21D /* Build configuration list for PBXNativeTarget "videoTests" */ = {
 			isa = XCConfigurationList;
@@ -722,6 +726,7 @@
 				822DC7CB1F6FF7D600A0B21D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		822DC7CC1F6FF7D600A0B21D /* Build configuration list for PBXNativeTarget "videoUITests" */ = {
 			isa = XCConfigurationList;
@@ -730,6 +735,7 @@
 				822DC7CE1F6FF7D600A0B21D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
