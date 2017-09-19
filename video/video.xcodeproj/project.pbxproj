@@ -19,6 +19,9 @@
 		82BF09891F701F5C00592E22 /* myImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF09881F701F5C00592E22 /* myImagePickerViewController.m */; };
 		82BF098A1F701F5C00592E22 /* myImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF09881F701F5C00592E22 /* myImagePickerViewController.m */; };
 		82BF098B1F701F5C00592E22 /* myImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF09881F701F5C00592E22 /* myImagePickerViewController.m */; };
+		82BF09901F71789F00592E22 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF098F1F71789F00592E22 /* imageCell.m */; };
+		82BF09911F71789F00592E22 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF098F1F71789F00592E22 /* imageCell.m */; };
+		82BF09921F71789F00592E22 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF098F1F71789F00592E22 /* imageCell.m */; };
 		C390F7318AF288629A54F50A /* libPods-video.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2753B5772D5BBAE5F50FD087 /* libPods-video.a */; };
 		D4CFAD8E009252C823F4D5A1 /* libPods-videoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFE450439486415631CF32E /* libPods-videoUITests.a */; };
 /* End PBXBuildFile section */
@@ -66,6 +69,8 @@
 		822DC7C31F6FF7D600A0B21D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82BF09871F701F5C00592E22 /* myImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myImagePickerViewController.h; sourceTree = "<group>"; };
 		82BF09881F701F5C00592E22 /* myImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myImagePickerViewController.m; sourceTree = "<group>"; };
+		82BF098E1F71789F00592E22 /* imageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageCell.h; sourceTree = "<group>"; };
+		82BF098F1F71789F00592E22 /* imageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageCell.m; sourceTree = "<group>"; };
 		9BE15468D3329503C2B87BD0 /* Pods-videoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-videoUITests/Pods-videoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFE450439486415631CF32E /* libPods-videoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-videoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -223,6 +228,8 @@
 		82BF09841F701EEC00592E22 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				82BF098E1F71789F00592E22 /* imageCell.h */,
+				82BF098F1F71789F00592E22 /* imageCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -521,6 +528,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				822DC7A41F6FF7D600A0B21D /* ViewController.m in Sources */,
+				82BF09901F71789F00592E22 /* imageCell.m in Sources */,
 				822DC7A11F6FF7D600A0B21D /* AppDelegate.m in Sources */,
 				82BF09891F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
 				822DC79E1F6FF7D600A0B21D /* main.m in Sources */,
@@ -533,6 +541,7 @@
 			files = (
 				82BF098A1F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
 				822DC7B71F6FF7D600A0B21D /* videoTests.m in Sources */,
+				82BF09911F71789F00592E22 /* imageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +551,7 @@
 			files = (
 				82BF098B1F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
 				822DC7C21F6FF7D600A0B21D /* videoUITests.m in Sources */,
+				82BF09921F71789F00592E22 /* imageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,11 +7,12 @@
 //
 
 #import "ViewController.h"
-#import <TZImagePickerController.h>
+#import "myImagePickerViewController.h"
 
-@interface ViewController ()<TZImagePickerControllerDelegate>
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIButton *openImagePicker;
+@property (weak, nonatomic) IBOutlet UIButton *imagePickerButton;
+
 
 @end
 
@@ -19,21 +20,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.openImagePicker addTarget:self action:@selector(openImagePickerButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     // Do any additional setup after loading the view, typically from a nib.
+    [self.imagePickerButton addTarget:self action:@selector(imagePickerButtonClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)imagePickerButtonClick {
+    myImagePickerViewController *myIMPicker = [[myImagePickerViewController alloc]init];
+    [self.navigationController pushViewController:myIMPicker animated:YES];
 }
 
 
-- (void)openImagePickerButtonTapped{
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
-    
-    
-
-    [self presentViewController:imagePickerVc animated:YES completion:nil];
-}
-
-- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(id)asset {
-    
-}
 
 @end
