@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "myImagePickerViewController.h"
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ViewController()
 
 @property (weak, nonatomic) IBOutlet UIButton *imagePickerButton;
 

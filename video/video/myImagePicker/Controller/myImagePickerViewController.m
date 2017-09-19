@@ -7,12 +7,13 @@
 //
 
 #import "myImagePickerViewController.h"
+#import "imageCell.h"
 #import <UIKit/UIKit.h>
 #import <TZImagePickerController.h>
 #import <Photos/Photos.h>
 #import <Masonry.h>
 
-@interface myImagePickerViewController ()
+@interface myImagePickerViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView        *tableView;
 @property (nonatomic,strong) NSMutableArray     *photoArray;
@@ -23,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self getOriginalImages];
     [self setupView];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -45,12 +46,21 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    return [UIScreen mainScreen].bounds.size.width/4*3;
+}
 
 #pragma mark - tableView delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
+    imageCell *cell = [[imageCell alloc]init];
+    if(indexPath.row<_photoArray.count){
+        cell.videoImage = [_photoArray objectAtIndex:indexPath.row];
+    }
+    return cell;
 }
+
+
+
 
 #pragma mark - getter
 - (UITableView*)tableView {
@@ -106,7 +116,7 @@
         
         // 从asset中获得图片
         [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-            [_photoArray addObject:result];
+            [self.photoArray addObject:result];
             NSLog(@"%@", result);
         }];
     }

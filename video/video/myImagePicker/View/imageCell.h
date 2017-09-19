@@ -10,4 +10,5 @@
 
 @interface imageCell : UITableViewCell
 
+@property(nonatomic, strong) UIImage*       videoImage;
 @end
