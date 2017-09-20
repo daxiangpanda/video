@@ -7,20 +7,30 @@
 //
 
 #import "myImagePickerViewController.h"
+#import "imagePickerLayout.h"
 #import "imageCell.h"
 #import <UIKit/UIKit.h>
 #import <TZImagePickerController.h>
 #import <Photos/Photos.h>
 #import <Masonry.h>
 
-@interface myImagePickerViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface myImagePickerViewController () <UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic,strong) UITableView        *tableView;
-@property (nonatomic,strong) NSMutableArray     *photoArray;
-
+@property (nonatomic, strong) NSMutableArray     *photoArray;
+@property (nonatomic, strong) imagePickerLayout *layout;
 @end
 
 @implementation myImagePickerViewController
+
+#pragma mark - life cycle
+- (id)initWithColumnsCount:(NSInteger)count {
+    imagePickerLayout *layout = [[imagePickerLayout alloc] initWithColumsCount:count];
+    if (self = [super initWithCollectionViewLayout:layout]) {
+        _layout = layout;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

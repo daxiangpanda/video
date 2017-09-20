@@ -16,6 +16,9 @@
 		822DC7AC1F6FF7D600A0B21D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 822DC7AA1F6FF7D600A0B21D /* LaunchScreen.storyboard */; };
 		822DC7B71F6FF7D600A0B21D /* videoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 822DC7B61F6FF7D600A0B21D /* videoTests.m */; };
 		822DC7C21F6FF7D600A0B21D /* videoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 822DC7C11F6FF7D600A0B21D /* videoUITests.m */; };
+		82B7106D1F72346D00CB3D78 /* imagePickerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B7106C1F72346D00CB3D78 /* imagePickerLayout.m */; };
+		82B7106E1F72346D00CB3D78 /* imagePickerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B7106C1F72346D00CB3D78 /* imagePickerLayout.m */; };
+		82B7106F1F72346D00CB3D78 /* imagePickerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B7106C1F72346D00CB3D78 /* imagePickerLayout.m */; };
 		82BF09891F701F5C00592E22 /* myImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF09881F701F5C00592E22 /* myImagePickerViewController.m */; };
 		82BF098A1F701F5C00592E22 /* myImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF09881F701F5C00592E22 /* myImagePickerViewController.m */; };
 		82BF098B1F701F5C00592E22 /* myImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF09881F701F5C00592E22 /* myImagePickerViewController.m */; };
@@ -67,6 +70,8 @@
 		822DC7BD1F6FF7D600A0B21D /* videoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = videoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		822DC7C11F6FF7D600A0B21D /* videoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = videoUITests.m; sourceTree = "<group>"; };
 		822DC7C31F6FF7D600A0B21D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82B7106B1F72346D00CB3D78 /* imagePickerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imagePickerLayout.h; sourceTree = "<group>"; };
+		82B7106C1F72346D00CB3D78 /* imagePickerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imagePickerLayout.m; sourceTree = "<group>"; };
 		82BF09871F701F5C00592E22 /* myImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myImagePickerViewController.h; sourceTree = "<group>"; };
 		82BF09881F701F5C00592E22 /* myImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myImagePickerViewController.m; sourceTree = "<group>"; };
 		82BF098E1F71789F00592E22 /* imageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageCell.h; sourceTree = "<group>"; };
@@ -230,6 +235,8 @@
 			children = (
 				82BF098E1F71789F00592E22 /* imageCell.h */,
 				82BF098F1F71789F00592E22 /* imageCell.m */,
+				82B7106B1F72346D00CB3D78 /* imagePickerLayout.h */,
+				82B7106C1F72346D00CB3D78 /* imagePickerLayout.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -530,6 +537,7 @@
 				822DC7A41F6FF7D600A0B21D /* ViewController.m in Sources */,
 				82BF09901F71789F00592E22 /* imageCell.m in Sources */,
 				822DC7A11F6FF7D600A0B21D /* AppDelegate.m in Sources */,
+				82B7106D1F72346D00CB3D78 /* imagePickerLayout.m in Sources */,
 				82BF09891F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
 				822DC79E1F6FF7D600A0B21D /* main.m in Sources */,
 			);
@@ -540,6 +548,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82BF098A1F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
+				82B7106E1F72346D00CB3D78 /* imagePickerLayout.m in Sources */,
 				822DC7B71F6FF7D600A0B21D /* videoTests.m in Sources */,
 				82BF09911F71789F00592E22 /* imageCell.m in Sources */,
 			);
@@ -550,6 +559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82BF098B1F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
+				82B7106F1F72346D00CB3D78 /* imagePickerLayout.m in Sources */,
 				822DC7C21F6FF7D600A0B21D /* videoUITests.m in Sources */,
 				82BF09921F71789F00592E22 /* imageCell.m in Sources */,
 			);
