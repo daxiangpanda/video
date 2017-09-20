@@ -9,6 +9,7 @@ target 'video' do
   pod 'AFNetworking', '~> 2.5'
   pod 'TZImagePickerController'
   pod 'Masonry'
+  pod 'GPUImage'
   target 'videoTests' do
     inherit! :search_paths
     # Pods for testing

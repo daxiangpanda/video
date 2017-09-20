@@ -8,11 +8,12 @@
 
 #import "ViewController.h"
 #import "myImagePickerViewController.h"
+#import "RecordVideoController.h"
 
 @interface ViewController()
 
 @property (weak, nonatomic) IBOutlet UIButton *imagePickerButton;
-
+@property (weak, nonatomic) IBOutlet UIButton *recordButton;
 
 @end
 
@@ -21,7 +22,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self addButtonTarget];
+}
+
+- (void)addButtonTarget {
     [self.imagePickerButton addTarget:self action:@selector(imagePickerButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.recordButton addTarget:self action:@selector(recordButtonClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)imagePickerButtonClick {
@@ -29,6 +35,9 @@
     [self.navigationController pushViewController:myIMPicker animated:YES];
 }
 
-
+- (void)recordButtonClick {
+    RecordVideoController *recordVC = [[RecordVideoController alloc]init];
+    [self.navigationController pushViewController:recordVC animated:YES];
+}
 
 @end

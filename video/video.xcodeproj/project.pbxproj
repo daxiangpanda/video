@@ -25,6 +25,9 @@
 		82BF09901F71789F00592E22 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF098F1F71789F00592E22 /* imageCell.m */; };
 		82BF09911F71789F00592E22 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF098F1F71789F00592E22 /* imageCell.m */; };
 		82BF09921F71789F00592E22 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF098F1F71789F00592E22 /* imageCell.m */; };
+		82BF09A01F72BE7700592E22 /* RecordVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF099F1F72BE7700592E22 /* RecordVideoController.m */; };
+		82BF09A11F72BE7700592E22 /* RecordVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF099F1F72BE7700592E22 /* RecordVideoController.m */; };
+		82BF09A21F72BE7700592E22 /* RecordVideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF099F1F72BE7700592E22 /* RecordVideoController.m */; };
 		C390F7318AF288629A54F50A /* libPods-video.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2753B5772D5BBAE5F50FD087 /* libPods-video.a */; };
 		D4CFAD8E009252C823F4D5A1 /* libPods-videoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFE450439486415631CF32E /* libPods-videoUITests.a */; };
 /* End PBXBuildFile section */
@@ -76,6 +79,8 @@
 		82BF09881F701F5C00592E22 /* myImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myImagePickerViewController.m; sourceTree = "<group>"; };
 		82BF098E1F71789F00592E22 /* imageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageCell.h; sourceTree = "<group>"; };
 		82BF098F1F71789F00592E22 /* imageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageCell.m; sourceTree = "<group>"; };
+		82BF099E1F72BE7700592E22 /* RecordVideoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordVideoController.h; sourceTree = "<group>"; };
+		82BF099F1F72BE7700592E22 /* RecordVideoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordVideoController.m; sourceTree = "<group>"; };
 		9BE15468D3329503C2B87BD0 /* Pods-videoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-videoUITests/Pods-videoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFE450439486415631CF32E /* libPods-videoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-videoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -156,6 +161,7 @@
 		822DC79B1F6FF7D600A0B21D /* video */ = {
 			isa = PBXGroup;
 			children = (
+				82BF09951F72BB7200592E22 /* RecordVideo */,
 				82BF09801F701EEC00592E22 /* myImagePicker */,
 				822DC79F1F6FF7D600A0B21D /* AppDelegate.h */,
 				822DC7A01F6FF7D600A0B21D /* AppDelegate.m */,
@@ -237,6 +243,47 @@
 				82BF098F1F71789F00592E22 /* imageCell.m */,
 				82B7106B1F72346D00CB3D78 /* imagePickerLayout.h */,
 				82B7106C1F72346D00CB3D78 /* imagePickerLayout.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		82BF09951F72BB7200592E22 /* RecordVideo */ = {
+			isa = PBXGroup;
+			children = (
+				82BF09961F72BB7200592E22 /* Controller */,
+				82BF09971F72BB7200592E22 /* Model */,
+				82BF09981F72BB7200592E22 /* Store */,
+				82BF09991F72BB7200592E22 /* View */,
+			);
+			path = RecordVideo;
+			sourceTree = "<group>";
+		};
+		82BF09961F72BB7200592E22 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				82BF099E1F72BE7700592E22 /* RecordVideoController.h */,
+				82BF099F1F72BE7700592E22 /* RecordVideoController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		82BF09971F72BB7200592E22 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		82BF09981F72BB7200592E22 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		82BF09991F72BB7200592E22 /* View */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -483,6 +530,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-video/Pods-video-resources.sh",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_amatorka.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png",
 				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -535,6 +587,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				822DC7A41F6FF7D600A0B21D /* ViewController.m in Sources */,
+				82BF09A01F72BE7700592E22 /* RecordVideoController.m in Sources */,
 				82BF09901F71789F00592E22 /* imageCell.m in Sources */,
 				822DC7A11F6FF7D600A0B21D /* AppDelegate.m in Sources */,
 				82B7106D1F72346D00CB3D78 /* imagePickerLayout.m in Sources */,
@@ -550,6 +603,7 @@
 				82BF098A1F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
 				82B7106E1F72346D00CB3D78 /* imagePickerLayout.m in Sources */,
 				822DC7B71F6FF7D600A0B21D /* videoTests.m in Sources */,
+				82BF09A11F72BE7700592E22 /* RecordVideoController.m in Sources */,
 				82BF09911F71789F00592E22 /* imageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,6 +615,7 @@
 				82BF098B1F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
 				82B7106F1F72346D00CB3D78 /* imagePickerLayout.m in Sources */,
 				822DC7C21F6FF7D600A0B21D /* videoUITests.m in Sources */,
+				82BF09A21F72BE7700592E22 /* RecordVideoController.m in Sources */,
 				82BF09921F71789F00592E22 /* imageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

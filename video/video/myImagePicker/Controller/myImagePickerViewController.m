@@ -40,10 +40,10 @@
 }
 
 - (void)setupView {
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.view);
-    }];
+//    [self.view addSubview:self.tableView];
+//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.mas_equalTo(self.view);
+//    }];
 }
 
 
@@ -72,15 +72,15 @@
 
 
 
-#pragma mark - getter
-- (UITableView*)tableView {
-    if(!_tableView) {
-        _tableView = [[UITableView alloc]init];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-    }
-    return _tableView;
-}
+//#pragma mark - getter
+//- (UITableView*)tableView {
+//    if(!_tableView) {
+//        _tableView = [[UITableView alloc]init];
+//        _tableView.delegate = self;
+//        _tableView.dataSource = self;
+//    }
+//    return _tableView;
+//}
 
 - (NSMutableArray*)photoArray {
     if(!_photoArray) {
