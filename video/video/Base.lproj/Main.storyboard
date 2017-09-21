@@ -31,6 +31,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Record"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLU-5i-GVw">
+                                <rect key="frame" x="110" y="414" width="154" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="waterMarkAfter"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -39,6 +44,7 @@
                         <outlet property="RecordButton" destination="UEj-V8-zgE" id="gaR-fA-M3Q"/>
                         <outlet property="imagePickerButton" destination="m7j-Zi-d7O" id="dwL-LV-lV5"/>
                         <outlet property="recordButton" destination="UEj-V8-zgE" id="kih-hK-1W2"/>
+                        <outlet property="waterMarkButton" destination="aLU-5i-GVw" id="eXE-VP-0UN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

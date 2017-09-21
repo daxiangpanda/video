@@ -9,11 +9,12 @@
 #import "ViewController.h"
 #import "myImagePickerViewController.h"
 #import "RecordVideoController.h"
-
+#import "VideoFilterController.h"
 @interface ViewController()
 
 @property (weak, nonatomic) IBOutlet UIButton *imagePickerButton;
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
+@property (weak, nonatomic) IBOutlet UIButton *waterMarkButton;
 
 @end
 
@@ -28,6 +29,7 @@
 - (void)addButtonTarget {
     [self.imagePickerButton addTarget:self action:@selector(imagePickerButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.recordButton addTarget:self action:@selector(recordButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.waterMarkButton addTarget:self action:@selector(waterMarkButtonClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)imagePickerButtonClick {
@@ -38,6 +40,11 @@
 - (void)recordButtonClick {
     RecordVideoController *recordVC = [[RecordVideoController alloc]init];
     [self.navigationController pushViewController:recordVC animated:YES];
+}
+
+- (void)waterMarkButtonClick {
+    VideoFilterController *videoFilterVC = [[VideoFilterController alloc]init];
+    [self.navigationController pushViewController:videoFilterVC animated:YES];
 }
 
 @end
