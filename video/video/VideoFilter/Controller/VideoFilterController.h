@@ -10,4 +10,6 @@
     GPUImageMovieWriter             *movieWriter;
 }
 
+@property (nonatomic, strong) NSURL * videoURL;
+
 @end

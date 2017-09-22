@@ -57,7 +57,7 @@ static HandlerVideo *instance = nil;
 //    NSArray *sandboxPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
 //    NSString* path = [sandboxPaths.firstObject stringByAppendingPathComponent:videoName];
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
-    NSLog(@"%@",pathToMovie);
+//    NSLog(@"%@",pathToMovie);
     if([[NSFileManager defaultManager] fileExistsAtPath:pathToMovie]) {
         //如果视频存在的话，不用再生产
         NSLog(@"空视频%@存在",videoName);
