@@ -37,8 +37,8 @@
 - (void)setupView {
     self.backgroundColor = [UIColor clearColor];
     [self addSubview:self.lastFrameView];
-    [self addSubview:self.visualEffectView];
     [self addSubview:self.tailWaterMarkView];
+    [self addSubview:self.visualEffectView];
     
     [self.lastFrameView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
@@ -74,9 +74,9 @@
 
 - (UIVisualEffectView *)visualEffectView {
     if (_visualEffectView == nil) {
-//        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-//        _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        _visualEffectView.alpha = 0.9;
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//        _visualEffectView.alpha = 0.9;
         _visualEffectView.backgroundColor = [UIColor clearColor];
         _visualEffectView.userInteractionEnabled = NO;
     }

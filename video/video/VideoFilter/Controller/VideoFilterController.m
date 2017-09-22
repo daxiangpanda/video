@@ -6,6 +6,8 @@
 
 @interface VideoFilterController ()
 
+@property (nonatomic, strong) UIVisualEffectView          *visualEffectView;
+
 @end
 
 @implementation VideoFilterController
@@ -14,7 +16,7 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-
+    self.visualEffectView.frame = self.view.frame;
 
     GPUImageView *filterView = [[GPUImageView alloc] initWithFrame:self.view.frame];
     [self.view addSubview: filterView];
@@ -81,17 +83,17 @@
     
     [addBlendFilter addTarget:movieWriter];
 //    __unsafe_unretained GPUImageUIElement *weakUIE = UIElement;
-    [UIView animateKeyframesWithDuration:100 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        [tailView.visualEffectView setEffect:blurEffect];
-    } completion:nil];
+//    [UIView animateKeyframesWithDuration:100 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+//        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//        [tailView.visualEffectView setEffect:blurEffect];
+//    } completion:nil];
     [filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
         NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,1-(CGFloat)frameTime.value/frameTime.timescale/1.5);
         //imageView 1s模糊
         //waterMark 1s显示
 //        tailView.virtualEffectAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
-
-        tailView.waterMarkAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
+//
+//        tailView.waterMarkAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
 
         [UIElement update];
     }];
@@ -110,7 +112,22 @@
         });
     }];
 
+    [self.view addSubview:self.visualEffectView];
+        [UIView animateKeyframesWithDuration:5 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+            UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+            [self.visualEffectView setEffect:blurEffect];
+        } completion:nil];
+}
 
+- (UIVisualEffectView *)visualEffectView {
+    if (_visualEffectView == nil) {
+//        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+//        _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+                _visualEffectView.alpha = 1;
+        _visualEffectView.backgroundColor = [UIColor clearColor];
+        _visualEffectView.userInteractionEnabled = NO;
+    }
+    return _visualEffectView;
 }
 
 - (void)didReceiveMemoryWarning {
