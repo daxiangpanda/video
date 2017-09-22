@@ -36,7 +36,7 @@ static HandlerVideo *instance = nil;
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
     CGContextFillRect(context, rect);
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -52,11 +52,13 @@ static HandlerVideo *instance = nil;
       progressImageBlock:(CompProgressBlcok)processImageBlock
           completedBlock:(CompCompletedBlock)completeBlock {
     
-    NSString *videoName = [NSString stringWithFormat:@"blackVideo%.0f*%.0f %.2fs.mp4",size.width,size.height,time];
-    NSArray *sandboxPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString* path = [sandboxPaths.firstObject stringByAppendingPathComponent:videoName];
-    NSLog(@"%@",path);
-    if([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+    NSString *videoName = [NSString stringWithFormat:@"blackVideo%.0f*%.0f%.2fs.mp4",size.width,size.height,time];
+    NSString *videoPath = [NSString stringWithFormat:@"Documents/%@",videoName];
+//    NSArray *sandboxPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+//    NSString* path = [sandboxPaths.firstObject stringByAppendingPathComponent:videoName];
+    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
+    NSLog(@"%@",pathToMovie);
+    if([[NSFileManager defaultManager] fileExistsAtPath:pathToMovie]) {
         //如果视频存在的话，不用再生产
         NSLog(@"空视频%@存在",videoName);
         return;
@@ -64,7 +66,7 @@ static HandlerVideo *instance = nil;
     
     NSError *error = nil;
     
-    AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:[NSURL fileURLWithPath:path] fileType:AVFileTypeQuickTimeMovie error:&error];
+    AVAssetWriter *videoWriter = [[AVAssetWriter alloc] initWithURL:[NSURL fileURLWithPath:pathToMovie] fileType:AVFileTypeQuickTimeMovie error:&error];
     
     NSParameterAssert(videoWriter);
     if(error)

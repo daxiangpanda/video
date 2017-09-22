@@ -7,6 +7,7 @@
     GPUImageView                    *filterImageView;
     GPUImageMovie                   *videoFile;
     GPUImageUIElement               *uiElementInput;
+    GPUImageMovieWriter             *movieWriter;
 }
 
 @end

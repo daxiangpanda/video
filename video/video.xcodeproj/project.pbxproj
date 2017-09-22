@@ -19,6 +19,34 @@
 		82B7106D1F72346D00CB3D78 /* imagePickerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B7106C1F72346D00CB3D78 /* imagePickerLayout.m */; };
 		82B7106E1F72346D00CB3D78 /* imagePickerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B7106C1F72346D00CB3D78 /* imagePickerLayout.m */; };
 		82B7106F1F72346D00CB3D78 /* imagePickerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B7106C1F72346D00CB3D78 /* imagePickerLayout.m */; };
+		82B710971F74B08300CB3D78 /* VTFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710941F74B08300CB3D78 /* VTFileManager.m */; };
+		82B710981F74B08300CB3D78 /* VTFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710941F74B08300CB3D78 /* VTFileManager.m */; };
+		82B710991F74B08300CB3D78 /* VTFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710941F74B08300CB3D78 /* VTFileManager.m */; };
+		82B7109A1F74B08300CB3D78 /* VTFileManager+FileName.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710961F74B08300CB3D78 /* VTFileManager+FileName.m */; };
+		82B7109B1F74B08300CB3D78 /* VTFileManager+FileName.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710961F74B08300CB3D78 /* VTFileManager+FileName.m */; };
+		82B7109C1F74B08300CB3D78 /* VTFileManager+FileName.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710961F74B08300CB3D78 /* VTFileManager+FileName.m */; };
+		82B7112A1F74BA1A00CB3D78 /* UIImage+ColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D01F74BA1A00CB3D78 /* UIImage+ColorImage.m */; };
+		82B7112B1F74BA1A00CB3D78 /* UIImage+ColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D01F74BA1A00CB3D78 /* UIImage+ColorImage.m */; };
+		82B7112C1F74BA1A00CB3D78 /* UIImage+ColorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D01F74BA1A00CB3D78 /* UIImage+ColorImage.m */; };
+		82B7112D1F74BA1A00CB3D78 /* UIImage+Enhancement.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D21F74BA1A00CB3D78 /* UIImage+Enhancement.m */; };
+		82B7112E1F74BA1A00CB3D78 /* UIImage+Enhancement.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D21F74BA1A00CB3D78 /* UIImage+Enhancement.m */; };
+		82B7112F1F74BA1A00CB3D78 /* UIImage+Enhancement.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D21F74BA1A00CB3D78 /* UIImage+Enhancement.m */; };
+		82B711301F74BA1A00CB3D78 /* UIImage+Resized.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D41F74BA1A00CB3D78 /* UIImage+Resized.m */; };
+		82B711311F74BA1A00CB3D78 /* UIImage+Resized.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D41F74BA1A00CB3D78 /* UIImage+Resized.m */; };
+		82B711321F74BA1A00CB3D78 /* UIImage+Resized.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D41F74BA1A00CB3D78 /* UIImage+Resized.m */; };
+		82B711331F74BA1A00CB3D78 /* UIImage+Tone.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D61F74BA1A00CB3D78 /* UIImage+Tone.m */; };
+		82B711341F74BA1A00CB3D78 /* UIImage+Tone.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D61F74BA1A00CB3D78 /* UIImage+Tone.m */; };
+		82B711351F74BA1A00CB3D78 /* UIImage+Tone.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D61F74BA1A00CB3D78 /* UIImage+Tone.m */; };
+		82B711361F74BA1A00CB3D78 /* UIImage+VideoImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D81F74BA1A00CB3D78 /* UIImage+VideoImage.m */; };
+		82B711371F74BA1A00CB3D78 /* UIImage+VideoImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D81F74BA1A00CB3D78 /* UIImage+VideoImage.m */; };
+		82B711381F74BA1A00CB3D78 /* UIImage+VideoImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D81F74BA1A00CB3D78 /* UIImage+VideoImage.m */; };
+		82B7115A1F74C24B00CB3D78 /* testVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 82B711591F74C24B00CB3D78 /* testVideo.mp4 */; };
+		82B711651F74F5BC00CB3D78 /* VTTailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B711641F74F5BC00CB3D78 /* VTTailView.m */; };
+		82B711661F74F5BC00CB3D78 /* VTTailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B711641F74F5BC00CB3D78 /* VTTailView.m */; };
+		82B711671F74F5BC00CB3D78 /* VTTailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B711641F74F5BC00CB3D78 /* VTTailView.m */; };
+		82B7116A1F75081000CB3D78 /* VTTailWaterMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B711691F75081000CB3D78 /* VTTailWaterMarkView.m */; };
+		82B7116B1F75081000CB3D78 /* VTTailWaterMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B711691F75081000CB3D78 /* VTTailWaterMarkView.m */; };
+		82B7116C1F75081000CB3D78 /* VTTailWaterMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B711691F75081000CB3D78 /* VTTailWaterMarkView.m */; };
 		82BF09891F701F5C00592E22 /* myImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF09881F701F5C00592E22 /* myImagePickerViewController.m */; };
 		82BF098A1F701F5C00592E22 /* myImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF09881F701F5C00592E22 /* myImagePickerViewController.m */; };
 		82BF098B1F701F5C00592E22 /* myImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82BF09881F701F5C00592E22 /* myImagePickerViewController.m */; };
@@ -81,6 +109,25 @@
 		822DC7C31F6FF7D600A0B21D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82B7106B1F72346D00CB3D78 /* imagePickerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imagePickerLayout.h; sourceTree = "<group>"; };
 		82B7106C1F72346D00CB3D78 /* imagePickerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imagePickerLayout.m; sourceTree = "<group>"; };
+		82B710931F74B08300CB3D78 /* VTFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTFileManager.h; sourceTree = "<group>"; };
+		82B710941F74B08300CB3D78 /* VTFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTFileManager.m; sourceTree = "<group>"; };
+		82B710951F74B08300CB3D78 /* VTFileManager+FileName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VTFileManager+FileName.h"; sourceTree = "<group>"; };
+		82B710961F74B08300CB3D78 /* VTFileManager+FileName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VTFileManager+FileName.m"; sourceTree = "<group>"; };
+		82B710CF1F74BA1A00CB3D78 /* UIImage+ColorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorImage.h"; sourceTree = "<group>"; };
+		82B710D01F74BA1A00CB3D78 /* UIImage+ColorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorImage.m"; sourceTree = "<group>"; };
+		82B710D11F74BA1A00CB3D78 /* UIImage+Enhancement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Enhancement.h"; sourceTree = "<group>"; };
+		82B710D21F74BA1A00CB3D78 /* UIImage+Enhancement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Enhancement.m"; sourceTree = "<group>"; };
+		82B710D31F74BA1A00CB3D78 /* UIImage+Resized.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resized.h"; sourceTree = "<group>"; };
+		82B710D41F74BA1A00CB3D78 /* UIImage+Resized.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resized.m"; sourceTree = "<group>"; };
+		82B710D51F74BA1A00CB3D78 /* UIImage+Tone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tone.h"; sourceTree = "<group>"; };
+		82B710D61F74BA1A00CB3D78 /* UIImage+Tone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tone.m"; sourceTree = "<group>"; };
+		82B710D71F74BA1A00CB3D78 /* UIImage+VideoImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+VideoImage.h"; sourceTree = "<group>"; };
+		82B710D81F74BA1A00CB3D78 /* UIImage+VideoImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+VideoImage.m"; sourceTree = "<group>"; };
+		82B711591F74C24B00CB3D78 /* testVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testVideo.mp4; sourceTree = "<group>"; };
+		82B711631F74F5BC00CB3D78 /* VTTailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTailView.h; sourceTree = "<group>"; };
+		82B711641F74F5BC00CB3D78 /* VTTailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTailView.m; sourceTree = "<group>"; };
+		82B711681F75081000CB3D78 /* VTTailWaterMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTailWaterMarkView.h; sourceTree = "<group>"; };
+		82B711691F75081000CB3D78 /* VTTailWaterMarkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTailWaterMarkView.m; sourceTree = "<group>"; };
 		82BF09871F701F5C00592E22 /* myImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myImagePickerViewController.h; sourceTree = "<group>"; };
 		82BF09881F701F5C00592E22 /* myImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myImagePickerViewController.m; sourceTree = "<group>"; };
 		82BF098E1F71789F00592E22 /* imageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageCell.h; sourceTree = "<group>"; };
@@ -171,6 +218,8 @@
 		822DC79B1F6FF7D600A0B21D /* video */ = {
 			isa = PBXGroup;
 			children = (
+				82B711591F74C24B00CB3D78 /* testVideo.mp4 */,
+				82B7109F1F74BA1900CB3D78 /* Category */,
 				82C0CBC61F74231F00E55584 /* VideoFilter */,
 				82BF09951F72BB7200592E22 /* RecordVideo */,
 				82BF09801F701EEC00592E22 /* myImagePicker */,
@@ -211,6 +260,44 @@
 				822DC7C31F6FF7D600A0B21D /* Info.plist */,
 			);
 			path = videoUITests;
+			sourceTree = "<group>";
+		};
+		82B710921F74B06D00CB3D78 /* File */ = {
+			isa = PBXGroup;
+			children = (
+				82B710931F74B08300CB3D78 /* VTFileManager.h */,
+				82B710941F74B08300CB3D78 /* VTFileManager.m */,
+				82B710951F74B08300CB3D78 /* VTFileManager+FileName.h */,
+				82B710961F74B08300CB3D78 /* VTFileManager+FileName.m */,
+			);
+			name = File;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		82B7109F1F74BA1900CB3D78 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				82B710921F74B06D00CB3D78 /* File */,
+				82B710CE1F74BA1A00CB3D78 /* UIImageCategory */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		82B710CE1F74BA1A00CB3D78 /* UIImageCategory */ = {
+			isa = PBXGroup;
+			children = (
+				82B710CF1F74BA1A00CB3D78 /* UIImage+ColorImage.h */,
+				82B710D01F74BA1A00CB3D78 /* UIImage+ColorImage.m */,
+				82B710D11F74BA1A00CB3D78 /* UIImage+Enhancement.h */,
+				82B710D21F74BA1A00CB3D78 /* UIImage+Enhancement.m */,
+				82B710D31F74BA1A00CB3D78 /* UIImage+Resized.h */,
+				82B710D41F74BA1A00CB3D78 /* UIImage+Resized.m */,
+				82B710D51F74BA1A00CB3D78 /* UIImage+Tone.h */,
+				82B710D61F74BA1A00CB3D78 /* UIImage+Tone.m */,
+				82B710D71F74BA1A00CB3D78 /* UIImage+VideoImage.h */,
+				82B710D81F74BA1A00CB3D78 /* UIImage+VideoImage.m */,
+			);
+			path = UIImageCategory;
 			sourceTree = "<group>";
 		};
 		82BF09801F701EEC00592E22 /* myImagePicker */ = {
@@ -336,6 +423,10 @@
 		82C0CBCC1F74231F00E55584 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				82B711631F74F5BC00CB3D78 /* VTTailView.h */,
+				82B711641F74F5BC00CB3D78 /* VTTailView.m */,
+				82B711681F75081000CB3D78 /* VTTailWaterMarkView.h */,
+				82B711691F75081000CB3D78 /* VTTailWaterMarkView.m */,
 				82C0CBCD1F74231F00E55584 /* HandlerVideo.h */,
 				82C0CBCE1F74231F00E55584 /* HandlerVideo.m */,
 			);
@@ -461,6 +552,7 @@
 				822DC7AC1F6FF7D600A0B21D /* LaunchScreen.storyboard in Resources */,
 				822DC7A91F6FF7D600A0B21D /* Assets.xcassets in Resources */,
 				822DC7A71F6FF7D600A0B21D /* Main.storyboard in Resources */,
+				82B7115A1F74C24B00CB3D78 /* testVideo.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,14 +733,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				822DC7A41F6FF7D600A0B21D /* ViewController.m in Sources */,
+				82B7112D1F74BA1A00CB3D78 /* UIImage+Enhancement.m in Sources */,
+				82B711651F74F5BC00CB3D78 /* VTTailView.m in Sources */,
+				82B710971F74B08300CB3D78 /* VTFileManager.m in Sources */,
 				82BF09A01F72BE7700592E22 /* RecordVideoController.m in Sources */,
+				82B7116A1F75081000CB3D78 /* VTTailWaterMarkView.m in Sources */,
 				82BF09901F71789F00592E22 /* imageCell.m in Sources */,
+				82B711331F74BA1A00CB3D78 /* UIImage+Tone.m in Sources */,
+				82B7109A1F74B08300CB3D78 /* VTFileManager+FileName.m in Sources */,
+				82B711301F74BA1A00CB3D78 /* UIImage+Resized.m in Sources */,
 				82C0CBD21F74231F00E55584 /* HandlerVideo.m in Sources */,
+				82B7112A1F74BA1A00CB3D78 /* UIImage+ColorImage.m in Sources */,
 				82C0CBCF1F74231F00E55584 /* VideoFilterController.m in Sources */,
 				822DC7A11F6FF7D600A0B21D /* AppDelegate.m in Sources */,
 				82B7106D1F72346D00CB3D78 /* imagePickerLayout.m in Sources */,
 				82BF09891F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
 				822DC79E1F6FF7D600A0B21D /* main.m in Sources */,
+				82B711361F74BA1A00CB3D78 /* UIImage+VideoImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,12 +758,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				82BF098A1F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
+				82B711341F74BA1A00CB3D78 /* UIImage+Tone.m in Sources */,
 				82B7106E1F72346D00CB3D78 /* imagePickerLayout.m in Sources */,
 				822DC7B71F6FF7D600A0B21D /* videoTests.m in Sources */,
 				82BF09A11F72BE7700592E22 /* RecordVideoController.m in Sources */,
+				82B711661F74F5BC00CB3D78 /* VTTailView.m in Sources */,
+				82B711311F74BA1A00CB3D78 /* UIImage+Resized.m in Sources */,
+				82B7112E1F74BA1A00CB3D78 /* UIImage+Enhancement.m in Sources */,
 				82C0CBD31F74231F00E55584 /* HandlerVideo.m in Sources */,
+				82B7109B1F74B08300CB3D78 /* VTFileManager+FileName.m in Sources */,
+				82B711371F74BA1A00CB3D78 /* UIImage+VideoImage.m in Sources */,
 				82BF09911F71789F00592E22 /* imageCell.m in Sources */,
+				82B7112B1F74BA1A00CB3D78 /* UIImage+ColorImage.m in Sources */,
+				82B7116B1F75081000CB3D78 /* VTTailWaterMarkView.m in Sources */,
 				82C0CBD01F74231F00E55584 /* VideoFilterController.m in Sources */,
+				82B710981F74B08300CB3D78 /* VTFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,12 +781,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				82BF098B1F701F5C00592E22 /* myImagePickerViewController.m in Sources */,
+				82B711351F74BA1A00CB3D78 /* UIImage+Tone.m in Sources */,
 				82B7106F1F72346D00CB3D78 /* imagePickerLayout.m in Sources */,
 				822DC7C21F6FF7D600A0B21D /* videoUITests.m in Sources */,
 				82BF09A21F72BE7700592E22 /* RecordVideoController.m in Sources */,
+				82B711671F74F5BC00CB3D78 /* VTTailView.m in Sources */,
+				82B711321F74BA1A00CB3D78 /* UIImage+Resized.m in Sources */,
+				82B7112F1F74BA1A00CB3D78 /* UIImage+Enhancement.m in Sources */,
 				82C0CBD41F74231F00E55584 /* HandlerVideo.m in Sources */,
+				82B7109C1F74B08300CB3D78 /* VTFileManager+FileName.m in Sources */,
+				82B711381F74BA1A00CB3D78 /* UIImage+VideoImage.m in Sources */,
 				82BF09921F71789F00592E22 /* imageCell.m in Sources */,
+				82B7112C1F74BA1A00CB3D78 /* UIImage+ColorImage.m in Sources */,
+				82B7116C1F75081000CB3D78 /* VTTailWaterMarkView.m in Sources */,
 				82C0CBD11F74231F00E55584 /* VideoFilterController.m in Sources */,
+				82B710991F74B08300CB3D78 /* VTFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
