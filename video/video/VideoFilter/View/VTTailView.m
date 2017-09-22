@@ -14,7 +14,7 @@
 //原图
 @property (nonatomic, strong) UIImageView                 *lastFrameView;
 //模糊效果
-@property (nonatomic, strong) UIVisualEffect              *visualEffect;
+@property (nonatomic, strong) UIVisualEffectView          *visualEffectView;
 //片尾水印
 @property (nonatomic, strong) VTTailWaterMarkView         *tailWaterMarkView;
 
@@ -36,44 +36,58 @@
 #pragma mark - setupView
 - (void)setupView {
     self.backgroundColor = [UIColor clearColor];
+    [self addSubview:self.lastFrameView];
+    [self addSubview:self.visualEffectView];
+    [self addSubview:self.tailWaterMarkView];
     
-    [self.l mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.mas_right).offset(-28);
-        make.bottom.mas_equalTo(self.mas_bottom).offset(-12);
-        make.left.lessThanOrEqualTo(self.mas_left).offset(20);
-        make.height.mas_equalTo(@32);
+    [self.lastFrameView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
     }];
     
-    [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.mas_right).offset(-28);
-        make.bottom.mas_equalTo(self.mas_bottom).offset(-12);
-        make.left.lessThanOrEqualTo(self.mas_left).offset(20);
-        make.height.mas_equalTo(@32);
+    [self.visualEffectView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
+    }];
+    
+    [self.tailWaterMarkView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
     }];
     
     [self layoutIfNeeded];
 }
 
-- (void)setart{
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:30 animations:^{
-            self.userNameLabel.frame = CGRectMake(0, 80, 30, 20);
-        }];
-    });
+//- (void)setart{
+//    dispatch_sync(dispatch_get_main_queue(), ^{
+//        [UIView animateWithDuration:30 animations:^{
+//            self.userNameLabel.frame = CGRectMake(0, 80, 30, 20);
+//        }];
+//    });
+//}
+
+
+- (UIImageView*)lastFrameView {
+    if(!_lastFrameView) {
+        _lastFrameView = [[UIImageView alloc]init];
+        
+    }
+    return _lastFrameView;
 }
 
-
-
-
-- (UILabel*)userNameLabel {
-    if(!_userNameLabel) {
-        _userNameLabel = [self createLabel];
-        _userNameLabel.font = [UIFont systemFontOfSize:50.0f];
-        _userNameLabel.textAlignment = NSTextAlignmentRight;
-        _userNameLabel.textColor = [UIColor whiteColor];
-        [self addSubview:_userNameLabel];
+- (UIVisualEffectView *)visualEffectView {
+    if (_visualEffectView == nil) {
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        _visualEffectView.alpha = 0;
+//        _visualEffectView.backgroundColor = [[UIColor colorFromName:@"181820"] colorWithAlphaComponent:0.2];
+        _visualEffectView.userInteractionEnabled = NO;
     }
-    return _userNameLabel;
+    return _visualEffectView;
+}
+
+- (VTTailWaterMarkView*)tailWaterMarkView {
+    if(!_tailWaterMarkView) {
+        _tailWaterMarkView = [[VTTailWaterMarkView alloc]init];
+    }
+    return _tailWaterMarkView;
 }
 
 -(UILabel *)createLabel{
@@ -83,7 +97,18 @@
 
 #pragma mark - setter
 - (void)setUserName:(NSString *)userName {
-    self.userNameLabel.text = [NSString stringWithFormat:@"@%@",userName];
+    self.tailWaterMarkView.userName = [NSString stringWithFormat:@"@%@",userName];
 }
 
+- (void)setVirtualEffectAlpha:(CGFloat)virtualEffectAlpha {
+    self.visualEffectView.alpha = virtualEffectAlpha;
+}
+
+- (void)setWaterMarkAlpha:(CGFloat)waterMarkAlpha {
+    self.tailWaterMarkView.alpha = waterMarkAlpha;
+}
+
+- (void)setLastFrameImage:(UIImage *)lastFrameImage {
+    self.lastFrameView.image = lastFrameImage;
+}
 @end

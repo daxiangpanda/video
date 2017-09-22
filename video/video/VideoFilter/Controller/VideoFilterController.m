@@ -2,7 +2,7 @@
 #import "HandlerVideo.h"
 #import <GPUImage.h>
 #import "UIImage+VideoImage.h"
-#import "VTWaterMarkView.h"
+#import "VTTailView.h"
 
 @interface VideoFilterController ()
 
@@ -51,24 +51,17 @@
     
     NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"testVideo" ofType:@"mp4"];
 
-    UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 720, 720)];
+    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, 720, 720)];
+    
+
     
     UIImage *lastImage = [UIImage thumbnailImageForVideo:[NSURL fileURLWithPath:testVideoPath] atTime:1];
     
-    UIImageView *imageView = [[UIImageView alloc]initWithImage:lastImage];
+    tailView.lastFrameImage = lastImage;
     
-    [contentView addSubview:imageView];
+    tailView.userName = @"大师";
     
-    VTWaterMarkView *waterMark = [[VTWaterMarkView alloc]initWithFrame:CGRectMake(0, 0, 720, 720)];
-
-    waterMark.userName = @"大师";
-    
-    [contentView addSubview:waterMark];
-
-    [UIView animateWithDuration:1 animations:^{
-        imageView.alpha = 0.2;
-    }];
-    GPUImageUIElement *UIElement = [[GPUImageUIElement alloc]initWithView:contentView];
+    GPUImageUIElement *UIElement = [[GPUImageUIElement alloc]initWithView:tailView];
     
     GPUImageAddBlendFilter *addBlendFilter = [[GPUImageAddBlendFilter alloc]init];
     
@@ -93,14 +86,15 @@
         NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,1-(CGFloat)frameTime.value/frameTime.timescale/1.5);
         //imageView 1s模糊
         //waterMark 1s显示
-        imageView.alpha = 1-(CGFloat)frameTime.value/frameTime.timescale/1.5;
-        waterMark.alpha = 1-(CGFloat)frameTime.value/frameTime.timescale/2;
+//        tailView.virtualEffectAlpha = 1-(CGFloat)frameTime.value/frameTime.timescale/1.5;
+        
+        tailView.waterMarkAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
 
         [UIElement update];
     }];
 //    [filter addTarget:filterView];
     
-    [movieWriter startRecording];
+//    [movieWriter startRecording];
     
     [videoFile startProcessing];
 
