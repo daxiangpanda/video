@@ -20,7 +20,7 @@
     [self.view addSubview: filterView];
     
     //生成一个黑色的视频
-    CGSize videoSize = CGSizeMake(720, 720);
+    CGSize videoSize = CGSizeMake(720, 540);
     CGFloat time = 1.5;
     CGFloat fps = 30;
     [[HandlerVideo sharedInstance]createBlackVideo:videoSize time:time fps:fps progressImageBlock:nil completedBlock:nil];
@@ -39,7 +39,7 @@
     if([[NSFileManager defaultManager] fileExistsAtPath:lastFrameMoviePath]) {
         [[NSFileManager defaultManager]removeItemAtPath:lastFrameMoviePath error:nil];
     }
-    movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:lastFrameVideoURL size:CGSizeMake(720, 720)];
+    movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:lastFrameVideoURL size:CGSizeMake(720, 540)];
     
     movieWriter.hasAudioTrack = YES;
     
@@ -49,13 +49,13 @@
     
     videoFile = [[GPUImageMovie alloc]initWithURL:sampleURL];
     
-    NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"testVideo" ofType:@"mp4"];
+    NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"];
 
-    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, 720, 720)];
+    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, 720, 540)];
     
+    CGFloat videoLength = [self getVideoLength:[NSURL fileURLWithPath:testVideoPath]];
 
-    
-    UIImage *lastImage = [UIImage thumbnailImageForVideo:[NSURL fileURLWithPath:testVideoPath] atTime:1];
+    UIImage *lastImage = [UIImage thumbnailImageForVideo:[NSURL fileURLWithPath:testVideoPath] atTime:videoLength*fps];
     
     tailView.lastFrameImage = lastImage;
     
@@ -81,13 +81,16 @@
     
     [addBlendFilter addTarget:movieWriter];
 //    __unsafe_unretained GPUImageUIElement *weakUIE = UIElement;
-
+    [UIView animateKeyframesWithDuration:100 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        [tailView.visualEffectView setEffect:blurEffect];
+    } completion:nil];
     [filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
         NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,1-(CGFloat)frameTime.value/frameTime.timescale/1.5);
         //imageView 1s模糊
         //waterMark 1s显示
-//        tailView.virtualEffectAlpha = 1-(CGFloat)frameTime.value/frameTime.timescale/1.5;
-        
+//        tailView.virtualEffectAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
+
         tailView.waterMarkAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
 
         [UIElement update];
@@ -114,7 +117,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (CGFloat)getVideoLength:(NSURL *)url{
+    NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO]
+                                                     forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
+    AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:url options:opts];
+    float second = 0;
+    second = urlAsset.duration.value/urlAsset.duration.timescale;
+    return second;
+}
 /*
 #pragma mark - Navigation
 

@@ -62,6 +62,7 @@
 		82C0CBD21F74231F00E55584 /* HandlerVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C0CBCE1F74231F00E55584 /* HandlerVideo.m */; };
 		82C0CBD31F74231F00E55584 /* HandlerVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C0CBCE1F74231F00E55584 /* HandlerVideo.m */; };
 		82C0CBD41F74231F00E55584 /* HandlerVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C0CBCE1F74231F00E55584 /* HandlerVideo.m */; };
+		82E095C71F752DE700A04215 /* testVideo1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 82E095C61F752DE700A04215 /* testVideo1.mp4 */; };
 		C390F7318AF288629A54F50A /* libPods-video.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2753B5772D5BBAE5F50FD087 /* libPods-video.a */; };
 		D4CFAD8E009252C823F4D5A1 /* libPods-videoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFE450439486415631CF32E /* libPods-videoUITests.a */; };
 /* End PBXBuildFile section */
@@ -138,6 +139,7 @@
 		82C0CBC91F74231F00E55584 /* VideoFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoFilterController.m; sourceTree = "<group>"; };
 		82C0CBCD1F74231F00E55584 /* HandlerVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandlerVideo.h; sourceTree = "<group>"; };
 		82C0CBCE1F74231F00E55584 /* HandlerVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandlerVideo.m; sourceTree = "<group>"; };
+		82E095C61F752DE700A04215 /* testVideo1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testVideo1.mp4; sourceTree = "<group>"; };
 		9BE15468D3329503C2B87BD0 /* Pods-videoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-videoUITests/Pods-videoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFE450439486415631CF32E /* libPods-videoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-videoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				82B711591F74C24B00CB3D78 /* testVideo.mp4 */,
+				82E095C61F752DE700A04215 /* testVideo1.mp4 */,
 				82B7109F1F74BA1900CB3D78 /* Category */,
 				82C0CBC61F74231F00E55584 /* VideoFilter */,
 				82BF09951F72BB7200592E22 /* RecordVideo */,
@@ -550,6 +553,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				822DC7AC1F6FF7D600A0B21D /* LaunchScreen.storyboard in Resources */,
+				82E095C71F752DE700A04215 /* testVideo1.mp4 in Resources */,
 				822DC7A91F6FF7D600A0B21D /* Assets.xcassets in Resources */,
 				822DC7A71F6FF7D600A0B21D /* Main.storyboard in Resources */,
 				82B7115A1F74C24B00CB3D78 /* testVideo.mp4 in Resources */,

@@ -47,7 +47,7 @@
     [self.visualEffectView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
     }];
-    
+//
     [self.tailWaterMarkView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
     }];
@@ -74,10 +74,10 @@
 
 - (UIVisualEffectView *)visualEffectView {
     if (_visualEffectView == nil) {
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-        _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        _visualEffectView.alpha = 0;
-//        _visualEffectView.backgroundColor = [[UIColor colorFromName:@"181820"] colorWithAlphaComponent:0.2];
+//        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//        _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        _visualEffectView.alpha = 0.9;
+        _visualEffectView.backgroundColor = [UIColor clearColor];
         _visualEffectView.userInteractionEnabled = NO;
     }
     return _visualEffectView;
