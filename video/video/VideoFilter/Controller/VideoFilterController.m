@@ -3,12 +3,18 @@
 #import <GPUImage.h>
 #import "UIImage+VideoImage.h"
 #import "VTTailView.h"
+#define KWS(weakSelf)           __weak __typeof(&*self)weakSelf = self
 
 @interface VideoFilterController ()
 
-@property (nonatomic, strong) UIVisualEffectView          *visualEffectView;
-@property (nonatomic, strong) NSURL                    *imageVideoURL;
-@property (nonatomic, strong) NSURL                    *blurVideoURL;
+@property (nonatomic, strong) NSURL                           *imageVideoURL;
+@property (nonatomic, strong) NSURL                           *blurVideoURL;
+@property (nonatomic, strong) NSURL                           *waterMarkVideoURL;
+@property (nonatomic, strong) GPUImageOutput<GPUImageInput>   *filter;
+@property (nonatomic, strong) GPUImageView                    *filterImageView;
+@property (nonatomic, strong) GPUImageMovie                   *videoFile;
+@property (nonatomic, strong) GPUImageUIElement               *uiElementInput;
+@property (nonatomic, strong) GPUImageMovieWriter             *movieWriter;
 
 @end
 
@@ -21,136 +27,8 @@
 
     _videoURL = [NSURL fileURLWithPath:testVideoPath];
     
-    
-    
     [self blackVideoToImageVideo];
-    
-    [self imageVideoToBlurVideo];
-    
-    [self blurVideoToWaterMarkVideo];
-    
-    
-//    [self.view setBackgroundColor:[UIColor whiteColor]];
 //    
-//    self.visualEffectView.frame = self.view.frame;
-//
-//    GPUImageView *filterView = [[GPUImageView alloc] initWithFrame:self.view.frame];
-//    [self.view addSubview: filterView];
-//    
-//    //生成一个黑色的视频
-//    CGSize videoSize = CGSizeMake(720, 540);
-//    CGFloat time = 1.5;
-//    CGFloat fps = 30;
-//    [[HandlerVideo sharedInstance]createBlackVideo:videoSize time:time fps:fps progressImageBlock:nil completedBlock:nil];
-//    NSString *videoName = [NSString stringWithFormat:@"blackVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
-//    NSString *videoPath = [NSString stringWithFormat:@"Documents/%@",videoName];
-//
-//    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
-//    //配置movieWriter
-//    
-//    
-//    
-//    NSString *lastFrameVideoName = [NSString stringWithFormat:@"lastFrameVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
-//    NSString *lastFrameMoviePath = [NSHomeDirectory() stringByAppendingPathComponent:lastFrameVideoName];
-//    NSURL *lastFrameVideoURL= [NSURL fileURLWithPath:lastFrameMoviePath];
-//
-//    if([[NSFileManager defaultManager] fileExistsAtPath:lastFrameMoviePath]) {
-//        [[NSFileManager defaultManager]removeItemAtPath:lastFrameMoviePath error:nil];
-//    }
-//    movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:lastFrameVideoURL size:CGSizeMake(720, 540)];
-//    
-//    movieWriter.hasAudioTrack = YES;
-//    
-//    movieWriter.shouldPassthroughAudio = YES;
-//    //读取黑色视频
-//    NSURL *sampleURL = [NSURL fileURLWithPath:pathToMovie];
-//    
-//    videoFile = [[GPUImageMovie alloc]initWithURL:sampleURL];
-//    
-//    NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"];
-//
-//    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
-//    
-//    CGFloat videoLength = [self getVideoLength:[NSURL fileURLWithPath:testVideoPath]];
-//
-//    UIImage *lastImage = [UIImage thumbnailImageForVideo:[NSURL fileURLWithPath:testVideoPath] atTime:videoLength*fps];
-//    
-//    tailView.lastFrameImage = lastImage;
-//    
-//    tailView.userName = @"大师";
-//    
-//    GPUImageUIElement *UIElement = [[GPUImageUIElement alloc]initWithView:tailView];
-//    
-//    GPUImageAddBlendFilter *addBlendFilter = [[GPUImageAddBlendFilter alloc]init];
-//    
-//    filter = [[GPUImageSepiaFilter alloc] init];
-//    
-////    __unsafe_unretained ShowcaseFilterViewController * weakSelf = self;
-//    
-//    GPUImageGaussianBlurFilter *gaussianBlur = [[GPUImageGaussianBlurFilter alloc]init];
-//    
-//    [videoFile addTarget:filter];
-//
-//    [filter addTarget:addBlendFilter];
-//    
-//    [UIElement addTarget:addBlendFilter];
-//    
-//    [addBlendFilter addTarget:gaussianBlur];
-//    [gaussianBlur addTarget:filterView];
-//    
-//    
-//    [addBlendFilter addTarget:movieWriter];
-////    __unsafe_unretained GPUImageUIElement *weakUIE = UIElement;
-////    [UIView animateKeyframesWithDuration:100 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
-////        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-////        [tailView.visualEffectView setEffect:blurEffect];
-////    } completion:nil];
-//    [filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
-//        NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,1-(CGFloat)frameTime.value/frameTime.timescale/1.5);
-//        //imageView 1s模糊
-//        //waterMark 1s显示
-////        tailView.virtualEffectAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
-//        [gaussianBlur setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5];
-//        tailView.waterMarkAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
-//
-//        [UIElement update];
-//    }];
-////    [filter addTarget:filterView];
-//    
-//    [movieWriter startRecording];
-//    
-//    [videoFile startProcessing];
-//
-//    __unsafe_unretained GPUImageMovieWriter *weakMovieWriter = movieWriter;
-//
-//    [movieWriter setCompletionBlock:^{
-//        [weakMovieWriter finishRecording];
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//        });
-//    }];
-//
-//    [self.view addSubview:self.visualEffectView];
-//        [UIView animateKeyframesWithDuration:5 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
-//            UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-//            [self.visualEffectView setEffect:blurEffect];
-//        } completion:nil];
-}
-
-- (UIVisualEffectView *)visualEffectView {
-    if (_visualEffectView == nil) {
-//        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-//        _visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-                _visualEffectView.alpha = 1;
-        _visualEffectView.backgroundColor = [UIColor clearColor];
-        _visualEffectView.userInteractionEnabled = NO;
-    }
-    return _visualEffectView;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (CGFloat)getVideoLength:(NSURL *)url{
@@ -162,178 +40,241 @@
     return second;
 }
 
+- (void)waterMarkVideo:(NSURL*)videoURL
+        completedBlock:(WmCompleteBlock)completeBlock
+          processBlock:(WmProcessBlock)processBlock {
+    AVAsset *asset = [AVAsset assetWithURL:videoURL];
+    AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] firstObject];
+    CGSize videoSize = [videoTrack naturalSize];
+    [asset naturalSize];
+}
 - (void)blackVideoToImageVideo {
-    
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-    
-        self.visualEffectView.frame = self.view.frame;
-    
+    double start = [[NSDate date] timeIntervalSince1970]*1000;
+    NSLog(@"blackVideoToImageVideo start time= %f ", (start));
         GPUImageView *filterView = [[GPUImageView alloc] initWithFrame:self.view.frame];
         [self.view addSubview: filterView];
+    //生成黑色视频
+    CGSize videoSize = CGSizeMake(720, 540);
+    CGFloat time = 1.5;
+    CGFloat fps = 30;
+    [[HandlerVideo sharedInstance]createBlackVideo:videoSize time:time fps:fps progressImageBlock:nil completedBlock:nil];
+    NSString *videoName = [NSString stringWithFormat:@"blackVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
+    NSString *videoPath = [NSString stringWithFormat:@"Documents/%@",videoName];
     
-        //生成一个黑色的视频
-        CGSize videoSize = CGSizeMake(720, 540);
-        CGFloat time = 1.5;
-        CGFloat fps = 30;
-        [[HandlerVideo sharedInstance]createBlackVideo:videoSize time:time fps:fps progressImageBlock:nil completedBlock:nil];
-        NSString *videoName = [NSString stringWithFormat:@"blackVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
-        NSString *videoPath = [NSString stringWithFormat:@"Documents/%@",videoName];
+    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
     
-        NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
-        //配置movieWriter
+    _videoFile = [[GPUImageMovie alloc]initWithURL:[NSURL fileURLWithPath:pathToMovie]];
+    //配置movieWriter
+    NSString *lastFrameVideoName = [NSString stringWithFormat:@"imageVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
+    NSString *lastFrameMoviePath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/%@",lastFrameVideoName]];
+    NSURL *lastFrameVideoURL= [NSURL fileURLWithPath:lastFrameMoviePath];
+    self.imageVideoURL = lastFrameVideoURL;
+    if([[NSFileManager defaultManager] fileExistsAtPath:lastFrameMoviePath]) {
+        [[NSFileManager defaultManager]removeItemAtPath:lastFrameMoviePath error:nil];
+    }
+    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:lastFrameVideoURL size:videoSize];
     
+    _movieWriter.hasAudioTrack = YES;
     
+    _movieWriter.shouldPassthroughAudio = YES;
     
-        NSString *lastFrameVideoName = [NSString stringWithFormat:@"lastFrameVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
-        NSString *lastFrameMoviePath = [NSHomeDirectory() stringByAppendingPathComponent:lastFrameVideoName];
-        NSURL *lastFrameVideoURL= [NSURL fileURLWithPath:lastFrameMoviePath];
+    NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"];
+
+    //生成最后一帧的图片
+    CGFloat videoLength = [self getVideoLength:[NSURL fileURLWithPath:testVideoPath]];
     
-        if([[NSFileManager defaultManager] fileExistsAtPath:lastFrameMoviePath]) {
-            [[NSFileManager defaultManager]removeItemAtPath:lastFrameMoviePath error:nil];
-        }
-        movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:lastFrameVideoURL size:CGSizeMake(720, 540)];
+    UIImage *lastImage = [UIImage thumbnailImageForVideo:[NSURL fileURLWithPath:testVideoPath] atTime:videoLength*fps];
+    UIImageView *imageView = [[UIImageView alloc]initWithImage:lastImage];
     
-        movieWriter.hasAudioTrack = YES;
+    UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+    [contentView addSubview:imageView];
+    _uiElementInput = [[GPUImageUIElement alloc]initWithView:contentView];
     
-        movieWriter.shouldPassthroughAudio = YES;
-        //读取黑色视频
-        NSURL *sampleURL = [NSURL fileURLWithPath:pathToMovie];
+    //target
     
-        videoFile = [[GPUImageMovie alloc]initWithURL:sampleURL];
+    GPUImageAddBlendFilter *addBlendFilter = [[GPUImageAddBlendFilter alloc]init];
     
-        NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"];
+    GPUImageOutput<GPUImageInput> *blankFilter = [[GPUImageSepiaFilter alloc] init];
     
-        VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+    [_videoFile addTarget:blankFilter];
     
-        CGFloat videoLength = [self getVideoLength:[NSURL fileURLWithPath:testVideoPath]];
+    [blankFilter addTarget:addBlendFilter];
     
-        UIImage *lastImage = [UIImage thumbnailImageForVideo:[NSURL fileURLWithPath:testVideoPath] atTime:videoLength*fps];
+    [_uiElementInput addTarget:addBlendFilter];
     
-        tailView.lastFrameImage = lastImage;
+    [addBlendFilter addTarget:filterView];
     
-        tailView.userName = @"大师";
+    [addBlendFilter addTarget:_movieWriter];
     
-        GPUImageUIElement *UIElement = [[GPUImageUIElement alloc]initWithView:tailView];
+    __unsafe_unretained GPUImageUIElement *weakUIElementInput = _uiElementInput;
+    [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
+        NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,1-(CGFloat)frameTime.value/frameTime.timescale/1.5);
+        [weakUIElementInput update];
+    }];
+
     
-        GPUImageAddBlendFilter *addBlendFilter = [[GPUImageAddBlendFilter alloc]init];
+    [_movieWriter startRecording];
     
-        filter = [[GPUImageSepiaFilter alloc] init];
+    [_videoFile startProcessing];
     
-    //    __unsafe_unretained ShowcaseFilterViewController * weakSelf = self;
+//    __unsafe_unretained GPUImageMovieWriter *weakMovieWriter = _movieWriter;
     
-        GPUImageGaussianBlurFilter *gaussianBlur = [[GPUImageGaussianBlurFilter alloc]init];
+    KWS(weakSelf);
+    [self.movieWriter setCompletionBlock:^{
+        [weakSelf completionWriter1];
+    }];
+
+}
+
+- (void)completionWriter1{
+    KWS(weakSelf);
+    [_movieWriter finishRecordingWithCompletionHandler:^{
+        [weakSelf finishRecording1];
+    }];
+}
+
+- (void)finishRecording1{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self imageVideoToBlurVideo];
+    });
+}
+
+- (void)completionWriter2{
+    KWS(weakSelf);
+    [_movieWriter finishRecordingWithCompletionHandler:^{
+        [weakSelf finishRecording2];
+    }];
+}
+
+- (void)finishRecording2{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self blurVideoToWaterMarkVideo];
+    });
+}
+
+- (void)imageVideoToBlurVideo {
+    [_videoFile removeAllTargets];
+    [_filter removeAllTargets];
+    //输入
+    CGSize videoSize = CGSizeMake(720, 540);
+    CGFloat time = 1.5;
+    CGFloat fps = 30;
+    NSString *videoName = [NSString stringWithFormat:@"imageVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
+    NSString *videoPath = [NSString stringWithFormat:@"Documents/%@",videoName];
+
+    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
     
-        [videoFile addTarget:filter];
+    _videoFile = [[GPUImageMovie alloc]initWithURL:[NSURL fileURLWithPath:pathToMovie]];
+
+    //输出
+    NSString *blurVideoName = [NSString stringWithFormat:@"blurVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
+    NSString *blurMoviePath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/%@",blurVideoName]];
+    NSURL *blurVideoURL= [NSURL fileURLWithPath:blurMoviePath];
+    self.blurVideoURL = blurVideoURL;
+    if([[NSFileManager defaultManager] fileExistsAtPath:blurMoviePath]) {
+        [[NSFileManager defaultManager]removeItemAtPath:blurMoviePath error:nil];
+    }
+    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:blurVideoURL size:videoSize];
+
+    _movieWriter.hasAudioTrack = YES;
     
-        [filter addTarget:addBlendFilter];
-    
-        [UIElement addTarget:addBlendFilter];
-    
-        [addBlendFilter addTarget:gaussianBlur];
-        [gaussianBlur addTarget:filterView];
-    
-    
-        [addBlendFilter addTarget:movieWriter];
-    //    __unsafe_unretained GPUImageUIElement *weakUIE = UIElement;
-    //    [UIView animateKeyframesWithDuration:100 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
-    //        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    //        [tailView.visualEffectView setEffect:blurEffect];
-    //    } completion:nil];
-        [filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
-            NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,1-(CGFloat)frameTime.value/frameTime.timescale/1.5);
-            //imageView 1s模糊
-            //waterMark 1s显示
-    //        tailView.virtualEffectAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
-            [gaussianBlur setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5];
-            tailView.waterMarkAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
-    
-            [UIElement update];
-        }];
-    //    [filter addTarget:filterView];
-    
-        [movieWriter startRecording];
-    
-        [videoFile startProcessing];
-    
-        __unsafe_unretained GPUImageMovieWriter *weakMovieWriter = movieWriter;
-    
-        [movieWriter setCompletionBlock:^{
-            [weakMovieWriter finishRecording];
-    
-            dispatch_async(dispatch_get_main_queue(), ^{
-            });
-        }];
-    
-        [self.view addSubview:self.visualEffectView];
-            [UIView animateKeyframesWithDuration:5 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
-                UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-                [self.visualEffectView setEffect:blurEffect];
-            } completion:nil];
-    
-    
-//    double start = [[NSDate date] timeIntervalSince1970]*1000;
-//    NSLog(@"blackVideoToImageVideo start time= %f ", (start));
-//        GPUImageView *filterView = [[GPUImageView alloc] initWithFrame:self.view.frame];
-//        [self.view addSubview: filterView];
-//    //生成黑色视频
-//    CGSize videoSize = CGSizeMake(720, 540);
-//    CGFloat time = 1.5;
-//    CGFloat fps = 30;
-//    [[HandlerVideo sharedInstance]createBlackVideo:videoSize time:time fps:fps progressImageBlock:nil completedBlock:nil];
-//    NSString *videoName = [NSString stringWithFormat:@"blackVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
-//    NSString *videoPath = [NSString stringWithFormat:@"Documents/%@",videoName];
-//    
-//    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
-//    
-//    videoFile = [[GPUImageMovie alloc]initWithURL:[NSURL fileURLWithPath:pathToMovie]];
-//    //配置movieWriter
-//    NSString *lastFrameVideoName = [NSString stringWithFormat:@"imageVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
-//    NSString *lastFrameMoviePath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/%@",lastFrameVideoName]];
-//    NSURL *lastFrameVideoURL= [NSURL fileURLWithPath:lastFrameMoviePath];
-//    self.imageVideoURL = lastFrameVideoURL;
-//    if([[NSFileManager defaultManager] fileExistsAtPath:lastFrameMoviePath]) {
-//        [[NSFileManager defaultManager]removeItemAtPath:lastFrameMoviePath error:nil];
-//    }
-//    movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:lastFrameVideoURL size:videoSize];
-//    
-//    movieWriter.hasAudioTrack = YES;
-//    
-//    movieWriter.shouldPassthroughAudio = YES;
-//    
-//    NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"];
+    _movieWriter.shouldPassthroughAudio = YES;
 //
-//    //生成最后一帧的图片
-//    CGFloat videoLength = [self getVideoLength:[NSURL fileURLWithPath:testVideoPath]];
-//    
-//    UIImage *lastImage = [UIImage thumbnailImageForVideo:[NSURL fileURLWithPath:testVideoPath] atTime:videoLength*fps];
-//    UIImageView *imageView = [[UIImageView alloc]initWithImage:lastImage];
-//    
-//    UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
-//    [contentView addSubview:imageView];
-//    uiElementInput = [[GPUImageUIElement alloc]initWithView:contentView];
-//    
 //    //target
-//    
-//    GPUImageAddBlendFilter *addBlendFilter = [[GPUImageAddBlendFilter alloc]init];
-//    
-//    GPUImageOutput<GPUImageInput> *blankFilter = [[GPUImageSepiaFilter alloc] init];
-//    
-//    [videoFile addTarget:blankFilter];
-//    
-//    [blankFilter addTarget:addBlendFilter];
-//    
-//    [uiElementInput addTarget:addBlendFilter];
-//    
-//    [addBlendFilter addTarget:filterView];
-//    
-//    __unsafe_unretained GPUImageUIElement *weakUIElementInput = uiElementInput;
-//    [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
-//        NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,1-(CGFloat)frameTime.value/frameTime.timescale/1.5);
-//        [weakUIElementInput update];
-//    }];
+    GPUImageGaussianBlurFilter *gaussianBlurFilter = [[GPUImageGaussianBlurFilter alloc]init];
+    GPUImageOutput<GPUImageInput> *blankFilter = [[GPUImageSepiaFilter alloc] init];
+    [_videoFile addTarget:gaussianBlurFilter];
+    [gaussianBlurFilter addTarget:blankFilter];
+    [blankFilter addTarget:_movieWriter];
+    [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
+//        [uiElementInput update];
+        NSLog(@"gaussianBlurFilter   blurRadiusPixels:  __________%f",(CGFloat)frameTime.value/frameTime.timescale/1.5*24);
+        [gaussianBlurFilter setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5*24];
+    }];
+    
+    [_movieWriter startRecording];
+    
+    [_videoFile startProcessing];
+    
+    //    __unsafe_unretained GPUImageMovieWriter *weakMovieWriter = _movieWriter;
+    
+    KWS(weakSelf);
+    [self.movieWriter setCompletionBlock:^{
+        [weakSelf completionWriter2];
+    }];
+}
+
+- (void)blurVideoToWaterMarkVideo {
+    [_videoFile removeAllTargets];
+    [_filter removeAllTargets];
+    //输入
+    CGSize videoSize = CGSizeMake(720, 540);
+    CGFloat time = 1.5;
+    CGFloat fps = 30;
+    NSString *videoName = [NSString stringWithFormat:@"blurVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
+    NSString *videoPath = [NSString stringWithFormat:@"Documents/%@",videoName];
+    
+    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
+    
+    _videoFile = [[GPUImageMovie alloc]initWithURL:[NSURL fileURLWithPath:pathToMovie]];
+    
+    //输出
+    NSString *waterMarkVideoName = [NSString stringWithFormat:@"waterMarkVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
+    NSString *waterMarkMoviePath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/%@",waterMarkVideoName]];
+    NSURL *waterMarkVideoURL= [NSURL fileURLWithPath:waterMarkMoviePath];
+    self.waterMarkVideoURL = waterMarkVideoURL;
+    if([[NSFileManager defaultManager] fileExistsAtPath:waterMarkMoviePath]) {
+        [[NSFileManager defaultManager]removeItemAtPath:waterMarkMoviePath error:nil];
+    }
+    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:waterMarkVideoURL size:videoSize];
+    
+    _movieWriter.hasAudioTrack = YES;
+    
+    _movieWriter.shouldPassthroughAudio = YES;
+    //
+    //target
+    
+    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+    GPUImageAddBlendFilter *addBlendFilter = [[GPUImageAddBlendFilter alloc]init];
+    GPUImageUIElement *uielement = [[GPUImageUIElement alloc]initWithView:tailView];
+    _filter = [[GPUImageSepiaFilter alloc] init];
+    [_videoFile addTarget:_filter];
+    [_filter addTarget:addBlendFilter];
+    [uielement addTarget:addBlendFilter];
+    [addBlendFilter addTarget:_movieWriter];
+
+    [_filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
+        NSLog(@"%f",(CGFloat)frameTime.value/frameTime.timescale/1.5);
+        tailView.waterMarkAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
+        [uielement update];
+
+    }];
+    
+    [_movieWriter startRecording];
+    
+    [_videoFile startProcessing];
+    
+    KWS(weakSelf);
+    [self.movieWriter setCompletionBlock:^{
+        [weakSelf completionWriter3];
+    }];
+}
+
+- (void)completionWriter3{
+    KWS(weakSelf);
+    [_movieWriter finishRecordingWithCompletionHandler:^{
+        [weakSelf finishRecording3];
+    }];
+}
+
+- (void)finishRecording3{
+    dispatch_async(dispatch_get_main_queue(), ^{
+//        UISaveVideoAtPathToSavedPhotosAlbum([filePath path], self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+
+    });
+}
+
 //
-//    [filter addTarget:filterView];
-//    
 //    [movieWriter startRecording];
 //    
 //    [videoFile startProcessing];
@@ -346,66 +287,12 @@
 //        dispatch_async(dispatch_get_main_queue(), ^{
 //        });
 //    }];
+//}
+
+//- (void)blurVideoToWaterMarkVideo {
 //    
-//    double end = [[NSDate date] timeIntervalSince1970]*1000;
-//    NSLog(@"end time= %f ", (end));
-//    NSLog(@"use time =%f millisecond ", (end-start));
-}
+//}
 
-- (void)imageVideoToBlurVideo {
-    [videoFile removeAllTargets];
-    [filter removeAllTargets];
-    //输入
-    CGSize videoSize = CGSizeMake(720, 540);
-    CGFloat time = 1.5;
-    CGFloat fps = 30;
-    NSString *videoName = [NSString stringWithFormat:@"imageVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
-    NSString *videoPath = [NSString stringWithFormat:@"Documents/%@",videoName];
-    
-    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
-    
-    videoFile = [[GPUImageMovie alloc]initWithURL:[NSURL fileURLWithPath:pathToMovie]];
-    
-    //输出
-    NSString *blurVideoName = [NSString stringWithFormat:@"blurVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
-    NSString *blurMoviePath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/%@",blurVideoName]];
-    NSURL *blurVideoURL= [NSURL fileURLWithPath:blurMoviePath];
-    self.blurVideoURL = blurVideoURL;
-    if([[NSFileManager defaultManager] fileExistsAtPath:blurMoviePath]) {
-        [[NSFileManager defaultManager]removeItemAtPath:blurMoviePath error:nil];
-    }
-    movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:blurVideoURL size:videoSize];
-    
-    movieWriter.hasAudioTrack = YES;
-    
-    movieWriter.shouldPassthroughAudio = YES;
-    
-    //target
-    GPUImageGaussianBlurFilter *gaussianBlurFilter = [[GPUImageGaussianBlurFilter alloc]init];
-    [videoFile addTarget:gaussianBlurFilter];
-    [gaussianBlurFilter addTarget:movieWriter];
-    [filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
-//        [uiElementInput update];
-        [gaussianBlurFilter setBlurRadiusInPixels:frameTime.value];
-    }];
-    
-    [movieWriter startRecording];
-    
-    [videoFile startProcessing];
-    
-    __unsafe_unretained GPUImageMovieWriter *weakMovieWriter = movieWriter;
-    
-    [movieWriter setCompletionBlock:^{
-        [weakMovieWriter finishRecording];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-        });
-    }];
-}
-
-- (void)blurVideoToWaterMarkVideo {
-    
-}
 
 
 - (NSURL*)imageVideoURL {
@@ -420,6 +307,13 @@
         _blurVideoURL = [[NSURL alloc]init];
     }
     return _blurVideoURL;
+}
+
+- (NSURL*)waterMarkVideoURL {
+    if(!_waterMarkVideoURL) {
+        _waterMarkVideoURL = [[NSURL alloc]init];
+    }
+    return _waterMarkVideoURL;
 }
 /*
 #pragma mark - Navigation

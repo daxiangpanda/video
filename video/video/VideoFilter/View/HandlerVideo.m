@@ -96,7 +96,9 @@ static HandlerVideo *instance = nil;
         while ([writerInput isReadyForMoreMediaData]) {
             if(++frame >= count) {
                 [writerInput markAsFinished];
-                [videoWriter finishWriting];
+                [videoWriter finishWritingWithCompletionHandler:^{
+
+                }];
                 printf("comp completed\n");
                 if (completeBlock) {
                     completeBlock(YES);
