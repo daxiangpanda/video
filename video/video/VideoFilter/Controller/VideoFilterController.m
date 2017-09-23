@@ -3,6 +3,8 @@
 #import <GPUImage.h>
 #import "UIImage+VideoImage.h"
 #import "VTTailView.h"
+#import "VTWaterMarkView.h"
+
 #define KWS(weakSelf)           __weak __typeof(&*self)weakSelf = self
 
 @interface VideoFilterController ()
@@ -27,7 +29,7 @@
 
     _videoURL = [NSURL fileURLWithPath:testVideoPath];
     
-    [self blackVideoToImageVideo];
+    [self midWaterMarkVideo:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"]]videoSize:CGSizeMake(720, 540)];
 //    
 }
 
@@ -46,8 +48,60 @@
     AVAsset *asset = [AVAsset assetWithURL:videoURL];
     AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] firstObject];
     CGSize videoSize = [videoTrack naturalSize];
-    [asset naturalSize];
+    
+    
 }
+
+//给视频加上视频中水印
+- (void)midWaterMarkVideo:(NSURL*)videoURL videoSize:(CGSize)videoSize{
+    NSLog(@"start");
+    _videoFile = [[GPUImageMovie alloc]initWithURL:videoURL];
+
+    GPUImageOutput<GPUImageInput> *filter = [[GPUImageBrightnessFilter alloc] init];
+    
+    //    (GPUImageBrightnessFilter*)filte
+    [_videoFile addTarget:filter];
+    
+    GPUImageAddBlendFilter *blendFilter = [[GPUImageAddBlendFilter alloc] init];
+    
+    VTWaterMarkView *waterMarkView = [[VTWaterMarkView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+    waterMarkView.userName = @"test测试名字";
+    
+    GPUImageUIElement *uiElementInput = [[GPUImageUIElement alloc] initWithView:waterMarkView];
+    
+    NSString *wateredVideoPath = [NSString stringWithFormat:@"%@water",videoURL.relativeString ];
+    NSURL *wateredVideoURL = [NSURL URLWithString:wateredVideoPath];
+    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:wateredVideoURL size:videoSize];
+    _movieWriter.shouldPassthroughAudio = YES;
+    NSLog(@"%@", wateredVideoURL);
+    [filter addTarget:blendFilter atTextureLocation:0];
+    [uiElementInput addTarget:blendFilter atTextureLocation:1];
+    [blendFilter addTarget:_movieWriter];
+    
+    //下面一行是啥意思？不同的地方写还是不写？
+    //    __unsafe_unretained GPUImageUIElement *weakUIE = uiElementInput;
+    [uiElementInput update];
+//    [filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
+//        NSLog(@"______%lld",frameTime.value);
+//        if(frameTime.value<30){
+//            [uiElementInput update];
+//        }
+//    }];
+
+    [_movieWriter startRecording];
+    
+    [_videoFile startProcessing];
+    
+    //    __unsafe_unretained GPUImageMovieWriter *weakMovieWriter = _movieWriter;
+    
+    KWS(weakSelf);
+    [self.movieWriter setCompletionBlock:^{
+        NSLog(@"done");
+//        [weakSelf completionWriter3];
+    }];
+    
+}
+
 - (void)blackVideoToImageVideo {
     double start = [[NSDate date] timeIntervalSince1970]*1000;
     NSLog(@"blackVideoToImageVideo start time= %f ", (start));
