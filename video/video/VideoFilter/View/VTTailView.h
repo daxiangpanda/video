@@ -10,9 +10,7 @@
 
 @interface VTTailView : UIView
 
-@property (nonatomic,strong) UIImage       *lastFrameImage;
 @property (nonatomic,strong) NSString      *userName;
-@property (nonatomic,assign) CGFloat       virtualEffectAlpha;
 @property (nonatomic,assign) CGFloat       waterMarkAlpha;
 - (UIVisualEffectView *)visualEffectView;
 @end

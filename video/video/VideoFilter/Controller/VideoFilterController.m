@@ -29,8 +29,9 @@
 
     _videoURL = [NSURL fileURLWithPath:testVideoPath];
     
-    [self midWaterMarkVideo:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"]]videoSize:CGSizeMake(720, 540)];
-//    
+//    [self midWaterMarkVideo:[NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"]]videoSize:CGSizeMake(720, 540)];
+    [self blackVideoToImageVideo];
+//
 }
 
 - (CGFloat)getVideoLength:(NSURL *)url{
@@ -53,54 +54,76 @@
 }
 
 //给视频加上视频中水印
+//IP7P 2s-3s
 - (void)midWaterMarkVideo:(NSURL*)videoURL videoSize:(CGSize)videoSize{
     NSLog(@"start");
     _videoFile = [[GPUImageMovie alloc]initWithURL:videoURL];
-
+    _videoFile.playAtActualSpeed = NO;
     GPUImageOutput<GPUImageInput> *filter = [[GPUImageBrightnessFilter alloc] init];
     
-    //    (GPUImageBrightnessFilter*)filte
     [_videoFile addTarget:filter];
     
     GPUImageAddBlendFilter *blendFilter = [[GPUImageAddBlendFilter alloc] init];
     
     VTWaterMarkView *waterMarkView = [[VTWaterMarkView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
     waterMarkView.userName = @"test测试名字";
-    
     GPUImageUIElement *uiElementInput = [[GPUImageUIElement alloc] initWithView:waterMarkView];
-    
-    NSString *wateredVideoPath = [NSString stringWithFormat:@"%@water",videoURL.relativeString ];
-    NSURL *wateredVideoURL = [NSURL URLWithString:wateredVideoPath];
+    NSString *videoName = [[videoURL path] componentsSeparatedByString:@"/"].lastObject;
+    NSString *path = [NSString stringWithFormat:@"Documents/%@water",videoName];
+    NSString *wateredVideoPath = [NSHomeDirectory() stringByAppendingPathComponent:path];
+    NSURL *wateredVideoURL = [NSURL fileURLWithPath:wateredVideoPath];
+    unlink([wateredVideoPath UTF8String]);
+    _movieWriter = nil;
     _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:wateredVideoURL size:videoSize];
+    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:wateredVideoURL
+                                                           size:videoSize
+                                                       fileType:AVFileTypeQuickTimeMovie
+                                                 outputSettings:nil];
     _movieWriter.shouldPassthroughAudio = YES;
+    _videoFile.audioEncodingTarget = _movieWriter;
+    [_videoFile enableSynchronizedEncodingUsingMovieWriter:_movieWriter];
     NSLog(@"%@", wateredVideoURL);
-    [filter addTarget:blendFilter atTextureLocation:0];
-    [uiElementInput addTarget:blendFilter atTextureLocation:1];
+//    [filter addTarget:_movieWriter];
+    [filter addTarget:blendFilter];
+    [uiElementInput addTarget:blendFilter];
     [blendFilter addTarget:_movieWriter];
     
     //下面一行是啥意思？不同的地方写还是不写？
-    //    __unsafe_unretained GPUImageUIElement *weakUIE = uiElementInput;
-    [uiElementInput update];
-//    [filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
-//        NSLog(@"______%lld",frameTime.value);
-//        if(frameTime.value<30){
-//            [uiElementInput update];
-//        }
-//    }];
+//        __unsafe_unretained GPUImageUIElement *weakUIE = uiElementInput;
+//    [uiElementInput update];
+    __block BOOL needUpdate = YES;
+    [filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
+        if(needUpdate){
+            [uiElementInput update];
+            needUpdate = !needUpdate;
+        }
+    }];
 
     [_movieWriter startRecording];
     
     [_videoFile startProcessing];
     
-    //    __unsafe_unretained GPUImageMovieWriter *weakMovieWriter = _movieWriter;
+    __unsafe_unretained GPUImageMovieWriter *weakMovieWriter = _movieWriter;
     
-    KWS(weakSelf);
-    [self.movieWriter setCompletionBlock:^{
-        NSLog(@"done");
-//        [weakSelf completionWriter3];
+    [_movieWriter setCompletionBlock:^{
+        NSLog(@"END");
+        [filter removeTarget:weakMovieWriter];
+        [weakMovieWriter finishRecording];
     }];
-    
 }
+
+//- (void)completionWriter5{
+//    KWS(weakSelf);
+//    [_movieWriter finishRecordingWithCompletionHandler:^{
+//        [weakSelf finishRecording5];
+//    }];
+//}
+//
+//- (void)finishRecording5{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//    });
+//}
+
 
 - (void)blackVideoToImageVideo {
     double start = [[NSDate date] timeIntervalSince1970]*1000;
@@ -202,7 +225,7 @@
 
 - (void)finishRecording2{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self blurVideoToWaterMarkVideo];
+//        [self blurVideoToWaterMarkVideo];
     });
 }
 
@@ -235,15 +258,27 @@
     _movieWriter.shouldPassthroughAudio = YES;
 //
 //    //target
+    
+    VTWaterMarkView *tailView = [[VTWaterMarkView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+    GPUImageAddBlendFilter *addBlendFilter = [[GPUImageAddBlendFilter alloc]init];
+    GPUImageUIElement *uielement = [[GPUImageUIElement alloc]initWithView:tailView];
+    tailView.userName = @"大兄弟撒女方";
+    _filter = [[GPUImageSepiaFilter alloc] init];
+    
+//    _uiElementInput = [GPUImageUIElement alloc]initWithView:<#(UIView *)#>
     GPUImageGaussianBlurFilter *gaussianBlurFilter = [[GPUImageGaussianBlurFilter alloc]init];
     GPUImageOutput<GPUImageInput> *blankFilter = [[GPUImageSepiaFilter alloc] init];
     [_videoFile addTarget:gaussianBlurFilter];
     [gaussianBlurFilter addTarget:blankFilter];
-    [blankFilter addTarget:_movieWriter];
+    [blankFilter addTarget:addBlendFilter];
+    [uielement addTarget:addBlendFilter];
+    [addBlendFilter addTarget:_movieWriter];
+//    __block GPUImageUIElement *weakUIElementInput = uielement;
     [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
-//        [uiElementInput update];
         NSLog(@"gaussianBlurFilter   blurRadiusPixels:  __________%f",(CGFloat)frameTime.value/frameTime.timescale/1.5*24);
         [gaussianBlurFilter setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5*24];
+        tailView.alpha = (CGFloat)frameTime.value/frameTime.timescale;
+        [uielement update];
     }];
     
     [_movieWriter startRecording];
@@ -254,6 +289,7 @@
     
     KWS(weakSelf);
     [self.movieWriter setCompletionBlock:^{
+        NSLog(@"done");
         [weakSelf completionWriter2];
     }];
 }

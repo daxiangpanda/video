@@ -29,8 +29,8 @@
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.mas_centerX);
         make.centerY.mas_equalTo(self.mas_centerY);
-        make.height.mas_equalTo(@100);
-        make.width.mas_equalTo(self.mas_width);
+//        make.height.mas_equalTo(@100);
+//        make.width.mas_equalTo(self.mas_width);
     }];
     
     [self.appNameImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -65,6 +65,7 @@
         _userNameLabel.font = [UIFont systemFontOfSize:20.0f];
         _userNameLabel.textAlignment = NSTextAlignmentCenter;
         _userNameLabel.textColor = [UIColor whiteColor];
+        _userNameLabel.backgroundColor = [UIColor blackColor];
         [self addSubview:_userNameLabel];
     }
     return _userNameLabel;
@@ -78,6 +79,12 @@
 #pragma mark - setter
 - (void)setUserName:(NSString *)userName {
     self.userNameLabel.text = [NSString stringWithFormat:@"%@",userName];
+}
+
+- (void)setWaterMarkAlpha:(CGFloat)waterMarkAlpha {
+    self.userNameLabel.alpha = waterMarkAlpha;
+    self.appNameImageView.alpha = waterMarkAlpha;
+    
 }
 
 @end
