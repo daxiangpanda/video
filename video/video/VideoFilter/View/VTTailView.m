@@ -12,8 +12,9 @@
 @interface VTTailView ()
 
 
-//片尾水印
-@property (nonatomic, strong) VTTailWaterMarkView         *tailWaterMarkView;
+@property (nonatomic, strong) UIImageView                 *appNameImageView;
+
+@property (nonatomic, strong) UILabel                     *userNameLabel;
 
 @end
 
@@ -34,13 +35,21 @@
 - (void)setupView {
     self.backgroundColor = [UIColor clearColor];
 
-    [self addSubview:self.tailWaterMarkView];
     
+    [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.mas_centerX);
+        make.centerY.mas_equalTo(self.mas_centerY);
+                make.height.mas_equalTo(@100);
+                make.width.mas_equalTo(self.mas_width);
+    }];
+    
+    [self.appNameImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.mas_centerX);
+        make.centerY.mas_equalTo(self.mas_centerY).offset(-50);
+    }];
 
 //
-    [self.tailWaterMarkView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self);
-    }];
+
     
     [self layoutIfNeeded];
 }
@@ -56,11 +65,26 @@
 
 
 
-- (VTTailWaterMarkView*)tailWaterMarkView {
-    if(!_tailWaterMarkView) {
-        _tailWaterMarkView = [[VTTailWaterMarkView alloc]init];
+- (UIImageView*)appNameImageView {
+    if(!_appNameImageView) {
+        _appNameImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"trailWaterMark_appIcon"]];
+        
+        [self addSubview:_appNameImageView];
     }
-    return _tailWaterMarkView;
+    return _appNameImageView;
+}
+
+
+- (UILabel*)userNameLabel {
+    if(!_userNameLabel) {
+        _userNameLabel = [self createLabel];
+        _userNameLabel.font = [UIFont systemFontOfSize:20.0f];
+        _userNameLabel.textAlignment = NSTextAlignmentCenter;
+        _userNameLabel.textColor = [UIColor whiteColor];
+        _userNameLabel.backgroundColor = [UIColor blackColor];
+        [self addSubview:_userNameLabel];
+    }
+    return _userNameLabel;
 }
 
 -(UILabel *)createLabel{
@@ -70,14 +94,12 @@
 
 #pragma mark - setter
 - (void)setUserName:(NSString *)userName {
-    self.tailWaterMarkView.userName = [NSString stringWithFormat:@"@%@",userName];
+    self.userNameLabel.text = [NSString stringWithFormat:@"@%@",userName];
 }
 
 
 
-- (void)setWaterMarkAlpha:(CGFloat)waterMarkAlpha {
-    self.tailWaterMarkView.waterMarkAlpha = waterMarkAlpha;
-}
+
 
 
 @end

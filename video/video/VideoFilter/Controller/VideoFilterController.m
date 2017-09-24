@@ -179,14 +179,38 @@
     
     [_uiElementInput addTarget:addBlendFilter];
     
-    [addBlendFilter addTarget:filterView];
+    //blur
+    GPUImageiOSBlurFilter *iOSBlurFilter = [[GPUImageiOSBlurFilter alloc]init];
+    [addBlendFilter addTarget:iOSBlurFilter];
     
-    [addBlendFilter addTarget:_movieWriter];
+    
+    //waterMarkElement
+    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+    tailView.userName = @"sa";
+    
+    GPUImageUIElement *waterMarkUIElement = [[GPUImageUIElement alloc]initWithView:tailView];
+    
+    GPUImageAddBlendFilter *waterMarkBlendFilter = [[GPUImageAddBlendFilter alloc]init];
+    [iOSBlurFilter addTarget:waterMarkBlendFilter];
+    [waterMarkUIElement addTarget:waterMarkBlendFilter];
+    
+    [waterMarkBlendFilter addTarget:_movieWriter];
+    [waterMarkBlendFilter addTarget:filterView];
+//
+//    [addBlendFilter addTarget:_movieWriter];
     
     __unsafe_unretained GPUImageUIElement *weakUIElementInput = _uiElementInput;
+    __block GPUImageUIElement *weakWaterMarkUIElement = waterMarkUIElement;
+
     [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
         NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,1-(CGFloat)frameTime.value/frameTime.timescale/1.5);
+        [iOSBlurFilter setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5*24];
+//        tailView.alpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
+//        if(frameTime.value>400){
+//            tailView.userName = @"taikdsa";
+//        }
         [weakUIElementInput update];
+//        [weakWaterMarkUIElement update];
     }];
 
     
@@ -212,7 +236,7 @@
 
 - (void)finishRecording1{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self imageVideoToBlurVideo];
+//        [self imageVideoToBlurVideo];
     });
 }
 
@@ -335,7 +359,8 @@
 
     [_filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
         NSLog(@"%f",(CGFloat)frameTime.value/frameTime.timescale/1.5);
-        tailView.waterMarkAlpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
+        tailView.alpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
+        
         [uielement update];
 
     }];

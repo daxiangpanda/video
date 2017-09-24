@@ -10,60 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/VideoFilter/Controller/VideoFilterController.m"
-            timestampString = "527940187.402834"
+            timestampString = "527938438.798267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "-midWaterMarkVideo:videoSize:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[VideoFilterController midWaterMarkVideo:videoSize:]"
-                  moduleName = "video"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/liuxinzhong/Desktop/video/video/video/VideoFilter/Controller/VideoFilterController.m"
-                  timestampString = "527940188.719607"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "1192">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__53-[VideoFilterController midWaterMarkVideo:videoSize:]_block_invoke"
-                  moduleName = "video"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/liuxinzhong/Desktop/video/video/video/VideoFilter/Controller/VideoFilterController.m"
-                  timestampString = "527940188.721751"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "95"
-                  endingLineNumber = "95"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/VideoFilter/View/VTTailWaterMarkView.m"
-            timestampString = "527940187.404636"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-setWaterMarkAlpha:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/VideoFilter/Controller/VideoFilterController.m"
-            timestampString = "527940187.405396"
+            timestampString = "527952574.928108"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "-imageVideoToBlurVideo"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,28 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/VideoFilter/Controller/VideoFilterController.m"
-            timestampString = "527940187.405958"
+            timestampString = "527953387.223735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "-blackVideoToImageVideo"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/VideoFilter/Controller/VideoFilterController.m"
-            timestampString = "527940187.406432"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
-            landmarkName = "-blurVideoToWaterMarkVideo"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
