@@ -165,6 +165,8 @@
     
     UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
     [contentView addSubview:imageView];
+//    UILabel *label = [[UILabel alloc]initWithFrame:contentView.frame];
+    
     _uiElementInput = [[GPUImageUIElement alloc]initWithView:contentView];
     
     //target
@@ -173,45 +175,98 @@
     
     GPUImageOutput<GPUImageInput> *blankFilter = [[GPUImageSepiaFilter alloc] init];
     
+
+    
+    //blur
+    GPUImageGaussianBlurFilter *blurFilter = [[GPUImageGaussianBlurFilter alloc]init];
+    [blurFilter setBlurRadiusInPixels:0];
+    
+    
+    //waterMarkElement
+    UIView *waterMarkContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+    
+    
+//    UILabel *testLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+//    testLabel.font = [UIFont systemFontOfSize:50.0f];
+//    testLabel.text = @"Time: 0.0 s";
+//    testLabel.textAlignment = UITextAlignmentCenter;
+//    testLabel.backgroundColor = [UIColor clearColor];
+//    testLabel.textColor = [UIColor whiteColor];
+//    testLabel.alpha = 0;
+//    tailView.userName = @"sa";
+    [waterMarkContentView addSubview:tailView];
+    
+    GPUImageUIElement *waterMarkUIElement = [[GPUImageUIElement alloc]initWithView:waterMarkContentView];
+    
+    GPUImageAddBlendFilter *waterMarkBlendFilter = [[GPUImageAddBlendFilter alloc]init];
+    GPUImageOutput<GPUImageInput> *blankFilter2 = [[GPUImageSepiaFilter alloc] init];
+
+
+//    [blurFilter addTarget:_movieWriter];
+//    [blurFilter addTarget:filterView];
+//
+//    [addBlendFilter addTarget:_movieWriter];
+    
+    //alltarget
+//    [_videoFile addTarget:blankFilter];
+//    
+//    [blankFilter addTarget:addBlendFilter];
+//    
+//    [_uiElementInput addTarget:addBlendFilter];
+//    [addBlendFilter addTarget:blurFilter];
+//    [blurFilter addTarget:blankFilter2];
+//    [ blankFilter2 addTarget:waterMarkBlendFilter];
+//    [waterMarkUIElement addTarget:waterMarkBlendFilter];
+//    
+//    [waterMarkBlendFilter addTarget:_movieWriter];
+//    [waterMarkBlendFilter addTarget:filterView];
+    
+    //alltarget3
     [_videoFile addTarget:blankFilter];
     
     [blankFilter addTarget:addBlendFilter];
     
-    [_uiElementInput addTarget:addBlendFilter];
-    
-    //blur
-    GPUImageiOSBlurFilter *iOSBlurFilter = [[GPUImageiOSBlurFilter alloc]init];
-    [addBlendFilter addTarget:iOSBlurFilter];
-    
-    
-    //waterMarkElement
-    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
-    tailView.userName = @"sa";
-    
-    GPUImageUIElement *waterMarkUIElement = [[GPUImageUIElement alloc]initWithView:tailView];
-    
-    GPUImageAddBlendFilter *waterMarkBlendFilter = [[GPUImageAddBlendFilter alloc]init];
-    [iOSBlurFilter addTarget:waterMarkBlendFilter];
-    [waterMarkUIElement addTarget:waterMarkBlendFilter];
+    [waterMarkUIElement addTarget:addBlendFilter];
+    [addBlendFilter addTarget:blurFilter];
+    [blurFilter addTarget:blankFilter2];
+    [ blankFilter2 addTarget:waterMarkBlendFilter];
+    [_uiElementInput addTarget:waterMarkBlendFilter];
     
     [waterMarkBlendFilter addTarget:_movieWriter];
     [waterMarkBlendFilter addTarget:filterView];
-//
-//    [addBlendFilter addTarget:_movieWriter];
     
-    __unsafe_unretained GPUImageUIElement *weakUIElementInput = _uiElementInput;
+    //alltarget2
+    
+//    [_videoFile addTarget:blankFilter];
+//    [blankFilter addTarget:addBlendFilter];
+//    [waterMarkUIElement addTarget:addBlendFilter];
+//    [addBlendFilter addTarget:waterMarkBlendFilter];
+//    [_uiElementInput addTarget:waterMarkBlendFilter];
+//    [waterMarkBlendFilter addTarget:blurFilter];
+//    [blurFilter addTarget:_movieWriter];
+//    [blurFilter addTarget:filterView];
+    
+    __block GPUImageUIElement *weakUIElementInput = _uiElementInput;
     __block GPUImageUIElement *weakWaterMarkUIElement = waterMarkUIElement;
-
-    [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
-        NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,1-(CGFloat)frameTime.value/frameTime.timescale/1.5);
-        [iOSBlurFilter setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5*24];
-//        tailView.alpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
+    __block UIView            *weakWaterContentView = waterMarkContentView;
+    __block GPUImageGaussianBlurFilter *weakBlurFilter = blurFilter;
+    [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * blankFilter, CMTime frameTime){
+        NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,(CGFloat)frameTime.value/frameTime.timescale/1.5*24);
+        [blurFilter setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5*24];
+        NSLog(@"%f",blurFilter.blurRadiusInPixels);
+        weakWaterContentView.alpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
+//        NSLog()
 //        if(frameTime.value>400){
 //            tailView.userName = @"taikdsa";
 //        }
+//        testLabel.text = [NSString stringWithFormat:@"%lld",frameTime.value ];
+//        testLabel.alpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
         [weakUIElementInput update];
-//        [weakWaterMarkUIElement update];
+        [weakWaterMarkUIElement update];
     }];
+    
+
 
     
     [_movieWriter startRecording];
