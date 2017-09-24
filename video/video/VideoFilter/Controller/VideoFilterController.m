@@ -173,9 +173,8 @@
     
     GPUImageAddBlendFilter *addBlendFilter = [[GPUImageAddBlendFilter alloc]init];
     
-    GPUImageOutput<GPUImageInput> *blankFilter = [[GPUImageSepiaFilter alloc] init];
-    
-
+    GPUImageBrightnessFilter *blankFilter = [[GPUImageBrightnessFilter alloc] init];
+    blankFilter.brightness = 0;
     
     //blur
     GPUImageGaussianBlurFilter *blurFilter = [[GPUImageGaussianBlurFilter alloc]init];
@@ -227,14 +226,16 @@
     
     [blankFilter addTarget:addBlendFilter];
     
-    [waterMarkUIElement addTarget:addBlendFilter];
+    [_uiElementInput addTarget: addBlendFilter];
     [addBlendFilter addTarget:blurFilter];
-    [blurFilter addTarget:blankFilter2];
-    [ blankFilter2 addTarget:waterMarkBlendFilter];
-    [_uiElementInput addTarget:waterMarkBlendFilter];
     
-    [waterMarkBlendFilter addTarget:_movieWriter];
-    [waterMarkBlendFilter addTarget:filterView];
+//    [blurFilter addTarget:waterMarkBlendFilter];
+//     addTarget:blankFilter2];
+//    [ blankFilter2 addTarget:waterMarkBlendFilter];
+//    [waterMarkUIElement addTarget:waterMarkBlendFilter];
+    
+    [blurFilter addTarget:_movieWriter];
+    [blurFilter addTarget:filterView];
     
     //alltarget2
     
@@ -253,17 +254,20 @@
     __block GPUImageGaussianBlurFilter *weakBlurFilter = blurFilter;
     [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * blankFilter, CMTime frameTime){
         NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,(CGFloat)frameTime.value/frameTime.timescale/1.5*24);
-        [blurFilter setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5*24];
-        NSLog(@"%f",blurFilter.blurRadiusInPixels);
-        weakWaterContentView.alpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
+        if(weakBlurFilter.blurRadiusInPixels < 16){
+            [weakBlurFilter setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5*24];
+            NSLog(@"%f",weakBlurFilter.blurRadiusInPixels);
+        }
+        [weakUIElementInput update];
+//        weakWaterContentView.alpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
 //        NSLog()
 //        if(frameTime.value>400){
 //            tailView.userName = @"taikdsa";
 //        }
 //        testLabel.text = [NSString stringWithFormat:@"%lld",frameTime.value ];
 //        testLabel.alpha = (CGFloat)frameTime.value/frameTime.timescale/1.5;
-        [weakUIElementInput update];
-        [weakWaterMarkUIElement update];
+        
+//        [weakWaterMarkUIElement update];
     }];
     
 
@@ -291,7 +295,7 @@
 
 - (void)finishRecording1{
     dispatch_async(dispatch_get_main_queue(), ^{
-//        [self imageVideoToBlurVideo];
+        [self blurVideoToWaterMarkVideo];
     });
 }
 
@@ -380,7 +384,7 @@
     CGSize videoSize = CGSizeMake(720, 540);
     CGFloat time = 1.5;
     CGFloat fps = 30;
-    NSString *videoName = [NSString stringWithFormat:@"blurVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
+    NSString *videoName = [NSString stringWithFormat:@"imageVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
     NSString *videoPath = [NSString stringWithFormat:@"Documents/%@",videoName];
     
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
@@ -406,9 +410,10 @@
     VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
     GPUImageAddBlendFilter *addBlendFilter = [[GPUImageAddBlendFilter alloc]init];
     GPUImageUIElement *uielement = [[GPUImageUIElement alloc]initWithView:tailView];
-    _filter = [[GPUImageSepiaFilter alloc] init];
-    [_videoFile addTarget:_filter];
-    [_filter addTarget:addBlendFilter];
+    GPUImageBrightnessFilter *filter = [[GPUImageBrightnessFilter alloc] init];
+    filter.brightness = 0;
+    [_videoFile addTarget:filter];
+    [filter addTarget:addBlendFilter];
     [uielement addTarget:addBlendFilter];
     [addBlendFilter addTarget:_movieWriter];
 
