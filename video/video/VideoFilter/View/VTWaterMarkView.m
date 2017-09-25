@@ -53,7 +53,7 @@
 
 - (UIImageView*)waterMarkImageView {
     if(!_waterMarkImageView) {
-        _waterMarkImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"waterMark"]];
+        _waterMarkImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"midWaterMark"]];
         [self addSubview:_waterMarkImageView];
     }
     return _waterMarkImageView;
