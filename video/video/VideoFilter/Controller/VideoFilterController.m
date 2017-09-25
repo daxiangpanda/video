@@ -154,6 +154,10 @@
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
     
     _videoFile = [[GPUImageMovie alloc]initWithURL:[NSURL fileURLWithPath:pathToMovie]];
+    GPUImageBrightnessFilter *blankFilter = [[GPUImageBrightnessFilter alloc] init];
+    blankFilter.brightness = 0;
+    [_videoFile addTarget:blankFilter];
+    
     //配置movieWriter
     NSString *lastFrameVideoName = [NSString stringWithFormat:@"imageVideo%.0f*%.0f%.2fs.mp4",videoSize.width,videoSize.height,time];
     NSString *lastFrameMoviePath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/%@",lastFrameVideoName]];
@@ -162,15 +166,11 @@
     if([[NSFileManager defaultManager] fileExistsAtPath:lastFrameMoviePath]) {
         [[NSFileManager defaultManager]removeItemAtPath:lastFrameMoviePath error:nil];
     }
-    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:lastFrameVideoURL size:videoSize];
-    
-    _movieWriter.hasAudioTrack = YES;
-    
-    _movieWriter.shouldPassthroughAudio = YES;
-    
+//    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:lastFrameVideoURL size:videoSize];
+//    _movieWriter.hasAudioTrack = NO;
+//    _movieWriter.shouldPassthroughAudio = YES;
+//
     NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"];
-
-    //生成最后一帧的图片
     CGFloat videoLength = [self getVideoLength:[NSURL fileURLWithPath:testVideoPath]];
     
     UIImage *lastImage = [UIImage thumbnailImageForVideo:[NSURL fileURLWithPath:testVideoPath] atTime:videoLength*fps];
@@ -179,62 +179,107 @@
     UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
     [contentView addSubview:imageView];
     
+    
+    // 2
     _uiElementInput = [[GPUImageUIElement alloc]initWithView:contentView];
-    
-    //target
-    
     GPUImageAddBlendFilter *addBlendFilter = [[GPUImageAddBlendFilter alloc]init];
     
-    GPUImageBrightnessFilter *blankFilter = [[GPUImageBrightnessFilter alloc] init];
-    blankFilter.brightness = 0;
     
+    // 3.
+    [_uiElementInput addTarget:addBlendFilter];
+    [blankFilter addTarget:addBlendFilter];
+    
+    
+    KWS(weakSelf);
+    [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
+        [weakSelf.uiElementInput update];
+    }];
+    //addBlendFilter
+    
+//
     //blur
     GPUImageGaussianBlurFilter *blurFilter = [[GPUImageGaussianBlurFilter alloc]init];
-    [blurFilter setBlurRadiusInPixels:0];
+    [blurFilter setBlurRadiusInPixels:24];
+    [addBlendFilter addTarget:blurFilter];
+    
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    label.font = [UIFont systemFontOfSize:10.0f];
+    label.text = @"Vtell";
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor redColor];
+    label.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
+    
+    GPUImageUIElement *  uiElementInputLabel = [[GPUImageUIElement alloc]initWithView:label];
+    GPUImageAddBlendFilter *addBlendFilterLABEL = [[GPUImageAddBlendFilter alloc]init];
+    
+   
+    
+    [uiElementInputLabel addTarget:addBlendFilterLABEL];
+    [blurFilter addTarget:addBlendFilterLABEL];
+
+    [blurFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
+        label.alpha = time.value/900.0;
+        [blurFilter setBlurRadiusInPixels:time.value/900.0 * 24];
+        [uiElementInputLabel update];
+    }];
+    
+    
+    [addBlendFilterLABEL addTarget:filterView];
+    [_videoFile startProcessing];
     
     
     //waterMarkElement
-    UIView *waterMarkContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
-    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
-    
-    [waterMarkContentView addSubview:tailView];
-    
-    GPUImageUIElement *waterMarkUIElement = [[GPUImageUIElement alloc]initWithView:waterMarkContentView];
-    
-    GPUImageAddBlendFilter *waterMarkBlendFilter = [[GPUImageAddBlendFilter alloc]init];
-    
-    //alltarget4 一下全部模糊 然后水印渐变
-    [_videoFile addTarget:blankFilter];
-    [blankFilter addTarget:addBlendFilter];
-    [_uiElementInput addTarget:addBlendFilter];
-    [addBlendFilter addTarget:blurFilter];
-    [blurFilter addTarget:waterMarkBlendFilter];
-    [waterMarkUIElement addTarget:waterMarkBlendFilter];
-    [blurFilter addTarget:_movieWriter];
-    [blurFilter addTarget:filterView];
-    
-    __block GPUImageUIElement *weakUIElementInput = _uiElementInput;
-    __block GPUImageGaussianBlurFilter *weakBlurFilter = blurFilter;
-    [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * blankFilter, CMTime frameTime){
-        NSLog(@"%lld_______%d___________%f",frameTime.value,frameTime.timescale,(CGFloat)frameTime.value/frameTime.timescale/1.5*24);
-        if(weakBlurFilter.blurRadiusInPixels < 16){
-            [weakBlurFilter setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5*24];
-            NSLog(@"%f",weakBlurFilter.blurRadiusInPixels);
-            
-        }
-        [weakUIElementInput update];
-        
-    }];
-    
-    [_movieWriter startRecording];
-    
-    [_videoFile startProcessing];
-    
-    KWS(weakSelf);
-    [_movieWriter setCompletionBlock:^{
-//        [weakSelf.movieWriter endProcessing];
+//    UIView *waterMarkContentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+//    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+//
+//    [waterMarkContentView addSubview:tailView];
+//
+//    GPUImageUIElement *waterMarkUIElement = [[GPUImageUIElement alloc]initWithView:waterMarkContentView];
+//
+//    GPUImageAddBlendFilter *waterMarkBlendFilter = [[GPUImageAddBlendFilter alloc]init];
+//
+//    //alltarget4 一下全部模糊 然后水印渐变
+//
+//
+//    [_videoFile addTarget:blankFilter];
+//    [blankFilter addTarget:addBlendFilter];
+//    [_uiElementInput addTarget:addBlendFilter];
+//    [addBlendFilter addTarget:blurFilter];
+//    [blurFilter addTarget:waterMarkBlendFilter];
+//    [waterMarkUIElement addTarget:waterMarkBlendFilter];
+//    [waterMarkBlendFilter addTarget:filterView];
+//    __block GPUImageUIElement *weakUIElementInput = _uiElementInput;
+//    __block GPUImageGaussianBlurFilter *weakBlurFilter = blurFilter;
+//    [blankFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * blankFilter, CMTime frameTime){
+//
+////        if(weakBlurFilter.blurRadiusInPixels < 16){
+////            [weakBlurFilter setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5*24];
+////            NSLog(@"%f",weakBlurFilter.blurRadiusInPixels);
+////
+////        }
+//        [weakUIElementInput update];
+//    }];
+//
+//    [addBlendFilter setFrameProcessingCompletionBlock:^(GPUImageOutput * blankFilter, CMTime frameTime){
+//
+//        //        if(weakBlurFilter.blurRadiusInPixels < 16){
+//        //            [weakBlurFilter setBlurRadiusInPixels:(CGFloat)frameTime.value/frameTime.timescale/1.5*24];
+//        //            NSLog(@"%f",weakBlurFilter.blurRadiusInPixels);
+//        //
+//        //        }
+//        [waterMarkUIElement update];
+//    }];
+//
+//    [_movieWriter startRecording];
+//
+//    [_videoFile startProcessing];
+//
+//    KWS(weakSelf);
+//    [_movieWriter setCompletionBlock:^{
+////        [weakSelf.movieWriter endProcessing];
 //        [weakSelf completionWriter1];
-    }];
+//    }];
 
 }
 
@@ -247,16 +292,16 @@
 
 - (void)finishRecording1{
     dispatch_async(dispatch_get_main_queue(), ^{
-        KWS(weakSelf);
-        [weakSelf blurVideoToWaterMarkVideo:^(BOOL success) {
-            if(success){
-                [weakSelf exportVideos:^(BOOL success) {
-                    if(success){
-                        NSLog(@"合成成功");
-                    }
-                }];
-            }
-        }];
+//        KWS(weakSelf);
+//        [weakSelf blurVideoToWaterMarkVideo:^(BOOL success) {
+//            if(success){
+//                [weakSelf exportVideos:^(BOOL success) {
+//                    if(success){
+//                        NSLog(@"合成成功");
+//                    }
+//                }];
+//            }
+//        }];
     });
 }
 
