@@ -234,7 +234,7 @@
     [_movieWriter setCompletionBlock:^{
 //        [weakSelf.movieWriter endProcessing];
         NSLog(@"done");
-//        [weakSelf completionWriter1];
+        [weakSelf completionWriter2];
     }];
 
 }
@@ -244,7 +244,7 @@
 - (void)completionWriter2{
     KWS(weakSelf);
     [_movieWriter finishRecordingWithCompletionHandler:^{
-        [weakSelf finishRecording2];
+//        [weakSelf finishRecording2];
     }];
 }
 
