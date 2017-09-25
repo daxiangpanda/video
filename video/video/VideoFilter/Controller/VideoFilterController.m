@@ -199,18 +199,20 @@
 //
     //blur
     GPUImageGaussianBlurFilter *blurFilter = [[GPUImageGaussianBlurFilter alloc]init];
-    [blurFilter setBlurRadiusInPixels:24];
+    [blurFilter setBlurRadiusInPixels:0];
     [addBlendFilter addTarget:blurFilter];
     
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-    label.font = [UIFont systemFontOfSize:10.0f];
-    label.text = @"Vtell";
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor redColor];
-    label.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+//    label.font = [UIFont systemFontOfSize:10.0f];
+//    label.text = @"Vtell";
+//    label.textAlignment = NSTextAlignmentCenter;
+//    label.textColor = [UIColor redColor];
+//    label.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
+    VTTailView *tailView = [[VTTailView alloc]initWithFrame:CGRectMake(1,1, videoSize.width-2, videoSize.height-2)];
+    tailView.userName = @"dadsa";
     
-    GPUImageUIElement *  uiElementInputLabel = [[GPUImageUIElement alloc]initWithView:label];
+    GPUImageUIElement *  uiElementInputLabel = [[GPUImageUIElement alloc]initWithView:tailView];
     GPUImageAddBlendFilter *addBlendFilterLABEL = [[GPUImageAddBlendFilter alloc]init];
     
    
@@ -219,7 +221,7 @@
     [blurFilter addTarget:addBlendFilterLABEL];
 
     [blurFilter setFrameProcessingCompletionBlock:^(GPUImageOutput *output, CMTime time) {
-        label.alpha = time.value/900.0;
+        tailView.alpha = time.value/900.0;
         [blurFilter setBlurRadiusInPixels:time.value/900.0 * 24];
         [uiElementInputLabel update];
     }];
