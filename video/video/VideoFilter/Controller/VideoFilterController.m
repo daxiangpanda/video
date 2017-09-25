@@ -164,9 +164,7 @@
     if([[NSFileManager defaultManager] fileExistsAtPath:lastFrameMoviePath]) {
         [[NSFileManager defaultManager]removeItemAtPath:lastFrameMoviePath error:nil];
     }
-    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:lastFrameVideoURL size:videoSize];
-    _movieWriter.hasAudioTrack = NO;
-    _movieWriter.shouldPassthroughAudio = YES;
+
 //
     NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"];
     CGFloat videoLength = [self getVideoLength:[NSURL fileURLWithPath:testVideoPath]];
@@ -202,13 +200,29 @@
 
     VTTailView *tailView = nil;
     CGFloat r = 0.0f;
+    CGRect rect = CGRectZero;
     if(videoSize.height<videoSize.width){
         r = videoSize.height/281;
-        tailView = [[VTTailView alloc]initWithFrame:CGRectMake((videoSize.width-375*r)/2*r,1*r, 375*r, 281*r) ];
+        rect = CGRectMake((videoSize.width-375*r)/2*r,1*r, 375*r, 281*r);
+        if(rect.origin.x<1.0f){
+            rect.origin.x = 1.0f;
+        }
+        if(rect.origin.y<1.0f){
+            rect.origin.y = 1.0f;
+        }
+
     }else {
         r = videoSize.width/375;
-        tailView = [[VTTailView alloc]initWithFrame:CGRectMake(1*r,(videoSize.height-281*r)/2*r, 375*r, 281*r)];
+        rect = CGRectMake(1*r,(videoSize.height-281*r)/2*r, 375*r, 281*r);
+        if(rect.origin.x<1.0f){
+            rect.origin.x = 1.0f;
+        }
+        if(rect.origin.y<1.0f){
+            rect.origin.y = 1.0f;
+        }
     }
+    
+    tailView = [[VTTailView alloc]initWithFrame:rect];
     tailView.userName = @"adsdsafc";
     tailView.alpha = 0;
     GPUImageUIElement *  uiElementInputLabel = [[GPUImageUIElement alloc]initWithView:tailView];
@@ -225,17 +239,32 @@
         [uiElementInputLabel update];
     }];
     
+    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:lastFrameVideoURL size:videoSize];
+//    _movieWriter.hasAudioTrack = NO;
+//    _movieWriter.shouldPassthroughAudio = YES;
+    
     
     [addBlendFilterLABEL addTarget:filterView];
     [addBlendFilter addTarget:_movieWriter];
-    [_videoFile startProcessing];
     [_movieWriter startRecording];
+    [_videoFile startProcessing];
     
     [_movieWriter setCompletionBlock:^{
 //        [weakSelf.movieWriter endProcessing];
         NSLog(@"done");
         [weakSelf completionWriter2];
     }];
+//    
+//    [_movieWriter startRecording];
+//    
+//    [_videoFile startProcessing];
+//    
+//    __unsafe_unretained GPUImageMovieWriter *weakMovieWriter = _movieWriter;
+//    KWS(weakSelf);
+//    [_movieWriter setCompletionBlock:^{
+//        NSLog(@"END");
+//        [weakSelf completionWriter1];
+//    }];
 
 }
 
