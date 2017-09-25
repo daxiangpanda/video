@@ -11,10 +11,12 @@
 #import <Masonry.h>
 @interface VTTailView ()
 
-
+@property (nonatomic, strong) UIView                      *contentView;
 @property (nonatomic, strong) UIImageView                 *appNameImageView;
-
+@property (nonatomic, strong) UIImageView                 *appSlogenImageView;
+@property (nonatomic, strong) UIImageView                 *appLogoImageView;
 @property (nonatomic, strong) UILabel                     *userNameLabel;
+@property (nonatomic, assign) CGFloat                     ratioInside;
 
 @end
 
@@ -22,7 +24,8 @@
 
 
 #pragma mark - life cycle
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame  {
+    
     self = [super initWithFrame:frame];
     if(self) {
         [self setupView];
@@ -34,18 +37,38 @@
 #pragma mark - setupView
 - (void)setupView {
     self.backgroundColor = [UIColor clearColor];
-
-    
+    self.ratioInside = self.frame.size.width/375;
+    [self.contentView addSubview:self.appNameImageView];
+    [self.contentView addSubview:self.userNameLabel];
+    [self.contentView addSubview:self.appSlogenImageView];
+    [self.contentView addSubview:self.appLogoImageView];
+    self.userNameLabel.font = [UIFont systemFontOfSize:12.0*self.ratioInside];
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.mas_centerX);
-        make.centerY.mas_equalTo(self.mas_centerY);
-                make.height.mas_equalTo(@100);
-                make.width.mas_equalTo(self.mas_width);
+        make.left.mas_equalTo(self.contentView.mas_left).offset(148*self.ratioInside);
+        make.right.greaterThanOrEqualTo(self.contentView.mas_right);
+        make.centerY.mas_equalTo(self.contentView.mas_centerY);
+        make.height.mas_equalTo(@(14*self.ratioInside));
     }];
     
     [self.appNameImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.mas_centerX);
-        make.centerY.mas_equalTo(self.mas_centerY).offset(-50);
+        make.left.mas_equalTo(self.contentView.mas_left).offset(150*self.ratioInside);
+        make.top.mas_equalTo(self.contentView.mas_top).offset(108*self.ratioInside);
+        make.width.mas_equalTo(@(89*self.ratioInside));
+        make.height.mas_equalTo(@(18*self.ratioInside));
+    }];
+    
+    [self.appSlogenImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.contentView.mas_left).offset(82*self.ratioInside);
+        make.top.mas_equalTo(self.userNameLabel.mas_bottom).offset(10*self.ratioInside);
+        make.width.mas_equalTo(@(210*self.ratioInside));
+        make.height.mas_equalTo(@(28*self.ratioInside));
+    }];
+    
+    [self.appLogoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.contentView.mas_left).offset(99*self.ratioInside);
+        make.top.mas_equalTo(self.contentView.mas_top).offset(104*self.ratioInside);
+        make.width.mas_equalTo(@(44*self.ratioInside));
+        make.height.mas_equalTo(@(44*self.ratioInside));
     }];
 
 //
@@ -62,27 +85,48 @@
 //    });
 //}
 
+#pragma mark - public
 
+- (UIView*)contentView {
+    
+    if(!_contentView) {
+        
+        _contentView = [[UIView alloc]initWithFrame:self.frame];
+        [self addSubview:_contentView];
+    }
+    return _contentView;
+}
 
-
+- (UIImageView *)appSlogenImageView {
+    
+    if(!_appSlogenImageView) {
+        _appSlogenImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tailView_slogen"]];
+    }
+    return _appSlogenImageView;
+}
 - (UIImageView*)appNameImageView {
     if(!_appNameImageView) {
-        _appNameImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"trailWaterMark_appIcon"]];
+        _appNameImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tailView_appName"]];
         
-        [self addSubview:_appNameImageView];
     }
     return _appNameImageView;
 }
 
+- (UIImageView*)appLogoImageView {
+    if(!_appLogoImageView) {
+        _appLogoImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"tailView_appLogo"]];
+        
+    }
+    return _appLogoImageView;
+}
 
 - (UILabel*)userNameLabel {
     if(!_userNameLabel) {
         _userNameLabel = [self createLabel];
-        _userNameLabel.font = [UIFont systemFontOfSize:20.0f];
-        _userNameLabel.textAlignment = NSTextAlignmentCenter;
+        _userNameLabel.backgroundColor = [UIColor clearColor];
+        _userNameLabel.textAlignment = NSTextAlignmentLeft;
         _userNameLabel.textColor = [UIColor whiteColor];
         _userNameLabel.backgroundColor = [UIColor blackColor];
-        [self addSubview:_userNameLabel];
     }
     return _userNameLabel;
 }
@@ -92,9 +136,16 @@
     return label;
 }
 
+- (CGFloat)ratioInside {
+    if(_ratioInside!=0){
+        return _ratioInside;
+    }
+    return 1.0f;
+}
+
 #pragma mark - setter
 - (void)setUserName:(NSString *)userName {
-    self.userNameLabel.text = [NSString stringWithFormat:@"@%@",userName];
+    self.userNameLabel.text = [NSString stringWithFormat:@"导演•%@",userName];
 }
 
 
