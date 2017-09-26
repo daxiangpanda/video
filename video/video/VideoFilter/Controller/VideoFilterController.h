@@ -4,15 +4,7 @@
 typedef void(^WmCompleteBlock)(BOOL success);
 typedef void(^WmProcessBlock)(CGFloat progress);
 
-@interface VideoFilterController : UIViewController <GPUImageVideoCameraDelegate>{
-//    GPUImageOutput<GPUImageInput>   *filter;
-//    GPUImageView                    *filterImageView;
-//    GPUImageMovie                   *videoFile;
-//    GPUImageUIElement               *uiElementInput;
-//    GPUImageMovieWriter             *movieWriter;
-
-    
-}
+@interface VideoFilterController : UIViewController <GPUImageVideoCameraDelegate>
 
 @property (nonatomic, strong) NSURL * videoURL;
 

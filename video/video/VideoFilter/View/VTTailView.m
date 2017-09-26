@@ -88,9 +88,7 @@
 #pragma mark - public
 
 - (UIView*)contentView {
-    
     if(!_contentView) {
-        
         _contentView = [[UIView alloc]initWithFrame:self.frame];
         [self addSubview:_contentView];
     }
