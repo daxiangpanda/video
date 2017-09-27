@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSURL                           *blurVideoURL;
 @property (nonatomic, strong) NSURL                           *waterMarkVideoURL;
 @property (nonatomic, strong) NSURL                           *midVideoURL;
+@property (nonatomic, strong) NSString                        *outVideoPath;
 @property (nonatomic, assign) CGSize                          videoSize;
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput>   *filter;
 @property (nonatomic, strong) GPUImageView                    *filterImageView;
@@ -286,6 +287,7 @@
         [weakSelf exportVideos:^(BOOL success) {
             if(success){
                 NSLog(@"合并完成");
+                UISaveVideoAtPathToSavedPhotosAlbum(self.outVideoPath , self, nil, nil);
             }
         }];
     });
@@ -305,6 +307,7 @@
     }
     unlink([outPath UTF8String]);
     NSURL *outputUrl = [NSURL fileURLWithPath:pathToMovie];
+    _outVideoPath = pathToMovie;
     CMTime cursorTime = kCMTimeZero;
     AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
     AVMutableCompositionTrack *videoAssetTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
