@@ -11,6 +11,7 @@
 
 @interface VTWaterMarkView ()
 
+@property (nonatomic, strong) UIView          *contentView;
 @property (nonatomic, strong) UIImageView     *waterMarkImageView;
 @property (nonatomic, strong) UILabel         *userNameLabel;
 
@@ -31,30 +32,39 @@
 
 #pragma mark - setupView
 - (void)setupView {
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor blueColor];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
+    }];
     
     [self.waterMarkImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.mas_right).offset(-20);
-        make.bottom.mas_equalTo(self.mas_bottom).offset(-48);
+        make.right.mas_equalTo(self.contentView.mas_right).offset(-20);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-48);
         make.width.mas_equalTo(@108);
         make.height.mas_equalTo(@46);
     }];
     
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.mas_right).offset(-28);
-        make.bottom.mas_equalTo(self.mas_bottom).offset(-12);
-        make.left.lessThanOrEqualTo(self.mas_left).offset(20);
+        make.right.mas_equalTo(self.contentView.mas_right).offset(-28);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-12);
+        make.left.lessThanOrEqualTo(self.contentView.mas_left).offset(20);
         make.height.mas_equalTo(@32);
     }];
     
     [self layoutIfNeeded];
 }
 
-
+- (UIView*)contentView {
+    if(!_contentView) {
+        _contentView = [[UIView alloc]initWithFrame:self.viewFrame];
+        [self addSubview:_contentView];
+    }
+    return _contentView;
+}
 - (UIImageView*)waterMarkImageView {
     if(!_waterMarkImageView) {
         _waterMarkImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"midWaterMark"]];
-        [self addSubview:_waterMarkImageView];
+        [self.contentView addSubview:_waterMarkImageView];
     }
     return _waterMarkImageView;
 }
@@ -65,7 +75,7 @@
         _userNameLabel.font = [UIFont systemFontOfSize:30.0f];
         _userNameLabel.textAlignment = NSTextAlignmentRight;
         _userNameLabel.textColor = [UIColor whiteColor];
-        [self addSubview:_userNameLabel];
+        [self.contentView addSubview:_userNameLabel];
     }
     return _userNameLabel;
 }

@@ -22,6 +22,10 @@
 @property (nonatomic, strong) GPUImageMovieWriter             *movieWriter;
 @property (nonatomic, strong) GPUImageMovieWriter             *movieWriter2;
 
+
+@property (nonatomic, strong) UIButton                        *button1;
+@property (nonatomic, strong) UIButton                        *button2;
+@property (nonatomic, strong) VTWaterMarkView                 *waterMarkView;
 @end
 
 @implementation VideoFilterController
@@ -31,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"testVideo1" ofType:@"mp4"];
+    NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"IMG_0103" ofType:@"MOV"];
 
     _videoURL = [NSURL fileURLWithPath:testVideoPath];
     
@@ -39,9 +43,38 @@
 //    [self blackVideoToImageVideo];
 //
 //    整个流程 ip7p 3s  ip5c 12s
-    [self waterMarkVideo:_videoURL completedBlock:nil processBlock:nil];
+    [self  waterMarkVideo:_videoURL completedBlock:nil processBlock:nil];
+//    _waterMarkView = [[VTWaterMarkView alloc]initWithFrame:CGRectMake(100, 200, 320 , 180)];
+//    _waterMarkView.userName = @"sad";
+//    [self.view addSubview:_waterMarkView];
+//
+//    _button1 = [[UIButton alloc]initWithFrame:CGRectMake(100, 200, 100, 100)];
+//    _button1.backgroundColor = [UIColor blackColor];
+//
+//    _button2 = [[UIButton alloc]initWithFrame:CGRectMake(300, 200, 100, 100)];
+//    _button2.backgroundColor = [UIColor blackColor];
+//    [self.view addSubview:_button2];
+//    [self.view addSubview:_button1];
+//
+//    [_button1 addTarget:self action:@selector(button1Clicked) forControlEvents:UIControlEventAllEvents];
+//
+//    [_button2 addTarget:self action:@selector(button2Clicked) forControlEvents:UIControlEventAllEvents];
+
+
+
 }
 
+- (void)button1Clicked {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.waterMarkView.transform = CGAffineTransformMakeRotation(90 / 180.0 * M_PI );
+    }];
+}
+- (void)button2Clicked {
+    [UIView animateWithDuration:0.3 animations:^{
+//                self.moveView.transform = CGAffineTransformTranslate(self.moveView.transform, cup.x - bef.x, cup.y - bef.y);
+        [self.waterMarkView setFrame:CGRectMake(100, 100, 320, 320)];
+    }];
+}
 - (CGFloat)getVideoLength:(NSURL *)url{
     NSDictionary *opts = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO]
                                                      forKey:AVURLAssetPreferPreciseDurationAndTimingKey];
@@ -64,16 +97,29 @@
 //IP7P 2s-3s
 - (void)midWaterMarkVideo:(NSURL*)videoURL videoSize:(CGSize)videoSize{
     NSLog(@"start");
-    _videoFile = [[GPUImageMovie alloc]initWithURL:videoURL];
+    NSUInteger degress = [self degressFromVideoFileWithURL:videoURL];
+    
+//    _videoFile = [[GPUImageMovie alloc]initWithURL:videoURL];
     _videoFile.playAtActualSpeed = NO;
+    _videoFile.runBenchmark = YES;
+    
+    AVAsset *asset = [AVAsset assetWithURL:videoURL];
+    
+    _videoFile = [[GPUImageMovie alloc]initWithAsset:asset];
+    
     GPUImageOutput<GPUImageInput> *filter = [[GPUImageBrightnessFilter alloc] init];
     
     [_videoFile addTarget:filter];
     
     GPUImageAddBlendFilter *blendFilter = [[GPUImageAddBlendFilter alloc] init];
     
-    VTWaterMarkView *waterMarkView = [[VTWaterMarkView alloc]initWithFrame:CGRectMake(0, 0, videoSize.width, videoSize.height)];
+    VTWaterMarkView *waterMarkView = [[VTWaterMarkView alloc]initWithFrame:CGRectMake(0, 0,videoSize.height, videoSize.width )];
     waterMarkView.userName = @"test测试名字";
+    CGAffineTransform rotate = CGAffineTransformMakeRotation(90 / 180.0 * M_PI );
+    
+    [waterMarkView setTransform:rotate];
+    
+    [waterMarkView setFrame:CGRectMake(1, 1, videoSize.width, videoSize.height)];
     GPUImageUIElement *uiElementInput = [[GPUImageUIElement alloc] initWithView:waterMarkView];
 //    NSString *videoName = [[videoURL path] componentsSeparatedByString:@"/"].lastObject;
     NSString *path = [NSString stringWithFormat:@"Documents/midVideo.mp4"];
@@ -86,18 +132,21 @@
                                                            size:videoSize
                                                        fileType:AVFileTypeQuickTimeMovie
                                                  outputSettings:nil];
+
     GPUImageView *filterView = [[GPUImageView alloc] initWithFrame:self.view.frame];
     [self.view addSubview: filterView];
     _midVideoURL = wateredVideoURL;
     _movieWriter.shouldPassthroughAudio = YES;
     _videoFile.audioEncodingTarget = _movieWriter;
+//    [_movieWriter setTransform:rotate];
+
     [_videoFile enableSynchronizedEncodingUsingMovieWriter:_movieWriter];
     NSLog(@"%@", wateredVideoURL);
 //    [filter addTarget:_movieWriter];
     [filter addTarget:blendFilter];
     [uiElementInput addTarget:blendFilter];
     [blendFilter addTarget:_movieWriter];
-//    [blendFilter addTarget:filterView];
+    [blendFilter addTarget:filterView];
     //下面一行是啥意思？不同的地方写还是不写？
 //        __unsafe_unretained GPUImageUIElement *weakUIE = uiElementInput;
 //    [uiElementInput update];
@@ -259,7 +308,7 @@
                                                  outputSettings:nil];
     _waterMarkVideoURL = lastFrameVideoURL;
 
-//    [addBlendFilterLABEL addTarget:filterView];
+    [addBlendFilterLABEL addTarget:filterView];
     [addBlendFilterLABEL addTarget:_movieWriter];
     [_movieWriter startRecording];
     [_videoFile startProcessing];
@@ -334,6 +383,35 @@
         }
     }];
 }
+
+-(NSUInteger)degressFromVideoFileWithURL:(NSURL *)url
+{
+    NSUInteger degress = 0;
+    
+    AVAsset *asset = [AVAsset assetWithURL:url];
+    NSArray *tracks = [asset tracksWithMediaType:AVMediaTypeVideo];
+    if([tracks count] > 0) {
+        AVAssetTrack *videoTrack = [tracks objectAtIndex:0];
+        CGAffineTransform t = videoTrack.preferredTransform;
+        
+        if(t.a == 0 && t.b == 1.0 && t.c == -1.0 && t.d == 0){
+            // Portrait
+            degress = 90;
+        }else if(t.a == 0 && t.b == -1.0 && t.c == 1.0 && t.d == 0){
+            // PortraitUpsideDown
+            degress = 270;
+        }else if(t.a == 1.0 && t.b == 0 && t.c == 0 && t.d == 1.0){
+            // LandscapeRight
+            degress = 0;
+        }else if(t.a == -1.0 && t.b == 0 && t.c == 0 && t.d == -1.0){
+            // LandscapeLeft
+            degress = 180;
+        }
+    }
+    
+    return degress;
+}
+
 /*
 #pragma mark - Navigation
 
