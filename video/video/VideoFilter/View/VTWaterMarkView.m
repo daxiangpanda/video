@@ -14,7 +14,7 @@
 @property (nonatomic, strong) UIView          *contentView;
 @property (nonatomic, strong) UIImageView     *waterMarkImageView;
 @property (nonatomic, strong) UILabel         *userNameLabel;
-
+@property (nonatomic, strong) UILabel         *userNameLabel1;
 @end
 
 @implementation VTWaterMarkView
@@ -32,7 +32,7 @@
 
 #pragma mark - setupView
 - (void)setupView {
-    self.backgroundColor = [UIColor blueColor];
+    self.backgroundColor = [UIColor clearColor];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self);
     }];
@@ -49,6 +49,13 @@
         make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-12);
         make.left.lessThanOrEqualTo(self.contentView.mas_left).offset(20);
         make.height.mas_equalTo(@32);
+    }];
+    
+    [self.userNameLabel1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.contentView.mas_right).offset(-28);
+        make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(30);
+        make.left.lessThanOrEqualTo(self.contentView.mas_left).offset(20);
+        make.height.mas_equalTo(@26);
     }];
     
     [self layoutIfNeeded];
@@ -73,11 +80,24 @@
     if(!_userNameLabel) {
         _userNameLabel = [self createLabel];
         _userNameLabel.font = [UIFont systemFontOfSize:30.0f];
+        _userNameLabel.shadowColor = [UIColor blackColor];
+        _userNameLabel.shadowOffset = CGSizeMake(5.0f, 5.0f);
         _userNameLabel.textAlignment = NSTextAlignmentRight;
         _userNameLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_userNameLabel];
     }
     return _userNameLabel;
+}
+
+- (UILabel*)userNameLabel1 {
+    if(!_userNameLabel1) {
+        _userNameLabel1 = [self createLabel];
+        _userNameLabel1.font = [UIFont systemFontOfSize:30.0f];
+        _userNameLabel1.textAlignment = NSTextAlignmentRight;
+        _userNameLabel1.textColor = [UIColor whiteColor];
+        [self.contentView addSubview:_userNameLabel1];
+    }
+    return _userNameLabel1;
 }
 
 -(UILabel *)createLabel{
@@ -88,6 +108,7 @@
 #pragma mark - setter
 - (void)setUserName:(NSString *)userName {
     self.userNameLabel.text = [NSString stringWithFormat:@"@%@",userName];
+    self.userNameLabel1.text = [NSString stringWithFormat:@"@%@",userName];
 }
 
 @end

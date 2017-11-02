@@ -5,6 +5,7 @@
 #import "UIImage+VideoImage.h"
 #import "VTTailView.h"
 #import "VTWaterMarkView.h"
+#import "VTTailFilter1.h"
 
 #define KWS(weakSelf)           __weak __typeof(&*self)weakSelf = self
 
@@ -14,6 +15,7 @@
 @property (nonatomic, strong) NSURL                           *blurVideoURL;
 @property (nonatomic, strong) NSURL                           *waterMarkVideoURL;
 @property (nonatomic, strong) NSURL                           *midVideoURL;
+@property (nonatomic, strong) NSString                        *outVideoPath;
 @property (nonatomic, assign) CGSize                          videoSize;
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput>   *filter;
 @property (nonatomic, strong) GPUImageView                    *filterImageView;
@@ -35,6 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor grayColor]];
     NSString* testVideoPath = [[NSBundle mainBundle]pathForResource:@"IMG_0103" ofType:@"MOV"];
 
     _videoURL = [NSURL fileURLWithPath:testVideoPath];
@@ -43,22 +46,23 @@
 //    [self blackVideoToImageVideo];
 //
 //    整个流程 ip7p 3s  ip5c 12s
-    [self  waterMarkVideo:_videoURL completedBlock:nil processBlock:nil];
-//    _waterMarkView = [[VTWaterMarkView alloc]initWithFrame:CGRectMake(100, 200, 320 , 180)];
-//    _waterMarkView.userName = @"sad";
-//    [self.view addSubview:_waterMarkView];
-//
-//    _button1 = [[UIButton alloc]initWithFrame:CGRectMake(100, 200, 100, 100)];
-//    _button1.backgroundColor = [UIColor blackColor];
-//
-//    _button2 = [[UIButton alloc]initWithFrame:CGRectMake(300, 200, 100, 100)];
-//    _button2.backgroundColor = [UIColor blackColor];
-//    [self.view addSubview:_button2];
-//    [self.view addSubview:_button1];
-//
-//    [_button1 addTarget:self action:@selector(button1Clicked) forControlEvents:UIControlEventAllEvents];
-//
-//    [_button2 addTarget:self action:@selector(button2Clicked) forControlEvents:UIControlEventAllEvents];
+//    [self waterMarkVideo:_videoURL completedBlock:nil processBlock:nil];
+//    [self filterGroupMarkVideo:_videoURL completedBlock:nil processBlock:nil];
+    _waterMarkView = [[VTWaterMarkView alloc]initWithFrame:CGRectMake(100, 200, 320 , 180)];
+    _waterMarkView.userName = @"sad";
+    [self.view addSubview:_waterMarkView];
+
+    _button1 = [[UIButton alloc]initWithFrame:CGRectMake(100, 200, 100, 100)];
+    _button1.backgroundColor = [UIColor blackColor];
+
+    _button2 = [[UIButton alloc]initWithFrame:CGRectMake(300, 200, 100, 100)];
+    _button2.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:_button2];
+    [self.view addSubview:_button1];
+
+    [_button1 addTarget:self action:@selector(button1Clicked) forControlEvents:UIControlEventAllEvents];
+
+    [_button2 addTarget:self action:@selector(button2Clicked) forControlEvents:UIControlEventAllEvents];
 
 
 
@@ -183,6 +187,92 @@
 }
 
 
+- (void)filterGroupMarkVideo:(NSURL*)videoURL
+        completedBlock:(WmCompleteBlock)completeBlock
+          processBlock:(WmProcessBlock)processBlock {
+    AVAsset *asset = [AVAsset assetWithURL:videoURL];
+    AVAssetTrack *videoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] firstObject];
+    _videoSize = [videoTrack naturalSize];
+    KWS(weakSelf);
+    NSString *videoName = [NSString stringWithFormat:@"blackVideo%.0f*%.0f%.2fs.mp4",720.0f,540.0f,1.50f];
+    NSString *videoPath = [NSString stringWithFormat:@"Documents/%@",videoName];
+    NSString *fullPath = [NSHomeDirectory() stringByAppendingPathComponent:videoPath];
+    [self midGroupWaterMarkVideo:[NSURL fileURLWithPath:fullPath] videoSize:_videoSize];
+}
+
+//给视频加上视频中水印
+//IP7P 2s-3s
+- (void)midGroupWaterMarkVideo:(NSURL*)videoURL videoSize:(CGSize)videoSize{
+    NSLog(@"start");
+    NSUInteger degress = [self degressFromVideoFileWithURL:videoURL];
+    
+    //    _videoFile = [[GPUImageMovie alloc]initWithURL:videoURL];
+    _videoFile.playAtActualSpeed = NO;
+    _videoFile.runBenchmark = YES;
+    
+    AVAsset *asset = [AVAsset assetWithURL:videoURL];
+    
+    _videoFile = [[GPUImageMovie alloc]initWithAsset:asset];
+    _videoFile.runBenchmark = YES;
+    VTTailFilter1 *filter1 = [[VTTailFilter1 alloc] init];
+    [filter1 setLastFrameImage:[UIImage imageNamed:@"tailTest"] userName:@"sad"];
+    [_videoFile addTarget:filter1];
+
+    
+
+    //    NSString *videoName = [[videoURL path] componentsSeparatedByString:@"/"].lastObject;
+    NSString *path = [NSString stringWithFormat:@"Documents/midVideo.mp4"];
+    NSString *wateredVideoPath = [NSHomeDirectory() stringByAppendingPathComponent:path];
+    NSURL *wateredVideoURL = [NSURL fileURLWithPath:wateredVideoPath];
+    unlink([wateredVideoPath UTF8String]);
+    _movieWriter = nil;
+    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:wateredVideoURL size:videoSize];
+    _movieWriter = [[GPUImageMovieWriter alloc]initWithMovieURL:wateredVideoURL
+                                                           size:videoSize
+                                                       fileType:AVFileTypeQuickTimeMovie
+                                                 outputSettings:nil];
+    
+    GPUImageView *filterView = [[GPUImageView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview: filterView];
+    _midVideoURL = wateredVideoURL;
+//    _movieWriter.shouldPassthroughAudio = YES;
+//    _videoFile.audioEncodingTarget = _movieWriter;
+//    [_videoFile enableSynchronizedEncodingUsingMovieWriter:_movieWriter];
+
+    [filter1 addTarget:_movieWriter];
+    [filter1 addTarget:filterView];
+    //    [_movieWriter setTransform:rotate];
+    
+    NSLog(@"%@", wateredVideoURL);
+    //    [filter addTarget:_movieWriter];
+
+    //下面一行是啥意思？不同的地方写还是不写？
+    //        __unsafe_unretained GPUImageUIElement *weakUIE = uiElementInput;
+    //    [uiElementInput update];
+    //    __block BOOL needUpdate = YES;
+    //    [filter setFrameProcessingCompletionBlock:^(GPUImageOutput * filter, CMTime frameTime){
+    //        NSLog(@"%lld",frameTime.value);
+    //        if((CGFloat)frameTime.value/frameTime.timescale<0.1){
+    //            [uiElementInput update];
+    //        }
+    //    }];
+    
+    //
+    
+
+    
+    [_movieWriter startRecording];
+    
+    [_videoFile startProcessing];
+    
+    __unsafe_unretained GPUImageMovieWriter *weakMovieWriter = _movieWriter;
+    KWS(weakSelf);
+    [_movieWriter setCompletionBlock:^{
+        NSLog(@"END");
+        [weakSelf completionWriter1];
+    }];
+}
+
 - (void)completionWriter1{
     KWS(weakSelf);
     [_movieWriter finishRecordingWithCompletionHandler:^{
@@ -192,7 +282,7 @@
 
 - (void)finishRecording1{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self blackVideoToImageVideo];
+//        [self blackVideoToImageVideo];
     });
 }
 
@@ -335,6 +425,7 @@
         [weakSelf exportVideos:^(BOOL success) {
             if(success){
                 NSLog(@"合并完成");
+                UISaveVideoAtPathToSavedPhotosAlbum(self.outVideoPath , self, nil, nil);
             }
         }];
     });
@@ -354,6 +445,7 @@
     }
     unlink([outPath UTF8String]);
     NSURL *outputUrl = [NSURL fileURLWithPath:pathToMovie];
+    _outVideoPath = pathToMovie;
     CMTime cursorTime = kCMTimeZero;
     AVMutableComposition *mixComposition = [[AVMutableComposition alloc] init];
     AVMutableCompositionTrack *videoAssetTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];

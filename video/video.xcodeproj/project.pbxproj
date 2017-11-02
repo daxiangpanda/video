@@ -16,7 +16,17 @@
 		822DC7AC1F6FF7D600A0B21D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 822DC7AA1F6FF7D600A0B21D /* LaunchScreen.storyboard */; };
 		822DC7B71F6FF7D600A0B21D /* videoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 822DC7B61F6FF7D600A0B21D /* videoTests.m */; };
 		822DC7C21F6FF7D600A0B21D /* videoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 822DC7C11F6FF7D600A0B21D /* videoUITests.m */; };
-		827241A31F7CDDD700906B9F /* IMG_0103.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 827241A21F7CDDD100906B9F /* IMG_0103.MOV */; };
+		823363411F9490D600D0DCFA /* IMG_0103.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 823363351F948F2700D0DCFA /* IMG_0103.MOV */; };
+		823363421F9490D900D0DCFA /* testVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 823363361F948F2700D0DCFA /* testVideo.mp4 */; };
+		823363431F9490DC00D0DCFA /* testVideo1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 823363371F948F2700D0DCFA /* testVideo1.mp4 */; };
+		823363441F9492CF00D0DCFA /* VTMidWaterMarkFilter.h in Sources */ = {isa = PBXBuildFile; fileRef = 823363391F948F6A00D0DCFA /* VTMidWaterMarkFilter.h */; };
+		823363451F9492CF00D0DCFA /* VTMidWaterMarkFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233633A1F948F6A00D0DCFA /* VTMidWaterMarkFilter.m */; };
+		823363461F9492CF00D0DCFA /* VTTailFilter1.h in Sources */ = {isa = PBXBuildFile; fileRef = 8233633B1F948F6A00D0DCFA /* VTTailFilter1.h */; };
+		823363471F9492CF00D0DCFA /* VTTailFilter1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233633C1F948F6A00D0DCFA /* VTTailFilter1.m */; };
+		823363481F9492CF00D0DCFA /* VTTailFilter2.h in Sources */ = {isa = PBXBuildFile; fileRef = 8233633D1F948F6A00D0DCFA /* VTTailFilter2.h */; };
+		823363491F9492CF00D0DCFA /* VTTailFilter2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233633E1F948F6A00D0DCFA /* VTTailFilter2.m */; };
+		8233634A1F9492CF00D0DCFA /* VTTailWaterMarkFilter.h in Sources */ = {isa = PBXBuildFile; fileRef = 8233633F1F948F6A00D0DCFA /* VTTailWaterMarkFilter.h */; };
+		8233634B1F9492CF00D0DCFA /* VTTailWaterMarkFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 823363401F948F6A00D0DCFA /* VTTailWaterMarkFilter.m */; };
 		829A61861F76CAEC009DA59A /* VTWaterMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 829A61851F76CAEC009DA59A /* VTWaterMarkView.m */; };
 		829A61871F76CAEC009DA59A /* VTWaterMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 829A61851F76CAEC009DA59A /* VTWaterMarkView.m */; };
 		829A61881F76CAEC009DA59A /* VTWaterMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 829A61851F76CAEC009DA59A /* VTWaterMarkView.m */; };
@@ -44,7 +54,6 @@
 		82B711361F74BA1A00CB3D78 /* UIImage+VideoImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D81F74BA1A00CB3D78 /* UIImage+VideoImage.m */; };
 		82B711371F74BA1A00CB3D78 /* UIImage+VideoImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D81F74BA1A00CB3D78 /* UIImage+VideoImage.m */; };
 		82B711381F74BA1A00CB3D78 /* UIImage+VideoImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B710D81F74BA1A00CB3D78 /* UIImage+VideoImage.m */; };
-		82B7115A1F74C24B00CB3D78 /* testVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 82B711591F74C24B00CB3D78 /* testVideo.mp4 */; };
 		82B711651F74F5BC00CB3D78 /* VTTailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B711641F74F5BC00CB3D78 /* VTTailView.m */; };
 		82B711661F74F5BC00CB3D78 /* VTTailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B711641F74F5BC00CB3D78 /* VTTailView.m */; };
 		82B711671F74F5BC00CB3D78 /* VTTailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 82B711641F74F5BC00CB3D78 /* VTTailView.m */; };
@@ -66,7 +75,6 @@
 		82C0CBD21F74231F00E55584 /* HandlerVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C0CBCE1F74231F00E55584 /* HandlerVideo.m */; };
 		82C0CBD31F74231F00E55584 /* HandlerVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C0CBCE1F74231F00E55584 /* HandlerVideo.m */; };
 		82C0CBD41F74231F00E55584 /* HandlerVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C0CBCE1F74231F00E55584 /* HandlerVideo.m */; };
-		82E095C71F752DE700A04215 /* testVideo1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 82E095C61F752DE700A04215 /* testVideo1.mp4 */; };
 		C390F7318AF288629A54F50A /* libPods-video.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2753B5772D5BBAE5F50FD087 /* libPods-video.a */; };
 		D4CFAD8E009252C823F4D5A1 /* libPods-videoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDFE450439486415631CF32E /* libPods-videoUITests.a */; };
 /* End PBXBuildFile section */
@@ -112,7 +120,17 @@
 		822DC7BD1F6FF7D600A0B21D /* videoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = videoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		822DC7C11F6FF7D600A0B21D /* videoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = videoUITests.m; sourceTree = "<group>"; };
 		822DC7C31F6FF7D600A0B21D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		827241A21F7CDDD100906B9F /* IMG_0103.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0103.MOV; sourceTree = "<group>"; };
+		823363351F948F2700D0DCFA /* IMG_0103.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_0103.MOV; sourceTree = "<group>"; };
+		823363361F948F2700D0DCFA /* testVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testVideo.mp4; sourceTree = "<group>"; };
+		823363371F948F2700D0DCFA /* testVideo1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testVideo1.mp4; sourceTree = "<group>"; };
+		823363391F948F6A00D0DCFA /* VTMidWaterMarkFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTMidWaterMarkFilter.h; sourceTree = "<group>"; };
+		8233633A1F948F6A00D0DCFA /* VTMidWaterMarkFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTMidWaterMarkFilter.m; sourceTree = "<group>"; };
+		8233633B1F948F6A00D0DCFA /* VTTailFilter1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTTailFilter1.h; sourceTree = "<group>"; };
+		8233633C1F948F6A00D0DCFA /* VTTailFilter1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTTailFilter1.m; sourceTree = "<group>"; };
+		8233633D1F948F6A00D0DCFA /* VTTailFilter2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTTailFilter2.h; sourceTree = "<group>"; };
+		8233633E1F948F6A00D0DCFA /* VTTailFilter2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTTailFilter2.m; sourceTree = "<group>"; };
+		8233633F1F948F6A00D0DCFA /* VTTailWaterMarkFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTTailWaterMarkFilter.h; sourceTree = "<group>"; };
+		823363401F948F6A00D0DCFA /* VTTailWaterMarkFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTTailWaterMarkFilter.m; sourceTree = "<group>"; };
 		829A61841F76CAEC009DA59A /* VTWaterMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTWaterMarkView.h; sourceTree = "<group>"; };
 		829A61851F76CAEC009DA59A /* VTWaterMarkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTWaterMarkView.m; sourceTree = "<group>"; };
 		82B7106B1F72346D00CB3D78 /* imagePickerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imagePickerLayout.h; sourceTree = "<group>"; };
@@ -131,7 +149,6 @@
 		82B710D61F74BA1A00CB3D78 /* UIImage+Tone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tone.m"; sourceTree = "<group>"; };
 		82B710D71F74BA1A00CB3D78 /* UIImage+VideoImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+VideoImage.h"; sourceTree = "<group>"; };
 		82B710D81F74BA1A00CB3D78 /* UIImage+VideoImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+VideoImage.m"; sourceTree = "<group>"; };
-		82B711591F74C24B00CB3D78 /* testVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testVideo.mp4; sourceTree = "<group>"; };
 		82B711631F74F5BC00CB3D78 /* VTTailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTailView.h; sourceTree = "<group>"; };
 		82B711641F74F5BC00CB3D78 /* VTTailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTTailView.m; sourceTree = "<group>"; };
 		82B711681F75081000CB3D78 /* VTTailWaterMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTTailWaterMarkView.h; sourceTree = "<group>"; };
@@ -146,7 +163,6 @@
 		82C0CBC91F74231F00E55584 /* VideoFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoFilterController.m; sourceTree = "<group>"; };
 		82C0CBCD1F74231F00E55584 /* HandlerVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandlerVideo.h; sourceTree = "<group>"; };
 		82C0CBCE1F74231F00E55584 /* HandlerVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandlerVideo.m; sourceTree = "<group>"; };
-		82E095C61F752DE700A04215 /* testVideo1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testVideo1.mp4; sourceTree = "<group>"; };
 		9BE15468D3329503C2B87BD0 /* Pods-videoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-videoUITests/Pods-videoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		FDFE450439486415631CF32E /* libPods-videoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-videoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -227,9 +243,8 @@
 		822DC79B1F6FF7D600A0B21D /* video */ = {
 			isa = PBXGroup;
 			children = (
-				827241A21F7CDDD100906B9F /* IMG_0103.MOV */,
-				82B711591F74C24B00CB3D78 /* testVideo.mp4 */,
-				82E095C61F752DE700A04215 /* testVideo1.mp4 */,
+				823363381F948F6A00D0DCFA /* filter */,
+				823363341F948F2700D0DCFA /* source */,
 				82B7109F1F74BA1900CB3D78 /* Category */,
 				82C0CBC61F74231F00E55584 /* VideoFilter */,
 				82BF09951F72BB7200592E22 /* RecordVideo */,
@@ -271,6 +286,31 @@
 				822DC7C31F6FF7D600A0B21D /* Info.plist */,
 			);
 			path = videoUITests;
+			sourceTree = "<group>";
+		};
+		823363341F948F2700D0DCFA /* source */ = {
+			isa = PBXGroup;
+			children = (
+				823363351F948F2700D0DCFA /* IMG_0103.MOV */,
+				823363361F948F2700D0DCFA /* testVideo.mp4 */,
+				823363371F948F2700D0DCFA /* testVideo1.mp4 */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		823363381F948F6A00D0DCFA /* filter */ = {
+			isa = PBXGroup;
+			children = (
+				823363391F948F6A00D0DCFA /* VTMidWaterMarkFilter.h */,
+				8233633A1F948F6A00D0DCFA /* VTMidWaterMarkFilter.m */,
+				8233633B1F948F6A00D0DCFA /* VTTailFilter1.h */,
+				8233633C1F948F6A00D0DCFA /* VTTailFilter1.m */,
+				8233633D1F948F6A00D0DCFA /* VTTailFilter2.h */,
+				8233633E1F948F6A00D0DCFA /* VTTailFilter2.m */,
+				8233633F1F948F6A00D0DCFA /* VTTailWaterMarkFilter.h */,
+				823363401F948F6A00D0DCFA /* VTTailWaterMarkFilter.m */,
+			);
+			path = filter;
 			sourceTree = "<group>";
 		};
 		82B710921F74B06D00CB3D78 /* File */ = {
@@ -562,12 +602,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				823363411F9490D600D0DCFA /* IMG_0103.MOV in Resources */,
 				822DC7AC1F6FF7D600A0B21D /* LaunchScreen.storyboard in Resources */,
-				82E095C71F752DE700A04215 /* testVideo1.mp4 in Resources */,
-				827241A31F7CDDD700906B9F /* IMG_0103.MOV in Resources */,
 				822DC7A91F6FF7D600A0B21D /* Assets.xcassets in Resources */,
+				823363421F9490D900D0DCFA /* testVideo.mp4 in Resources */,
 				822DC7A71F6FF7D600A0B21D /* Main.storyboard in Resources */,
-				82B7115A1F74C24B00CB3D78 /* testVideo.mp4 in Resources */,
+				823363431F9490DC00D0DCFA /* testVideo1.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,6 +787,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				823363441F9492CF00D0DCFA /* VTMidWaterMarkFilter.h in Sources */,
+				823363451F9492CF00D0DCFA /* VTMidWaterMarkFilter.m in Sources */,
+				823363461F9492CF00D0DCFA /* VTTailFilter1.h in Sources */,
+				823363471F9492CF00D0DCFA /* VTTailFilter1.m in Sources */,
+				823363481F9492CF00D0DCFA /* VTTailFilter2.h in Sources */,
+				823363491F9492CF00D0DCFA /* VTTailFilter2.m in Sources */,
+				8233634A1F9492CF00D0DCFA /* VTTailWaterMarkFilter.h in Sources */,
+				8233634B1F9492CF00D0DCFA /* VTTailWaterMarkFilter.m in Sources */,
 				822DC7A41F6FF7D600A0B21D /* ViewController.m in Sources */,
 				82B7112D1F74BA1A00CB3D78 /* UIImage+Enhancement.m in Sources */,
 				82B711651F74F5BC00CB3D78 /* VTTailView.m in Sources */,
