@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		323B753D2A8E04B303B962DA /* libPods-videoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D259A0E942D6EFCDD6A144D /* libPods-videoTests.a */; };
+		82087325210833730036B604 /* UIImage+PointColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 82087324210833730036B604 /* UIImage+PointColor.m */; };
+		8208732721084C440036B604 /* flower.png in Resources */ = {isa = PBXBuildFile; fileRef = 8208732621084C440036B604 /* flower.png */; };
 		822DC79E1F6FF7D600A0B21D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 822DC79D1F6FF7D600A0B21D /* main.m */; };
 		822DC7A11F6FF7D600A0B21D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 822DC7A01F6FF7D600A0B21D /* AppDelegate.m */; };
 		822DC7A41F6FF7D600A0B21D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 822DC7A31F6FF7D600A0B21D /* ViewController.m */; };
@@ -20,13 +22,30 @@
 		823363421F9490D900D0DCFA /* testVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 823363361F948F2700D0DCFA /* testVideo.mp4 */; };
 		823363431F9490DC00D0DCFA /* testVideo1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 823363371F948F2700D0DCFA /* testVideo1.mp4 */; };
 		823363441F9492CF00D0DCFA /* VTMidWaterMarkFilter.h in Sources */ = {isa = PBXBuildFile; fileRef = 823363391F948F6A00D0DCFA /* VTMidWaterMarkFilter.h */; };
-		823363451F9492CF00D0DCFA /* VTMidWaterMarkFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233633A1F948F6A00D0DCFA /* VTMidWaterMarkFilter.m */; };
+		823363451F9492CF00D0DCFA /* VTMidWaterMarkFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8233633A1F948F6A00D0DCFA /* VTMidWaterMarkFilter.mm */; };
 		823363461F9492CF00D0DCFA /* VTTailFilter1.h in Sources */ = {isa = PBXBuildFile; fileRef = 8233633B1F948F6A00D0DCFA /* VTTailFilter1.h */; };
 		823363471F9492CF00D0DCFA /* VTTailFilter1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233633C1F948F6A00D0DCFA /* VTTailFilter1.m */; };
 		823363481F9492CF00D0DCFA /* VTTailFilter2.h in Sources */ = {isa = PBXBuildFile; fileRef = 8233633D1F948F6A00D0DCFA /* VTTailFilter2.h */; };
 		823363491F9492CF00D0DCFA /* VTTailFilter2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233633E1F948F6A00D0DCFA /* VTTailFilter2.m */; };
 		8233634A1F9492CF00D0DCFA /* VTTailWaterMarkFilter.h in Sources */ = {isa = PBXBuildFile; fileRef = 8233633F1F948F6A00D0DCFA /* VTTailWaterMarkFilter.h */; };
 		8233634B1F9492CF00D0DCFA /* VTTailWaterMarkFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 823363401F948F6A00D0DCFA /* VTTailWaterMarkFilter.m */; };
+		8294D3A22108621200927834 /* PaletteColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3922108621200927834 /* PaletteColorUtils.m */; };
+		8294D3A32108621200927834 /* Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3932108621200927834 /* Palette.m */; };
+		8294D3A42108621200927834 /* PaletteSwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3942108621200927834 /* PaletteSwatch.m */; };
+		8294D3A52108621200927834 /* UIImage+Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3962108621200927834 /* UIImage+Palette.m */; };
+		8294D3A62108621200927834 /* PaletteColorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D39D2108621200927834 /* PaletteColorModel.m */; };
+		8294D3A72108621200927834 /* PriorityBoxArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D39E2108621200927834 /* PriorityBoxArray.m */; };
+		8294D3A82108621200927834 /* PaletteTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D39F2108621200927834 /* PaletteTarget.m */; };
+		8294D3B2210864BC00927834 /* UIColor+Enhancement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3B1210864BC00927834 /* UIColor+Enhancement.m */; };
+		8294D3B7210869E800927834 /* posterController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3B5210869E700927834 /* posterController.mm */; };
+		8294D3BA21086A1B00927834 /* PosterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3B921086A1B00927834 /* PosterView.m */; };
+		8294D3BF21086C0E00927834 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3BE21086C0E00927834 /* UIView+Extension.m */; };
+		8294D3C12108714B00927834 /* water.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8294D3C02108714A00927834 /* water.jpeg */; };
+		8294D3C3210873EA00927834 /* flower1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8294D3C2210873EA00927834 /* flower1.png */; };
+		8294D3C52108745300927834 /* flower2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8294D3C42108745200927834 /* flower2.png */; };
+		8294D3C92108783700927834 /* tea.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8294D3C82108783700927834 /* tea.jpeg */; };
+		8294D3CB2108796B00927834 /* sky.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8294D3CA2108796B00927834 /* sky.jpg */; };
+		8294D3CD21087A6700927834 /* indoor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8294D3CC21087A6600927834 /* indoor.jpg */; };
 		829A61861F76CAEC009DA59A /* VTWaterMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 829A61851F76CAEC009DA59A /* VTWaterMarkView.m */; };
 		829A61871F76CAEC009DA59A /* VTWaterMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 829A61851F76CAEC009DA59A /* VTWaterMarkView.m */; };
 		829A61881F76CAEC009DA59A /* VTWaterMarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 829A61851F76CAEC009DA59A /* VTWaterMarkView.m */; };
@@ -104,6 +123,9 @@
 		5799B281BA2F550CEF8CC738 /* Pods-videoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-videoTests/Pods-videoTests.release.xcconfig"; sourceTree = "<group>"; };
 		664CB01A3C0DCF6346B1CAAD /* Pods-videoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-videoTests/Pods-videoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		766EDB7004CCE4589B4F8D9B /* Pods-video.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-video.debug.xcconfig"; path = "Pods/Target Support Files/Pods-video/Pods-video.debug.xcconfig"; sourceTree = "<group>"; };
+		82087323210833730036B604 /* UIImage+PointColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+PointColor.h"; sourceTree = "<group>"; };
+		82087324210833730036B604 /* UIImage+PointColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PointColor.m"; sourceTree = "<group>"; };
+		8208732621084C440036B604 /* flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flower.png; path = ../../../Desktop/flower.png; sourceTree = "<group>"; };
 		822DC7991F6FF7D600A0B21D /* video.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = video.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		822DC79D1F6FF7D600A0B21D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		822DC79F1F6FF7D600A0B21D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -124,13 +146,42 @@
 		823363361F948F2700D0DCFA /* testVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testVideo.mp4; sourceTree = "<group>"; };
 		823363371F948F2700D0DCFA /* testVideo1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = testVideo1.mp4; sourceTree = "<group>"; };
 		823363391F948F6A00D0DCFA /* VTMidWaterMarkFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTMidWaterMarkFilter.h; sourceTree = "<group>"; };
-		8233633A1F948F6A00D0DCFA /* VTMidWaterMarkFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTMidWaterMarkFilter.m; sourceTree = "<group>"; };
+		8233633A1F948F6A00D0DCFA /* VTMidWaterMarkFilter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VTMidWaterMarkFilter.mm; sourceTree = "<group>"; };
 		8233633B1F948F6A00D0DCFA /* VTTailFilter1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTTailFilter1.h; sourceTree = "<group>"; };
 		8233633C1F948F6A00D0DCFA /* VTTailFilter1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTTailFilter1.m; sourceTree = "<group>"; };
 		8233633D1F948F6A00D0DCFA /* VTTailFilter2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTTailFilter2.h; sourceTree = "<group>"; };
 		8233633E1F948F6A00D0DCFA /* VTTailFilter2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTTailFilter2.m; sourceTree = "<group>"; };
 		8233633F1F948F6A00D0DCFA /* VTTailWaterMarkFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTTailWaterMarkFilter.h; sourceTree = "<group>"; };
 		823363401F948F6A00D0DCFA /* VTTailWaterMarkFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTTailWaterMarkFilter.m; sourceTree = "<group>"; };
+		8294D3902108621200927834 /* iOSPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSPalette.h; sourceTree = "<group>"; };
+		8294D3922108621200927834 /* PaletteColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteColorUtils.m; sourceTree = "<group>"; };
+		8294D3932108621200927834 /* Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Palette.m; sourceTree = "<group>"; };
+		8294D3942108621200927834 /* PaletteSwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteSwatch.m; sourceTree = "<group>"; };
+		8294D3952108621200927834 /* PriorityBoxArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityBoxArray.h; sourceTree = "<group>"; };
+		8294D3962108621200927834 /* UIImage+Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Palette.m"; sourceTree = "<group>"; };
+		8294D3972108621200927834 /* PaletteTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteTarget.h; sourceTree = "<group>"; };
+		8294D3982108621200927834 /* PaletteSwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteSwatch.h; sourceTree = "<group>"; };
+		8294D3992108621200927834 /* Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Palette.h; sourceTree = "<group>"; };
+		8294D39A2108621200927834 /* PaletteColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteColorUtils.h; sourceTree = "<group>"; };
+		8294D39C2108621200927834 /* PaletteColorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaletteColorModel.h; sourceTree = "<group>"; };
+		8294D39D2108621200927834 /* PaletteColorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteColorModel.m; sourceTree = "<group>"; };
+		8294D39E2108621200927834 /* PriorityBoxArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityBoxArray.m; sourceTree = "<group>"; };
+		8294D39F2108621200927834 /* PaletteTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaletteTarget.m; sourceTree = "<group>"; };
+		8294D3A02108621200927834 /* UIImage+Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Palette.h"; sourceTree = "<group>"; };
+		8294D3B0210864BB00927834 /* UIColor+Enhancement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Enhancement.h"; sourceTree = "<group>"; };
+		8294D3B1210864BC00927834 /* UIColor+Enhancement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Enhancement.m"; sourceTree = "<group>"; };
+		8294D3B5210869E700927834 /* posterController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = posterController.mm; sourceTree = "<group>"; };
+		8294D3B6210869E700927834 /* posterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = posterController.h; sourceTree = "<group>"; };
+		8294D3B821086A1B00927834 /* PosterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosterView.h; sourceTree = "<group>"; };
+		8294D3B921086A1B00927834 /* PosterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosterView.m; sourceTree = "<group>"; };
+		8294D3BD21086C0D00927834 /* UIView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		8294D3BE21086C0E00927834 /* UIView+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		8294D3C02108714A00927834 /* water.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = water.jpeg; path = ../../../Downloads/water.jpeg; sourceTree = "<group>"; };
+		8294D3C2210873EA00927834 /* flower1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flower1.png; path = ../../../Documents/flower1.png; sourceTree = "<group>"; };
+		8294D3C42108745200927834 /* flower2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = flower2.png; path = ../../../Documents/flower2.png; sourceTree = "<group>"; };
+		8294D3C82108783700927834 /* tea.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tea.jpeg; path = ../../../Documents/tea.jpeg; sourceTree = "<group>"; };
+		8294D3CA2108796B00927834 /* sky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sky.jpg; path = ../../../Desktop/sky.jpg; sourceTree = "<group>"; };
+		8294D3CC21087A6600927834 /* indoor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = indoor.jpg; path = ../../../Desktop/indoor.jpg; sourceTree = "<group>"; };
 		829A61841F76CAEC009DA59A /* VTWaterMarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTWaterMarkView.h; sourceTree = "<group>"; };
 		829A61851F76CAEC009DA59A /* VTWaterMarkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTWaterMarkView.m; sourceTree = "<group>"; };
 		82B7106B1F72346D00CB3D78 /* imagePickerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imagePickerLayout.h; sourceTree = "<group>"; };
@@ -218,6 +269,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8208731F21082DD30036B604 /* posterMainColor */ = {
+			isa = PBXGroup;
+			children = (
+				8294D3B3210869E200927834 /* View */,
+				8294D3B4210869E700927834 /* Controller */,
+				8294D38F2108621200927834 /* iOSPalette */,
+			);
+			path = posterMainColor;
+			sourceTree = "<group>";
+		};
 		822DC7901F6FF7D600A0B21D = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +304,14 @@
 		822DC79B1F6FF7D600A0B21D /* video */ = {
 			isa = PBXGroup;
 			children = (
+				8294D3C2210873EA00927834 /* flower1.png */,
+				8294D3C02108714A00927834 /* water.jpeg */,
+				8294D3CA2108796B00927834 /* sky.jpg */,
+				8208732621084C440036B604 /* flower.png */,
+				8294D3C42108745200927834 /* flower2.png */,
+				8294D3CC21087A6600927834 /* indoor.jpg */,
+				8294D3C82108783700927834 /* tea.jpeg */,
+				8208731F21082DD30036B604 /* posterMainColor */,
 				823363381F948F6A00D0DCFA /* filter */,
 				823363341F948F2700D0DCFA /* source */,
 				82B7109F1F74BA1900CB3D78 /* Category */,
@@ -302,7 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				823363391F948F6A00D0DCFA /* VTMidWaterMarkFilter.h */,
-				8233633A1F948F6A00D0DCFA /* VTMidWaterMarkFilter.m */,
+				8233633A1F948F6A00D0DCFA /* VTMidWaterMarkFilter.mm */,
 				8233633B1F948F6A00D0DCFA /* VTTailFilter1.h */,
 				8233633C1F948F6A00D0DCFA /* VTTailFilter1.m */,
 				8233633D1F948F6A00D0DCFA /* VTTailFilter2.h */,
@@ -311,6 +380,90 @@
 				823363401F948F6A00D0DCFA /* VTTailWaterMarkFilter.m */,
 			);
 			path = filter;
+			sourceTree = "<group>";
+		};
+		8294D38F2108621200927834 /* iOSPalette */ = {
+			isa = PBXGroup;
+			children = (
+				8294D3902108621200927834 /* iOSPalette.h */,
+				8294D3912108621200927834 /* Source */,
+			);
+			path = iOSPalette;
+			sourceTree = "<group>";
+		};
+		8294D3912108621200927834 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				8294D3922108621200927834 /* PaletteColorUtils.m */,
+				8294D3932108621200927834 /* Palette.m */,
+				8294D3942108621200927834 /* PaletteSwatch.m */,
+				8294D3952108621200927834 /* PriorityBoxArray.h */,
+				8294D3962108621200927834 /* UIImage+Palette.m */,
+				8294D3972108621200927834 /* PaletteTarget.h */,
+				8294D3982108621200927834 /* PaletteSwatch.h */,
+				8294D3992108621200927834 /* Palette.h */,
+				8294D39A2108621200927834 /* PaletteColorUtils.h */,
+				8294D39B2108621200927834 /* Model */,
+				8294D39E2108621200927834 /* PriorityBoxArray.m */,
+				8294D39F2108621200927834 /* PaletteTarget.m */,
+				8294D3A02108621200927834 /* UIImage+Palette.h */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		8294D39B2108621200927834 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8294D39C2108621200927834 /* PaletteColorModel.h */,
+				8294D39D2108621200927834 /* PaletteColorModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8294D3AC210863A300927834 /* UIColorCategory */ = {
+			isa = PBXGroup;
+			children = (
+				8294D3B0210864BB00927834 /* UIColor+Enhancement.h */,
+				8294D3B1210864BC00927834 /* UIColor+Enhancement.m */,
+			);
+			path = UIColorCategory;
+			sourceTree = "<group>";
+		};
+		8294D3B3210869E200927834 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8294D3B821086A1B00927834 /* PosterView.h */,
+				8294D3B921086A1B00927834 /* PosterView.m */,
+			);
+			name = View;
+			path = video/posterMainColor/View;
+			sourceTree = SOURCE_ROOT;
+		};
+		8294D3B4210869E700927834 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8294D3B6210869E700927834 /* posterController.h */,
+				8294D3B5210869E700927834 /* posterController.mm */,
+			);
+			name = Controller;
+			path = video/posterMainColor/Controller;
+			sourceTree = SOURCE_ROOT;
+		};
+		8294D3BB21086BEF00927834 /* UIViewCategory */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = UIViewCategory;
+			path = video/Category/UIViewCategory;
+			sourceTree = SOURCE_ROOT;
+		};
+		8294D3BC21086BF500927834 /* UIViewCategory */ = {
+			isa = PBXGroup;
+			children = (
+				8294D3BD21086C0D00927834 /* UIView+Extension.h */,
+				8294D3BE21086C0E00927834 /* UIView+Extension.m */,
+			);
+			path = UIViewCategory;
 			sourceTree = "<group>";
 		};
 		82B710921F74B06D00CB3D78 /* File */ = {
@@ -328,6 +481,8 @@
 		82B7109F1F74BA1900CB3D78 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				8294D3BC21086BF500927834 /* UIViewCategory */,
+				8294D3AC210863A300927834 /* UIColorCategory */,
 				82B710921F74B06D00CB3D78 /* File */,
 				82B710CE1F74BA1A00CB3D78 /* UIImageCategory */,
 			);
@@ -337,6 +492,7 @@
 		82B710CE1F74BA1A00CB3D78 /* UIImageCategory */ = {
 			isa = PBXGroup;
 			children = (
+				8294D3BB21086BEF00927834 /* UIViewCategory */,
 				82B710CF1F74BA1A00CB3D78 /* UIImage+ColorImage.h */,
 				82B710D01F74BA1A00CB3D78 /* UIImage+ColorImage.m */,
 				82B710D11F74BA1A00CB3D78 /* UIImage+Enhancement.h */,
@@ -347,6 +503,8 @@
 				82B710D61F74BA1A00CB3D78 /* UIImage+Tone.m */,
 				82B710D71F74BA1A00CB3D78 /* UIImage+VideoImage.h */,
 				82B710D81F74BA1A00CB3D78 /* UIImage+VideoImage.m */,
+				82087323210833730036B604 /* UIImage+PointColor.h */,
+				82087324210833730036B604 /* UIImage+PointColor.m */,
 			);
 			path = UIImageCategory;
 			sourceTree = "<group>";
@@ -497,7 +655,6 @@
 				822DC7951F6FF7D600A0B21D /* Sources */,
 				822DC7961F6FF7D600A0B21D /* Frameworks */,
 				822DC7971F6FF7D600A0B21D /* Resources */,
-				6C4C9FFA963537CC9F78C03E /* [CP] Embed Pods Frameworks */,
 				A578B61A1D2517CF49B80AD9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -517,8 +674,6 @@
 				822DC7AE1F6FF7D600A0B21D /* Sources */,
 				822DC7AF1F6FF7D600A0B21D /* Frameworks */,
 				822DC7B01F6FF7D600A0B21D /* Resources */,
-				8EDE44E785E6F664F6A43932 /* [CP] Embed Pods Frameworks */,
-				AE9E4028D330F40747C7A780 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -538,8 +693,6 @@
 				822DC7B91F6FF7D600A0B21D /* Sources */,
 				822DC7BA1F6FF7D600A0B21D /* Frameworks */,
 				822DC7BB1F6FF7D600A0B21D /* Resources */,
-				374CA943843FF1B3A418D92A /* [CP] Embed Pods Frameworks */,
-				3761D2BA991A64770B340F56 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -602,11 +755,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8294D3C12108714B00927834 /* water.jpeg in Resources */,
+				8294D3C92108783700927834 /* tea.jpeg in Resources */,
+				8208732721084C440036B604 /* flower.png in Resources */,
 				823363411F9490D600D0DCFA /* IMG_0103.MOV in Resources */,
 				822DC7AC1F6FF7D600A0B21D /* LaunchScreen.storyboard in Resources */,
 				822DC7A91F6FF7D600A0B21D /* Assets.xcassets in Resources */,
 				823363421F9490D900D0DCFA /* testVideo.mp4 in Resources */,
+				8294D3CD21087A6700927834 /* indoor.jpg in Resources */,
 				822DC7A71F6FF7D600A0B21D /* Main.storyboard in Resources */,
+				8294D3C52108745300927834 /* flower2.png in Resources */,
+				8294D3CB2108796B00927834 /* sky.jpg in Resources */,
+				8294D3C3210873EA00927834 /* flower1.png in Resources */,
 				823363431F9490DC00D0DCFA /* testVideo1.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -646,36 +806,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		374CA943843FF1B3A418D92A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-videoUITests/Pods-videoUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3761D2BA991A64770B340F56 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-videoUITests/Pods-videoUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4188F75BC52F15D266ECF51D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -694,36 +824,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6C4C9FFA963537CC9F78C03E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-video/Pods-video-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8EDE44E785E6F664F6A43932 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-videoTests/Pods-videoTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A578B61A1D2517CF49B80AD9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -740,26 +840,16 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_amatorka.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_miss_etikate.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_soft_elegance_1.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/lookup_soft_elegance_2.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-video/Pods-video-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AE9E4028D330F40747C7A780 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-videoTests/Pods-videoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E3C565DFD83BC73C2111B3A6 /* [CP] Check Pods Manifest.lock */ = {
@@ -788,24 +878,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				823363441F9492CF00D0DCFA /* VTMidWaterMarkFilter.h in Sources */,
-				823363451F9492CF00D0DCFA /* VTMidWaterMarkFilter.m in Sources */,
+				823363451F9492CF00D0DCFA /* VTMidWaterMarkFilter.mm in Sources */,
+				8294D3B7210869E800927834 /* posterController.mm in Sources */,
 				823363461F9492CF00D0DCFA /* VTTailFilter1.h in Sources */,
+				8294D3A42108621200927834 /* PaletteSwatch.m in Sources */,
 				823363471F9492CF00D0DCFA /* VTTailFilter1.m in Sources */,
 				823363481F9492CF00D0DCFA /* VTTailFilter2.h in Sources */,
+				8294D3BA21086A1B00927834 /* PosterView.m in Sources */,
 				823363491F9492CF00D0DCFA /* VTTailFilter2.m in Sources */,
 				8233634A1F9492CF00D0DCFA /* VTTailWaterMarkFilter.h in Sources */,
+				8294D3A82108621200927834 /* PaletteTarget.m in Sources */,
 				8233634B1F9492CF00D0DCFA /* VTTailWaterMarkFilter.m in Sources */,
 				822DC7A41F6FF7D600A0B21D /* ViewController.m in Sources */,
+				82087325210833730036B604 /* UIImage+PointColor.m in Sources */,
 				82B7112D1F74BA1A00CB3D78 /* UIImage+Enhancement.m in Sources */,
+				8294D3BF21086C0E00927834 /* UIView+Extension.m in Sources */,
+				8294D3B2210864BC00927834 /* UIColor+Enhancement.m in Sources */,
+				8294D3A32108621200927834 /* Palette.m in Sources */,
 				82B711651F74F5BC00CB3D78 /* VTTailView.m in Sources */,
 				82B710971F74B08300CB3D78 /* VTFileManager.m in Sources */,
+				8294D3A72108621200927834 /* PriorityBoxArray.m in Sources */,
 				82BF09A01F72BE7700592E22 /* RecordVideoController.m in Sources */,
 				82B7116A1F75081000CB3D78 /* VTTailWaterMarkView.m in Sources */,
 				82BF09901F71789F00592E22 /* imageCell.m in Sources */,
+				8294D3A52108621200927834 /* UIImage+Palette.m in Sources */,
+				8294D3A22108621200927834 /* PaletteColorUtils.m in Sources */,
 				82B711331F74BA1A00CB3D78 /* UIImage+Tone.m in Sources */,
 				829A61861F76CAEC009DA59A /* VTWaterMarkView.m in Sources */,
 				82B7109A1F74B08300CB3D78 /* VTFileManager+FileName.m in Sources */,
 				82B711301F74BA1A00CB3D78 /* UIImage+Resized.m in Sources */,
+				8294D3A62108621200927834 /* PaletteColorModel.m in Sources */,
 				82C0CBD21F74231F00E55584 /* HandlerVideo.m in Sources */,
 				82B7112A1F74BA1A00CB3D78 /* UIImage+ColorImage.m in Sources */,
 				82C0CBCF1F74231F00E55584 /* VideoFilterController.m in Sources */,
@@ -925,6 +1027,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -974,6 +1077,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIImageView     *waterMarkImageView;
 @property (nonatomic, strong) UILabel         *userNameLabel;
 @property (nonatomic, strong) UILabel         *userNameLabel1;
+
 @end
 
 @implementation VTWaterMarkView

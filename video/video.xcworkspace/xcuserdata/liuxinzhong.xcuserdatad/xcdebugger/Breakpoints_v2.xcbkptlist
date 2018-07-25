@@ -60,7 +60,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/VideoFilter/Controller/VideoFilterController.m"
-            timestampString = "529833984.202557"
+            timestampString = "554194490.5269229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "246"
@@ -76,7 +76,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/VideoFilter/Controller/VideoFilterController.m"
-            timestampString = "529833984.202623"
+            timestampString = "554194490.5282691"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "270"
@@ -91,13 +91,13 @@
                   symbolName = "-[VideoFilterController midGroupWaterMarkVideo:videoSize:]"
                   moduleName = "video"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/liuxinzhong/Desktop/video/video/video/VideoFilter/Controller/VideoFilterController.m"
-                  timestampString = "529832794.959794"
+                  urlString = "file:///Users/liuxinzhong/video/video/video/VideoFilter/Controller/VideoFilterController.m"
+                  timestampString = "554198384.178975"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "269"
-                  endingLineNumber = "269"
-                  offsetFromSymbolStart = "1336">
+                  startingLineNumber = "270"
+                  endingLineNumber = "270"
+                  offsetFromSymbolStart = "1475">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -106,15 +106,46 @@
                   symbolName = "__58-[VideoFilterController midGroupWaterMarkVideo:videoSize:]_block_invoke"
                   moduleName = "video"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/liuxinzhong/Desktop/video/video/video/VideoFilter/Controller/VideoFilterController.m"
-                  timestampString = "529832794.961451"
+                  urlString = "file:///Users/liuxinzhong/video/video/video/VideoFilter/Controller/VideoFilterController.m"
+                  timestampString = "554198384.181631"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "271"
+                  endingLineNumber = "271"
+                  offsetFromSymbolStart = "23">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.152"
+                  moduleName = "video"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liuxinzhong/video/video/video/VideoFilter/Controller/VideoFilterController.m"
+                  timestampString = "554198384.185232"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "270"
                   endingLineNumber = "270"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "video/Category/UIColorCategory/UIColor+RGBACode.m"
+            timestampString = "554198122.782674"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "+colorFromRGBcode:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
