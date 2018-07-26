@@ -32,4 +32,16 @@
     return [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
 
+- (UIImage *)resizedWithWidth:(CGFloat)width height:(CGFloat)height {
+    if(width <= 0.0 || height <= 0.0) {
+        return [UIImage new];
+    }
+    CGSize newSize = CGSizeMake(width, height);
+    UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
+    [self drawInRect:CGRectMake(0.0, 0.0, width, height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 @end

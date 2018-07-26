@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,12 +40,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="mainColor"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Whh-a5-yjE">
+                                <rect key="frame" x="155" y="368" width="52" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="coreML"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="rfe-NK-I0E"/>
                     <connections>
                         <outlet property="RecordButton" destination="UEj-V8-zgE" id="gaR-fA-M3Q"/>
+                        <outlet property="coreMLButton" destination="Whh-a5-yjE" id="ttX-B7-Rks"/>
                         <outlet property="imagePickerButton" destination="m7j-Zi-d7O" id="dwL-LV-lV5"/>
                         <outlet property="mainColorButton" destination="srN-w8-hX5" id="56x-oN-zhJ"/>
                         <outlet property="recordButton" destination="UEj-V8-zgE" id="kih-hK-1W2"/>

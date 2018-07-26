@@ -11,13 +11,14 @@
 #import "RecordVideoController.h"
 #import "VideoFilterController.h"
 #import "PosterController.h"
-
+#import "MattingController.h"
 @interface ViewController()
 
 @property (weak, nonatomic) IBOutlet UIButton *imagePickerButton;
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
 @property (weak, nonatomic) IBOutlet UIButton *waterMarkButton;
 @property (weak, nonatomic) IBOutlet UIButton *mainColorButton;
+@property (weak, nonatomic) IBOutlet UIButton *coreMLButton;
 
 @end
 
@@ -34,6 +35,7 @@
     [self.recordButton addTarget:self action:@selector(recordButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.waterMarkButton addTarget:self action:@selector(waterMarkButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.mainColorButton addTarget:self action:@selector(mainColorButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.coreMLButton addTarget:self action:@selector(coreMLButtonClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)imagePickerButtonClick {
@@ -54,6 +56,12 @@
 - (void)mainColorButtonClick {
     PosterController *videoFilterVC = [[PosterController alloc]init];
     [self.navigationController pushViewController:videoFilterVC animated:YES];
+}
+
+- (void)coreMLButtonClick  {
+    MattingController *matVC = [[MattingController alloc]init];
+    [self.navigationController pushViewController:matVC animated:YES];
+
 }
 
 @end

@@ -47,7 +47,7 @@
 }
 
 - (void)setupData {
-    _useCamera = YES;
+    _useCamera = NO;
     self.bufferQueue = dispatch_queue_create("bufferQueue", NULL);
 }
 
@@ -66,7 +66,7 @@
     if(_useCamera){
         [self openCamera];
     }else {
-        UIImage *backgroundImage = [UIImage imageNamed:@"sky.jpg"];
+        UIImage *backgroundImage = [UIImage imageNamed:@"flower"];
         self.backgroundImageView.image = backgroundImage;
         
         

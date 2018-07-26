@@ -17,4 +17,8 @@
                               top:(CGFloat)top;
 
 + (UIImage *)imageWithOriginalName:(NSString *)imageName;
+
+// 改变UIImage的尺寸
+- (UIImage *)resizedWithWidth:(CGFloat)width
+                       height:(CGFloat)height;
 @end
