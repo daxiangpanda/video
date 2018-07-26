@@ -10,7 +10,7 @@
 #import "myImagePickerViewController.h"
 #import "RecordVideoController.h"
 #import "VideoFilterController.h"
-#import "posterController.h"
+#import "PosterController.h"
 
 @interface ViewController()
 
@@ -52,7 +52,7 @@
 }
 
 - (void)mainColorButtonClick {
-    posterController *videoFilterVC = [[posterController alloc]init];
+    PosterController *videoFilterVC = [[PosterController alloc]init];
     [self.navigationController pushViewController:videoFilterVC animated:YES];
 }
 

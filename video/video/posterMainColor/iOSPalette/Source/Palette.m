@@ -373,6 +373,7 @@ int hist[32768];
         
         // Get raw pixel data from image
         unsigned char *rawData = [self rawPixelDataFromImage:_image];
+
         if (!rawData || self.pixelCount <= 0){
             NSDictionary *userInfo = @{
                                        NSLocalizedDescriptionKey: NSLocalizedString(@"Operation fail", nil),
@@ -526,8 +527,9 @@ int hist[32768];
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), cgImage);
     
     // We are done with the context
+    // 内存泄漏问题？？
     CGContextRelease(context);
-    
+//    CGImageRelease(cgImage);
     // Write pixel count to passed pointer
     self.pixelCount = (NSInteger)width * (NSInteger)height;
     

@@ -37,7 +37,7 @@
 		8294D3A72108621200927834 /* PriorityBoxArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D39E2108621200927834 /* PriorityBoxArray.m */; };
 		8294D3A82108621200927834 /* PaletteTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D39F2108621200927834 /* PaletteTarget.m */; };
 		8294D3B2210864BC00927834 /* UIColor+Enhancement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3B1210864BC00927834 /* UIColor+Enhancement.m */; };
-		8294D3B7210869E800927834 /* posterController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3B5210869E700927834 /* posterController.mm */; };
+		8294D3B7210869E800927834 /* PosterController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3B5210869E700927834 /* PosterController.mm */; };
 		8294D3BA21086A1B00927834 /* PosterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3B921086A1B00927834 /* PosterView.m */; };
 		8294D3BF21086C0E00927834 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8294D3BE21086C0E00927834 /* UIView+Extension.m */; };
 		8294D3C12108714B00927834 /* water.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8294D3C02108714A00927834 /* water.jpeg */; };
@@ -170,8 +170,8 @@
 		8294D3A02108621200927834 /* UIImage+Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Palette.h"; sourceTree = "<group>"; };
 		8294D3B0210864BB00927834 /* UIColor+Enhancement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Enhancement.h"; sourceTree = "<group>"; };
 		8294D3B1210864BC00927834 /* UIColor+Enhancement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Enhancement.m"; sourceTree = "<group>"; };
-		8294D3B5210869E700927834 /* posterController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = posterController.mm; sourceTree = "<group>"; };
-		8294D3B6210869E700927834 /* posterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = posterController.h; sourceTree = "<group>"; };
+		8294D3B5210869E700927834 /* PosterController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PosterController.mm; sourceTree = "<group>"; };
+		8294D3B6210869E700927834 /* PosterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PosterController.h; sourceTree = "<group>"; };
 		8294D3B821086A1B00927834 /* PosterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosterView.h; sourceTree = "<group>"; };
 		8294D3B921086A1B00927834 /* PosterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosterView.m; sourceTree = "<group>"; };
 		8294D3BD21086C0D00927834 /* UIView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -442,8 +442,8 @@
 		8294D3B4210869E700927834 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8294D3B6210869E700927834 /* posterController.h */,
-				8294D3B5210869E700927834 /* posterController.mm */,
+				8294D3B6210869E700927834 /* PosterController.h */,
+				8294D3B5210869E700927834 /* PosterController.mm */,
 			);
 			name = Controller;
 			path = video/posterMainColor/Controller;
@@ -879,7 +879,7 @@
 			files = (
 				823363441F9492CF00D0DCFA /* VTMidWaterMarkFilter.h in Sources */,
 				823363451F9492CF00D0DCFA /* VTMidWaterMarkFilter.mm in Sources */,
-				8294D3B7210869E800927834 /* posterController.mm in Sources */,
+				8294D3B7210869E800927834 /* PosterController.mm in Sources */,
 				823363461F9492CF00D0DCFA /* VTTailFilter1.h in Sources */,
 				8294D3A42108621200927834 /* PaletteSwatch.m in Sources */,
 				823363471F9492CF00D0DCFA /* VTTailFilter1.m in Sources */,
