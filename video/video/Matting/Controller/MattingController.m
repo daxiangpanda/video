@@ -32,21 +32,23 @@
     NSLog(@"%@",outPut);
     for(int i = 0;i<outPut.upscore_dsn3.count;i++){
         CGFloat percent = [self sigmoid:[outPut.upscore_dsn3[i] floatValue]];
-        if(percent > 0.01) {
+        if(percent > 0.1) {
             NSLog(@"output[%d]:%f",i,percent);
         }
     }
     
     UInt8 gray[500 * 500];
     NSMutableData *data = [NSMutableData dataWithLength:500 * 500];
-//    [data bytes][0];
-    Byte byte[500 * 500];
     for(int i = 0;i<500;i++){
         for(int j = 0;j<500;j++){
             NSInteger index = i * 500 +j;
-            CGFloat value = [outPut.upscore_dsn3[index] doubleValue];
-            CGFloat result = [self sigmoid:value];
-            gray[index] = (UInt8)(result * 255);
+            double value = [outPut.upscore_dsn3[index] doubleValue];
+            double result = [self sigmoid:value];
+//            printf(result * 255);
+            if(result > 0.1){
+                NSLog(@"%d",(UInt8)(result) * 255);
+            }
+            gray[index] = (UInt8)(result) * 255;
 //            gray[index] = (UInt8)([self sigmoid:[outPut.upscore_dsn3[index] doubleValue]] * 255);
         }
     }
@@ -54,9 +56,7 @@
 //        NSLog(@"%d",(UInt8)([self sigmoid:[outPut.upscore_fuse[i] floatValue]] * 255));
         
     }
-    NSData *imageData = [NSData dataWithBytes:gray length:500 * 500];
-//    UIImageWriteToSavedPhotosAlbum([UIImage imageWithData:imageData], nil, nil, nil);
-//    [UIImage imageWithData:imageData];
+
     CFDataRef cfData = CFDataCreate(nil, gray, 500 * 500);
     
     CGDataProviderRef provider = CGDataProviderCreateWithCFData(cfData);
@@ -71,7 +71,7 @@
 }
 
 
-- (CGFloat)sigmoid:(CGFloat)input {
+- (double)sigmoid:(double)input {
     return 1 / (1 + exp(-input));
 }
 - (HEDso3_1 *)model {

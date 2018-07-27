@@ -25,8 +25,10 @@
 @property (nonatomic, strong) AVCaptureDeviceInput          *videoInput;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer    *previewLayer;
 @property (nonatomic, strong) AVCaptureDevice               *device;
-@property (nonatomic, strong) dispatch_queue_t          bufferQueue;
-@property (nonatomic, strong) AVCaptureVideoDataOutput  *dataOutPut;
+@property (nonatomic, strong) dispatch_queue_t              bufferQueue;
+@property (nonatomic, strong) AVCaptureVideoDataOutput      *dataOutPut;
+@property (nonatomic, assign) NSInteger                     currentIndex;
+
 @end
 
 
@@ -37,6 +39,7 @@
     if(self) {
         [self setupData];
         [self setupView];
+        [self addGesture];
     }
     return self;
 }
@@ -47,8 +50,33 @@
 }
 
 - (void)setupData {
+    _currentIndex = 0;
     _useCamera = NO;
     self.bufferQueue = dispatch_queue_create("bufferQueue", NULL);
+}
+
+- (void)addGesture {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap)];
+    // 允许用户交互
+    self.posterImageView.userInteractionEnabled = YES;
+    
+    [self.posterImageView addGestureRecognizer:tap];
+
+}
+
+- (void)doTap {
+    NSLog(@"11");
+    NSArray *array = @[[UIImage imageNamed:@"flower1"],[UIImage imageNamed:@"flower2"],[UIImage imageNamed:@"pic1.jpg"],[UIImage imageNamed:@"tea.jpeg"],[UIImage imageNamed:@"sky.jpg"],[UIImage imageNamed:@"flower"],[UIImage imageNamed:@"indoor.jpg"]];
+    self.backgroundImageView.image = array[_currentIndex % array.count];
+    _currentIndex += 1;
+    __weak typeof (self) weakSelf = self;
+    [self.backgroundImageView.image getPaletteImageColor:^(PaletteColorModel *recommendColor, NSDictionary *allModeColorDic, NSError *error) {
+        if (!recommendColor){
+            return;
+        }
+        weakSelf.posterImageView.mainColor = [UIColor colorFromRGBcode:recommendColor.imageColorString];
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
