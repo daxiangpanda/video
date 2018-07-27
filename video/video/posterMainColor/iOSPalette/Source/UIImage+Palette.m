@@ -11,7 +11,7 @@
 @implementation UIImage (Palette)
 
 - (void)getPaletteImageColor:(GetColorBlock)block{
-    [self getPaletteImageColorWithMode:DEFAULT_NON_MODE_PALETTE withCallBack:block];
+    [self getPaletteImageColorWithMode:ALL_MODE_PALETTE withCallBack:block];
     
 }
 

@@ -92,12 +92,12 @@
                   moduleName = "video"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuxinzhong/video/video/video/VideoFilter/Controller/VideoFilterController.m"
-                  timestampString = "554357009.8871861"
+                  timestampString = "554361589.06637"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "270"
                   endingLineNumber = "270"
-                  offsetFromSymbolStart = "1336">
+                  offsetFromSymbolStart = "1475">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -107,12 +107,12 @@
                   moduleName = "video"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuxinzhong/video/video/video/VideoFilter/Controller/VideoFilterController.m"
-                  timestampString = "554357009.889367"
+                  timestampString = "554361589.0684789"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "271"
                   endingLineNumber = "271"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "23">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -122,12 +122,12 @@
                   moduleName = "video"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liuxinzhong/video/video/video/VideoFilter/Controller/VideoFilterController.m"
-                  timestampString = "554357009.891539"
+                  timestampString = "554361589.072505"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "270"
                   endingLineNumber = "270"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -155,11 +155,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/posterMainColor/Controller/PosterController.mm"
-            timestampString = "554357009.785105"
+            timestampString = "554361588.951779"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "-captureOutput:didOutputSampleBuffer:fromConnection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -171,12 +171,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Matting/Controller/MattingController.m"
-            timestampString = "554357009.785524"
+            timestampString = "554361588.951856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
             endingLineNumber = "49"
             landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "video/posterMainColor/Controller/PosterController.mm"
+            timestampString = "554361680.3479789"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-doTap"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
