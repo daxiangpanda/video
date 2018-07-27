@@ -38,10 +38,21 @@
     }
     
     UInt8 gray[500 * 500];
+    NSMutableData *data = [NSMutableData dataWithLength:500 * 500];
+//    [data bytes][0];
     Byte byte[500 * 500];
+    for(int i = 0;i<500;i++){
+        for(int j = 0;j<500;j++){
+            NSInteger index = i * 500 +j;
+            CGFloat value = [outPut.upscore_dsn3[index] doubleValue];
+            CGFloat result = [self sigmoid:value];
+            gray[index] = (UInt8)(result * 255);
+//            gray[index] = (UInt8)([self sigmoid:[outPut.upscore_dsn3[index] doubleValue]] * 255);
+        }
+    }
     for(int i = 0;i<outPut.upscore_dsn3.count;i++){
 //        NSLog(@"%d",(UInt8)([self sigmoid:[outPut.upscore_fuse[i] floatValue]] * 255));
-        gray[i] = (int)([self sigmoid:[outPut.upscore_dsn3[i] floatValue]] * 255);
+        
     }
     NSData *imageData = [NSData dataWithBytes:gray length:500 * 500];
 //    UIImageWriteToSavedPhotosAlbum([UIImage imageWithData:imageData], nil, nil, nil);
@@ -52,7 +63,7 @@
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
     
-    CGImageRef cgImage = CGImageCreate(500, 500, 8, 8, 500, colorSpace, kCGBitmapByteOrderDefault, provider, nil, YES, kCGRenderingIntentDefault);
+    CGImageRef cgImage = CGImageCreate(500, 500, 8, 8, 500, colorSpace, nil, provider, nil, YES, kCGRenderingIntentDefault);
     UIImage *image = [UIImage imageWithCGImage:cgImage];
     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
 //    [UIImage imageWithCGImage:cgImage];
