@@ -386,6 +386,8 @@ int hist[32768];
         }
         
         NSInteger red,green,blue;
+        // 依次分析每一个pixel
+        
         for (int pixelIndex = 0 ; pixelIndex < self.pixelCount; pixelIndex++){
             
             red   = (NSInteger)rawData[pixelIndex*4+0];

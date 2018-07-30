@@ -13,9 +13,11 @@
 #import "UIImage+Palette.h"
 #import "UIColor+Enhancement.h"
 #import "PosterView.h"
+#import "TZImagePickerController.h"
+
 //#import <opencv2/opencv.hpp>
 
-@interface PosterController()<AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface PosterController()<AVCaptureVideoDataOutputSampleBufferDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TZImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UIImageView                   *backgroundImageView;
 @property (nonatomic, strong) PosterView                    *posterImageView;
@@ -28,6 +30,8 @@
 @property (nonatomic, strong) dispatch_queue_t              bufferQueue;
 @property (nonatomic, strong) AVCaptureVideoDataOutput      *dataOutPut;
 @property (nonatomic, assign) NSInteger                     currentIndex;
+
+@property (nonatomic, strong) UIButton                      *imagePickerButton;
 
 @end
 
@@ -47,6 +51,7 @@
 - (void)setupView {
     [self.view addSubview:self.backgroundImageView];
     [self.view addSubview:self.posterImageView];
+    [self.view addSubview:self.imagePickerButton];
 }
 
 - (void)setupData {
@@ -67,16 +72,37 @@
 - (void)doTap {
     NSLog(@"11");
     NSArray *array = @[[UIImage imageNamed:@"flower1"],[UIImage imageNamed:@"flower2"],[UIImage imageNamed:@"pic1.jpg"],[UIImage imageNamed:@"tea.jpeg"],[UIImage imageNamed:@"sky.jpg"],[UIImage imageNamed:@"flower"],[UIImage imageNamed:@"indoor.jpg"]];
-    self.backgroundImageView.image = array[_currentIndex % array.count];
+    
+    [self changeBackgroundImage:array[_currentIndex % array.count]];
+    
+}
+
+
+- (void)changeBackgroundImage:(UIImage *)image {
+    self.backgroundImageView.image = image;
     _currentIndex += 1;
     __weak typeof (self) weakSelf = self;
     [self.backgroundImageView.image getPaletteImageColor:^(PaletteColorModel *recommendColor, NSDictionary *allModeColorDic, NSError *error) {
         if (!recommendColor){
             return;
         }
+        CGFloat maxPercentage = 0.0;
+        NSString *maxColor;
+        for (NSString *key in allModeColorDic) {
+            if([allModeColorDic[key] isKindOfClass:[PaletteColorModel class]]) {
+                NSLog(@"____percentage:%f",((PaletteColorModel *)allModeColorDic[key]).percentage);
+                if(((PaletteColorModel *)allModeColorDic[key]).percentage > maxPercentage) {
+                    maxPercentage = ((PaletteColorModel *)allModeColorDic[key]).percentage;
+                    maxColor = ((PaletteColorModel *)allModeColorDic[key]).imageColorString;
+                }
+            }
+            NSLog(@"key: %@ value: %@", key, allModeColorDic[key]);
+        }
+        
+        NSLog(@"maxColor:%@,_________percentage:%f",maxColor,maxPercentage);
+        NSLog(@"recommendColor:%@",recommendColor.imageColorString);
         weakSelf.posterImageView.mainColor = [UIColor colorFromRGBcode:recommendColor.imageColorString];
     }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -271,4 +297,33 @@
     }
     return _posterImageView;
 }
+
+- (UIButton *)imagePickerButton {
+    if(!_imagePickerButton) {
+        _imagePickerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _imagePickerButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 100, 100, 100);
+
+        [_imagePickerButton addTarget:self action:@selector(imagePickerButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        _imagePickerButton.backgroundColor = [UIColor clearColor];
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+        [_imagePickerButton addSubview:titleLabel];
+        titleLabel.text = @"切换背景";
+        titleLabel.font = [UIFont systemFontOfSize:15.0f];
+        titleLabel.textColor = [UIColor blackColor];
+    }
+    return _imagePickerButton;
+}
+
+- (void)imagePickerButtonClicked {
+
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
+    
+    // You can get the photos by block, the same as by delegate.
+    // 你可以通过block或者代理，来得到用户选择的照片.
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        [self changeBackgroundImage:photos.firstObject];
+    }];
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
+}
+
 @end
