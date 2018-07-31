@@ -61,7 +61,6 @@
 - (void)coreMLButtonClick  {
     MattingController *matVC = [[MattingController alloc]init];
     [self.navigationController pushViewController:matVC animated:YES];
-
 }
 
 @end

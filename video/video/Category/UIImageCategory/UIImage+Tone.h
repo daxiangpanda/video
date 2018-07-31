@@ -10,6 +10,8 @@
 
 @interface UIImage (Tone)
 
+@property (nonatomic, copy) NSString *name;
+
 - (UIImage *)imageTone;
 
 @end

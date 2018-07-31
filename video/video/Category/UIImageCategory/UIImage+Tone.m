@@ -7,9 +7,12 @@
 //
 
 #import "UIImage+Tone.h"
+#import <objc/runtime.h>
 
 @implementation UIImage (Tone)
 
+
+char nameKey;
 - (UIImage *)imageTone{
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1
     int bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedLast;
@@ -67,4 +70,11 @@
     
 }
 
+-(void)setName:(NSString *)name {
+    objc_setAssociatedObject(self, &nameKey, name, OBJC_ASSOCIATION_COPY);
+}
+
+-(NSString *)name {
+    return objc_getAssociatedObject(self, &nameKey);
+}
 @end

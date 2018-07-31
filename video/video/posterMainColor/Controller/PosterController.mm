@@ -15,7 +15,8 @@
 #import "PosterView.h"
 #import "TZImagePickerController.h"
 
-//#import <opencv2/opencv.hpp>
+#import <objc/runtime.h>
+#import "Person.h"
 
 @interface PosterController()<AVCaptureVideoDataOutputSampleBufferDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,TZImagePickerControllerDelegate>
 
@@ -32,6 +33,8 @@
 @property (nonatomic, assign) NSInteger                     currentIndex;
 
 @property (nonatomic, strong) UIButton                      *imagePickerButton;
+
+@property (nonatomic, strong) UILabel                       *testLabel;
 
 @end
 
@@ -52,6 +55,8 @@
     [self.view addSubview:self.backgroundImageView];
     [self.view addSubview:self.posterImageView];
     [self.view addSubview:self.imagePickerButton];
+    [self.view addSubview:self.testLabel];
+
 }
 
 - (void)setupData {
@@ -62,19 +67,14 @@
 
 - (void)addGesture {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTap)];
-    // 允许用户交互
     self.posterImageView.userInteractionEnabled = YES;
-    
     [self.posterImageView addGestureRecognizer:tap];
 
 }
 
 - (void)doTap {
-    NSLog(@"11");
-    NSArray *array = @[[UIImage imageNamed:@"flower1"],[UIImage imageNamed:@"flower2"],[UIImage imageNamed:@"pic1.jpg"],[UIImage imageNamed:@"tea.jpeg"],[UIImage imageNamed:@"sky.jpg"],[UIImage imageNamed:@"flower"],[UIImage imageNamed:@"indoor.jpg"]];
-    
+    NSArray *array = @[[UIImage imageNamed:@"flower2"],[UIImage imageNamed:@"pic1.jpg"],[UIImage imageNamed:@"tea.jpeg"],[UIImage imageNamed:@"sky.jpg"],[UIImage imageNamed:@"flower"],[UIImage imageNamed:@"indoor.jpg"],[UIImage imageNamed:@"flower1"]];
     [self changeBackgroundImage:array[_currentIndex % array.count]];
-    
 }
 
 
@@ -90,55 +90,46 @@
         NSString *maxColor;
         for (NSString *key in allModeColorDic) {
             if([allModeColorDic[key] isKindOfClass:[PaletteColorModel class]]) {
-                NSLog(@"____percentage:%f",((PaletteColorModel *)allModeColorDic[key]).percentage);
+//                NSLog(@"____percentage:%f",((PaletteColorModel *)allModeColorDic[key]).percentage);
                 if(((PaletteColorModel *)allModeColorDic[key]).percentage > maxPercentage) {
                     maxPercentage = ((PaletteColorModel *)allModeColorDic[key]).percentage;
                     maxColor = ((PaletteColorModel *)allModeColorDic[key]).imageColorString;
                 }
             }
-            NSLog(@"key: %@ value: %@", key, allModeColorDic[key]);
+            if([allModeColorDic[key] isKindOfClass:[PaletteColorModel class]]) {
+//                NSLog(@"key: %@ value: %@", key, ((PaletteColorModel *)allModeColorDic[key]).imageColorString);
+            }
         }
         
-        NSLog(@"maxColor:%@,_________percentage:%f",maxColor,maxPercentage);
-        NSLog(@"recommendColor:%@",recommendColor.imageColorString);
-        weakSelf.posterImageView.mainColor = [UIColor colorFromRGBcode:recommendColor.imageColorString];
+//        NSLog(@"maxColor:%@,_________percentage:%f",maxColor,maxPercentage);
+//        NSLog(@"recommendColor:%@",recommendColor.imageColorString);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            weakSelf.posterImageView.mainColor = [UIColor colorFromRGBcode:maxColor];
+        });
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-    
 }
 
 - (void)viewDidLoad {
-    __weak typeof (self) weakSelf = self;
-
     if(_useCamera){
         [self openCamera];
     }else {
-        UIImage *backgroundImage = [UIImage imageNamed:@"flower"];
-        self.backgroundImageView.image = backgroundImage;
-        
-        
-        [backgroundImage getPaletteImageColor:^(PaletteColorModel *recommendColor, NSDictionary *allModeColorDic, NSError *error) {
-            if (!recommendColor){
-                return;
-            }
-            weakSelf.posterImageView.mainColor = [UIColor colorFromRGBcode:recommendColor.imageColorString];
-        }];
+        UIImage *backgroundImage = [UIImage imageNamed:@"pic1.jpg"];
+        [self changeBackgroundImage:backgroundImage];
     }
-
+    
 }
 
 - (void)openCamera {
     self.session = [[AVCaptureSession alloc]init];
     [self.session setSessionPreset:AVCaptureSessionPresetiFrame1280x720];
     
-    self.device = [self cameraWithPosition:AVCaptureDevicePositionFront];;
+    self.device = [self cameraWithPosition:AVCaptureDevicePositionBack];;
     [self.device lockForConfiguration:nil];
     
     //    [self.device setActiveVideoMaxFrameDuration:CMTimeMake(1, 60)];
@@ -171,7 +162,9 @@
     [self.session startRunning];
 }
 
+
 - (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition)position{
+//    AVCaptureDeviceDiscoverySession *session = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVMediaTypeVideo] mediaType:AVMediaTypeVideo position:AVCaptureDevicePositionBack];
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     for ( AVCaptureDevice *device in devices )
         if ( device.position == position ) return device;
@@ -180,24 +173,18 @@
 
 -(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
     __weak typeof (self) weakSelf = self;
-//    CVImageBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-//    CGImageRef  imageRef = [self imageFromPixelBuffer:sampleBuffer];
-//    [UIImage imageWithCGImage:imageRef]
-//    CGImageRef cgImage = [self imageFromSampleBuffer:sampleBuffer];
-    
+    UIImageWriteToSavedPhotosAlbum([self imageFromSamplePlanerPixelBuffer:sampleBuffer], nil, nil, nil);
     [[self imageFromSamplePlanerPixelBuffer:sampleBuffer] getPaletteImageColor:^(PaletteColorModel *recommendColor, NSDictionary *allModeColorDic, NSError *error) {
-        NSLog(@"colorString:%@",recommendColor.imageColorString);
+//        NSLog(@"colorString:%@",recommendColor.imageColorString);
         if (!recommendColor){
             return;
         }
         weakSelf.posterImageView.mainColor = [UIColor colorFromRGBcode:recommendColor.imageColorString];
     }];
-//    CGImageRelease( cgImage );
-
 }
 
-- (CGImageRef) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer // Create a CGImageRef from sample buffer data
-{
+ // Create a CGImageRef from sample buffer data
+- (CGImageRef)imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer{
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CVPixelBufferLockBaseAddress(imageBuffer,0);        // Lock the image buffer
     
@@ -213,13 +200,11 @@
     
     CGColorSpaceRelease(colorSpace);
     CVPixelBufferUnlockBaseAddress(imageBuffer,0);
-    /* CVBufferRelease(imageBuffer); */  // do not call this!
     
     return newImage;
 }
 
--(UIImage *) imageFromSamplePlanerPixelBuffer:(CMSampleBufferRef) sampleBuffer{
-    
+- (UIImage *)imageFromSamplePlanerPixelBuffer:(CMSampleBufferRef) sampleBuffer{
     @autoreleasepool {
         // Get a CMSampleBuffer's Core Video image buffer for the media data
         CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
@@ -260,7 +245,7 @@
     }
 }
 
-- (CGImageRef )imageFromPixelBuffer:(CMSampleBufferRef)sampleBuffer {
+- (CGImageRef)imageFromPixelBuffer:(CMSampleBufferRef)sampleBuffer {
     
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     
@@ -302,7 +287,6 @@
     if(!_imagePickerButton) {
         _imagePickerButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _imagePickerButton.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 100, 100, 100);
-
         [_imagePickerButton addTarget:self action:@selector(imagePickerButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         _imagePickerButton.backgroundColor = [UIColor clearColor];
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
@@ -315,15 +299,35 @@
 }
 
 - (void)imagePickerButtonClicked {
-
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
-    
-    // You can get the photos by block, the same as by delegate.
-    // 你可以通过block或者代理，来得到用户选择的照片.
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
         [self changeBackgroundImage:photos.firstObject];
     }];
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
+- (UILabel *)testLabel {
+    if(!_testLabel) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 200)];
+        [label setBackgroundColor:[UIColor blackColor]];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setNumberOfLines:0];
+        
+        NSString *labelText = @"可以自己按照宽高，字体大小，来计算有多少行。。然后。。。每行画一个UILabel。。高度自己可以控制把这个写一个自定义的类。 ";
+        
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:labelText];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        
+        [paragraphStyle setLineHeightMultiple:0.7];//调整行间距
+        label.font = [UIFont systemFontOfSize:30.0f];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];
+        label.attributedText = attributedString;
+        [self.view addSubview:label];
+//        [label sizeToFit];
+        
+        NSLog(@"%f %f",label.frame.size.width,label.frame.size.height);
+        _testLabel = label;
+    }
+    return _testLabel;
+}
 @end

@@ -56,7 +56,7 @@ int hist[32768];
         _lowerIndex = lowerIndex;
         _upperIndex = upperIndex;
         _distinctColors = colorArray;
-    
+        
         [self fitBox];
         
     }
@@ -103,8 +103,8 @@ int hist[32768];
     
     // Now revert all of the colors so that they are packed as RGB again
     [self modifySignificantOctetWithDismension:longestDimension lowerIndex:_lowerIndex upperIndex:_upperIndex];
-
-//    modifySignificantOctet(colors, longestDimension, mLowerIndex, mUpperIndex);
+    
+    //    modifySignificantOctet(colors, longestDimension, mLowerIndex, mUpperIndex);
     
     NSInteger midPoint = _population / 2;
     for (NSInteger i = _lowerIndex, count = 0; i <= _upperIndex; i++)  {
@@ -240,7 +240,7 @@ int hist[32768];
     redMean = [PaletteColorUtils modifyWordWidthWithValue:redMean currentWidth:QUANTIZE_WORD_WIDTH targetWidth:8];
     greenMean = [PaletteColorUtils modifyWordWidthWithValue:greenMean currentWidth:QUANTIZE_WORD_WIDTH targetWidth:8];
     blueMean = [PaletteColorUtils modifyWordWidthWithValue:blueMean currentWidth:QUANTIZE_WORD_WIDTH targetWidth:8];
-
+    
     NSInteger rgb888Color = redMean << 2 * 8 | greenMean << 8 | blueMean;
     
     PaletteSwatch *swatch = [[PaletteSwatch alloc]initWithColorInt:rgb888Color population:totalPopulation];
@@ -366,20 +366,20 @@ int hist[32768];
 }
 
 - (void)startToAnalyzeImage{
-
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         
         [self clearHistArray];
         
         // Get raw pixel data from image
         unsigned char *rawData = [self rawPixelDataFromImage:_image];
-
+        
         if (!rawData || self.pixelCount <= 0){
             NSDictionary *userInfo = @{
                                        NSLocalizedDescriptionKey: NSLocalizedString(@"Operation fail", nil),
-                                        NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"The image is nill.", nil),
-                                        NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Check the image input please", nil)
-                                           };
+                                       NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"The image is nill.", nil),
+                                       NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Check the image input please", nil)
+                                       };
             NSError *nullImageError = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileNoSuchFileError userInfo:userInfo];
             _getColorBlock(nil,nil,nullImageError);
             return;
@@ -408,14 +408,57 @@ int hist[32768];
         NSInteger distinctColorCount = 0;
         NSInteger length = sizeof(hist)/sizeof(hist[0]);
         for (NSInteger color = 0 ; color < length ;color++){
-            if (hist[color] > 0 && [self shouldIgnoreColor:color]){
-                hist[color] = 0;
-            }
+            //            if (hist[color] > 0 && [self shouldIgnoreColor:color]){
+            //            if (hist[color] > 0){
+            //                hist[color] = 0;
+            //            }
             if (hist[color] > 0){
                 distinctColorCount ++;
             }
         }
         
+        int maxColor = 0;
+        int maxCount = 0;
+        for (int i = 0;i<32768;i++){
+            if(maxCount < hist[i]){
+                maxCount = hist[i];
+                maxColor = i;
+                NSLog(@"color:%d,_____count:%d",i,hist[i]);
+            }
+        }
+        
+        
+//        NSInteger color = maxColor;
+//        NSInteger redMax = [PaletteColorUtils quantizedRed:color];
+//        NSInteger greenMax = [PaletteColorUtils quantizedGreen:color];
+//        NSInteger blueMax = [PaletteColorUtils quantizedBlue:color];
+//
+//        NSInteger redMean = [PaletteColorUtils modifyWordWidthWithValue:redMax currentWidth:QUANTIZE_WORD_WIDTH targetWidth:8];
+//        NSInteger greenMean = [PaletteColorUtils modifyWordWidthWithValue:greenMax currentWidth:QUANTIZE_WORD_WIDTH targetWidth:8];
+//        NSInteger blueMean = [PaletteColorUtils modifyWordWidthWithValue:blueMax currentWidth:QUANTIZE_WORD_WIDTH targetWidth:8];
+//
+//        NSInteger color888 = redMean << 2 * 8 | greenMean << 8 | blueMean;
+//
+//        PaletteSwatch *swatch = [[PaletteSwatch alloc]initWithColorInt:color888 population:20];
+//        PaletteColorModel *model = [[PaletteColorModel alloc]init];
+//        model.imageColorString = [swatch getColorString];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            _getColorBlock(model,nil,nil);
+//        });
+//        return;
+        
+        //        [swatch getColorString]
+        //
+        //        NSInteger rgb888Color = redMean << 2 * 8 | greenMean << 8 | blueMean;
+        //
+        //        PaletteSwatch *swatch = [[PaletteSwatch alloc]initWithColorInt:rgb888Color population:totalPopulation];
+        
+        //        PaletteColorModel *colorModel = [[PaletteColorModel alloc]init];
+        //        colorModel.imageColorString = [swatch getColorString];
+        
+        //        colorModel.percentage = (CGFloat)[swatch getPopulation]/(CGFloat)self.pixelCount;
+        
+        //        _getColorBlock()
         NSInteger distinctColorIndex = 0;
         _distinctColors = [[NSMutableArray alloc]init];
         for (NSInteger color = 0; color < length ;color++){
@@ -463,7 +506,7 @@ int hist[32768];
         
         [self getSwatchForTarget];
     });
-
+    
 }
 
 - (void)splitBoxes:(PriorityBoxArray*)queue{
@@ -499,7 +542,7 @@ int hist[32768];
 - (unsigned char *)rawPixelDataFromImage:(UIImage *)image{
     // Get cg image and its size
     
-//    image = [self scaleDownImage:image];
+    //    image = [self scaleDownImage:image];
     
     CGImageRef cgImage = [image CGImage];
     NSUInteger width = CGImageGetWidth(cgImage);
@@ -531,7 +574,7 @@ int hist[32768];
     // We are done with the context
     // 内存泄漏问题？？
     CGContextRelease(context);
-//    CGImageRelease(cgImage);
+    //    CGImageRelease(cgImage);
     // Write pixel count to passed pointer
     self.pixelCount = (NSInteger)width * (NSInteger)height;
     
@@ -578,10 +621,10 @@ int hist[32768];
         
         PaletteTarget *lightMutedTarget = [[PaletteTarget alloc]initWithTargetMode:LIGHT_MUTED_PALETTE];
         [targets addObject:lightMutedTarget];
-
+        
         PaletteTarget *darkVibrantTarget = [[PaletteTarget alloc]initWithTargetMode:DARK_VIBRANT_PALETTE];
         [targets addObject:darkVibrantTarget];
-
+        
         PaletteTarget *darkMutedTarget = [[PaletteTarget alloc]initWithTargetMode:DARK_MUTED_PALETTE];
         [targets addObject:darkMutedTarget];
         
@@ -646,6 +689,7 @@ int hist[32768];
 - (void)getSwatchForTarget{
     NSMutableDictionary *finalDic = [[NSMutableDictionary alloc]init];
     PaletteColorModel *recommendColorModel;
+    // 寻找不同类型的颜色
     for (NSInteger i = 0;i<_targetArray.count;i++){
         PaletteTarget *target = [_targetArray objectAtIndex:i];
         [target normalizeWeights];
@@ -656,8 +700,8 @@ int hist[32768];
             
             colorModel.percentage = (CGFloat)[swatch getPopulation]/(CGFloat)self.pixelCount;
             
-//            colorModel.titleTextColorString = [swatch getTitleTextColorString];
-//            colorModel.bodyTextColorString = [swatch getBodyTextColorString];
+            //            colorModel.titleTextColorString = [swatch getTitleTextColorString];
+            //            colorModel.bodyTextColorString = [swatch getBodyTextColorString];
             
             if (colorModel){
                 [finalDic setObject:colorModel forKey:[target getTargetKey]];
@@ -684,7 +728,7 @@ int hist[32768];
     dispatch_async(dispatch_get_main_queue(), ^{
         _getColorBlock(recommendColorModel,finalColorDic,nil);
     });
-
+    
 }
 
 - (PaletteSwatch*)getMaxScoredSwatchForTarget:(PaletteTarget*)target{

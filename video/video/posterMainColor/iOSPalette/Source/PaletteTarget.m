@@ -8,6 +8,7 @@
 
 #import "PaletteTarget.h"
 
+// 不同的target的参数
 const float TARGET_DARK_LUMA = 0.26f;
 const float MAX_DARK_LUMA = 0.45f;
 
