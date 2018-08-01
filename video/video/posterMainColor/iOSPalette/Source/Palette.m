@@ -64,6 +64,7 @@ int hist[32768];
 }
 
 - (NSInteger)getVolume{
+    // 各个分量的差值的乘积
     NSInteger volume = (_maxRed - _minRed + 1) * (_maxGreen - _minGreen + 1) *
     (_maxBlue - _minBlue + 1);
     return volume;
@@ -92,16 +93,20 @@ int hist[32768];
 }
 
 - (NSInteger)findSplitPoint{
+    //寻找哪一个分量差距最大
     NSInteger longestDimension = [self getLongestColorDimension];
     
     // We need to sort the colors in this box based on the longest color dimension.
     // As we can't use a Comparator to define the sort logic, we modify each color so that
     // it's most significant is the desired dimension
+    // 根据占比最大的分量重新排列RGB值为分量重的分量在前面
     [self modifySignificantOctetWithDismension:longestDimension lowerIndex:_lowerIndex upperIndex:_upperIndex];
     
+    // 重新排序重新排列后的颜色
     [self sortColorArray];
     
     // Now revert all of the colors so that they are packed as RGB again
+    // 将颜色重新排列成RGB
     [self modifySignificantOctetWithDismension:longestDimension lowerIndex:_lowerIndex upperIndex:_upperIndex];
     
     //    modifySignificantOctet(colors, longestDimension, mLowerIndex, mUpperIndex);
@@ -255,6 +260,7 @@ int hist[32768];
     return YES;
 }
 
+// 计算rgb各个分量的极值 以及这个box的population
 - (void)fitBox{
     
     // Reset the min and max to opposite values
@@ -472,6 +478,7 @@ int hist[32768];
         distinctColorIndex--;
         
         if (distinctColorCount <= kMaxColorNum){
+            // 如果不同颜色的数量少于16个的话 那么直接创建swatch
             NSMutableArray *swatchs = [[NSMutableArray alloc]init];
             for (NSInteger i = 0;i < distinctColorCount ; i++){
                 NSInteger color = [_distinctColors[i] integerValue];
@@ -493,6 +500,7 @@ int hist[32768];
             
             _swatchArray = [swatchs copy];
         }else{
+            // 如果不同颜色数量过多 那么建立vbox
             _priorityArray = [[PriorityBoxArray alloc]init];
             VBox *colorVBox = [[VBox alloc]initWithLowerIndex:0 upperIndex:distinctColorIndex colorArray:_distinctColors];
             [_priorityArray addVBox:colorVBox];
@@ -510,7 +518,7 @@ int hist[32768];
 }
 
 - (void)splitBoxes:(PriorityBoxArray*)queue{
-    //queue is a priority queue.
+    //queue is a priority queue. 将queue中的vbox分裂
     while (queue.count < kMaxColorNum) {
         VBox *vbox = [queue poll];
         if (vbox != nil && [vbox canSplit]) {
@@ -749,8 +757,10 @@ int hist[32768];
 
 - (BOOL)shouldBeScoredForTarget:(PaletteSwatch*)swatch target:(PaletteTarget*)target{
     NSArray *hsl = [swatch getHsl];
-    return [hsl[1] floatValue] >= [target getMinSaturation] && [hsl[1] floatValue]<= [target getMaxSaturation]
-    && [hsl[2] floatValue]>= [target getMinLuma] && [hsl[2] floatValue] <= [target getMaxLuma];
+    return [hsl[1] floatValue] >= [target getMinSaturation]
+    && [hsl[1] floatValue]<= [target getMaxSaturation]
+    && [hsl[2] floatValue]>= [target getMinLuma]
+    && [hsl[2] floatValue] <= [target getMaxLuma];
     
 }
 
