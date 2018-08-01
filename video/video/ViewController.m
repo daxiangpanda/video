@@ -12,6 +12,8 @@
 #import "VideoFilterController.h"
 #import "PosterController.h"
 #import "MattingController.h"
+#import "MultiplyFilterController.h"
+
 @interface ViewController()
 
 @property (weak, nonatomic) IBOutlet UIButton *imagePickerButton;
@@ -19,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *waterMarkButton;
 @property (weak, nonatomic) IBOutlet UIButton *mainColorButton;
 @property (weak, nonatomic) IBOutlet UIButton *coreMLButton;
+@property (weak, nonatomic) IBOutlet UIButton *multiplyFilter;
 
 @end
 
@@ -36,6 +39,7 @@
     [self.waterMarkButton addTarget:self action:@selector(waterMarkButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.mainColorButton addTarget:self action:@selector(mainColorButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.coreMLButton addTarget:self action:@selector(coreMLButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.multiplyFilter addTarget:self action:@selector(multiplyFilterButtonClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)imagePickerButtonClick {
@@ -63,4 +67,8 @@
     [self.navigationController pushViewController:matVC animated:YES];
 }
 
+- (void)multiplyFilterButtonClick {
+    MultiplyFilterController *matVC = [[MultiplyFilterController alloc]init];
+    [self.navigationController pushViewController:matVC animated:YES];
+}
 @end

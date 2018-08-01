@@ -35,7 +35,7 @@
 @property (nonatomic, strong) UIButton                      *imagePickerButton;
 
 @property (nonatomic, strong) UILabel                       *testLabel;
-
+@property (nonatomic, strong) NSMutableArray                *array;
 @end
 
 
@@ -53,8 +53,13 @@
 
 - (void)setupView {
     [self.view addSubview:self.backgroundImageView];
+    
     [self.view addSubview:self.posterImageView];
     [self.view addSubview:self.imagePickerButton];
+    
+    UIImage *mainImage = _array[_currentIndex % _array.count];
+//    self.backgroundImageView.image  = mainImage;
+    [self changeBackgroundImage:mainImage];
 //    [self.view addSubview:self.testLabel];
 
 }
@@ -63,6 +68,11 @@
     _currentIndex = 0;
     _useCamera = NO;
     self.bufferQueue = dispatch_queue_create("bufferQueue", NULL);
+    NSMutableArray *array = [NSMutableArray array];
+    for(NSString *path in [[NSBundle mainBundle] pathsForResourcesOfType:@"png" inDirectory:@"flower"]) {
+        [array addObject:[UIImage imageWithContentsOfFile:path]];
+    }
+    _array = array;
 }
 
 - (void)addGesture {
@@ -75,11 +85,8 @@
 - (void)doTap {
 //    NSArray *array = @[[UIImage imageNamed:@"flower2"],[UIImage imageNamed:@"pic1.jpg"],[UIImage imageNamed:@"tea.jpeg"],[UIImage imageNamed:@"sky.jpg"],[UIImage imageNamed:@"flower"],[UIImage imageNamed:@"indoor.jpg"],[UIImage imageNamed:@"flower1"]];
 //    NSLog(@"%@",[[NSBundle mainBundle] pathsForResourcesOfType:@"png" inDirectory:@"flower"]);
-    NSMutableArray *array = [NSMutableArray array];
-    for(NSString *path in [[NSBundle mainBundle] pathsForResourcesOfType:@"png" inDirectory:@"flower"]) {
-        [array addObject:[UIImage imageWithContentsOfFile:path]];
-    }
-    [self changeBackgroundImage:array[_currentIndex % array.count]];
+
+    [self changeBackgroundImage:_array[_currentIndex % _array.count]];
 }
 
 

@@ -21,4 +21,7 @@
 // 改变UIImage的尺寸
 - (UIImage *)resizedWithWidth:(CGFloat)width
                        height:(CGFloat)height;
+
++ (UIImage*)imageWithImage:(UIImage*)sourceImage
+              scaledToSize:(CGSize)newSize;
 @end
