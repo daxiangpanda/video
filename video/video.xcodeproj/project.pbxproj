@@ -151,6 +151,7 @@
 		8233633F1F948F6A00D0DCFA /* VTTailWaterMarkFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTTailWaterMarkFilter.h; sourceTree = "<group>"; };
 		823363401F948F6A00D0DCFA /* VTTailWaterMarkFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VTTailWaterMarkFilter.m; sourceTree = "<group>"; };
 		8242C269211168DF001ED4AF /* flower */ = {isa = PBXFileReference; lastKnownFileType = folder; path = flower; sourceTree = "<group>"; };
+		8242C26B21118D65001ED4AF /* Palette算法大体流程.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Palette算法大体流程.md"; sourceTree = "<group>"; };
 		82610A3A2109B23D0096B42A /* UIImage+PixelBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+PixelBuffer.h"; sourceTree = "<group>"; };
 		82610A3B2109B23D0096B42A /* UIImage+PixelBuffer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PixelBuffer.m"; sourceTree = "<group>"; };
 		82610A442109BAF60096B42A /* MattingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MattingController.h; sourceTree = "<group>"; };
@@ -275,6 +276,7 @@
 				8294D3B3210869E200927834 /* View */,
 				8294D3B4210869E700927834 /* Controller */,
 				8294D38F2108621200927834 /* iOSPalette */,
+				8242C26B21118D65001ED4AF /* Palette算法大体流程.md */,
 			);
 			path = posterMainColor;
 			sourceTree = "<group>";

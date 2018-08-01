@@ -74,7 +74,7 @@
 
 - (void)doTap {
 //    NSArray *array = @[[UIImage imageNamed:@"flower2"],[UIImage imageNamed:@"pic1.jpg"],[UIImage imageNamed:@"tea.jpeg"],[UIImage imageNamed:@"sky.jpg"],[UIImage imageNamed:@"flower"],[UIImage imageNamed:@"indoor.jpg"],[UIImage imageNamed:@"flower1"]];
-    NSLog(@"%@",[[NSBundle mainBundle] pathsForResourcesOfType:@"png" inDirectory:@"flower"]);
+//    NSLog(@"%@",[[NSBundle mainBundle] pathsForResourcesOfType:@"png" inDirectory:@"flower"]);
     NSMutableArray *array = [NSMutableArray array];
     for(NSString *path in [[NSBundle mainBundle] pathsForResourcesOfType:@"png" inDirectory:@"flower"]) {
         [array addObject:[UIImage imageWithContentsOfFile:path]];
@@ -91,27 +91,29 @@
         if (!recommendColor){
             return;
         }
-        CGFloat maxPercentage = 0.0;
-        NSString *maxColor;
-        for (NSString *key in allModeColorDic) {
-            if([allModeColorDic[key] isKindOfClass:[PaletteColorModel class]]) {
-//                NSLog(@"____percentage:%f",((PaletteColorModel *)allModeColorDic[key]).percentage);
-                if(((PaletteColorModel *)allModeColorDic[key]).percentage > maxPercentage) {
-                    maxPercentage = ((PaletteColorModel *)allModeColorDic[key]).percentage;
-                    maxColor = ((PaletteColorModel *)allModeColorDic[key]).imageColorString;
-                }
-            }
-            if([allModeColorDic[key] isKindOfClass:[PaletteColorModel class]]) {
-//                NSLog(@"key: %@ value: %@", key, ((PaletteColorModel *)allModeColorDic[key]).imageColorString);
-            }
-        }
-        
-//        NSLog(@"maxColor:%@,_________percentage:%f",maxColor,maxPercentage);
-//        NSLog(@"recommendColor:%@",recommendColor.imageColorString);
+//        CGFloat maxPercentage = 0.0;
+//        NSString *maxColor;
+//        for (NSString *key in allModeColorDic) {
+//            if([allModeColorDic[key] isKindOfClass:[PaletteColorModel class]]) {
+////                NSLog(@"____percentage:%f",((PaletteColorModel *)allModeColorDic[key]).percentage);
+//                if(((PaletteColorModel *)allModeColorDic[key]).percentage > maxPercentage) {
+//                    maxPercentage = ((PaletteColorModel *)allModeColorDic[key]).percentage;
+//                    maxColor = ((PaletteColorModel *)allModeColorDic[key]).imageColorString;
+//                }
+//            }
+//            if([allModeColorDic[key] isKindOfClass:[PaletteColorModel class]]) {
+////                NSLog(@"key: %@ value: %@", key, ((PaletteColorModel *)allModeColorDic[key]).imageColorString);
+//            }
+//        }
+//        
+////        NSLog(@"maxColor:%@,_________percentage:%f",maxColor,maxPercentage);
+////        NSLog(@"recommendColor:%@",recommendColor.imageColorString);
         dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.posterImageView.mainColor = [UIColor colorFromRGBcode:maxColor];
+            weakSelf.posterImageView.mainColor = [UIColor colorFromRGBcode:recommendColor.imageColorString];
+            NSLog(@"2");
         });
     }];
+    NSLog(@"1");
 }
 
 - (void)viewWillAppear:(BOOL)animated {

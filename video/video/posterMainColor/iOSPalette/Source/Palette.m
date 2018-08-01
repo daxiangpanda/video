@@ -429,7 +429,7 @@ int hist[32768];
             if(maxCount < hist[i]){
                 maxCount = hist[i];
                 maxColor = i;
-                NSLog(@"color:%d,_____count:%d",i,hist[i]);
+//                NSLog(@"color:%d,_____count:%d",i,hist[i]);
             }
         }
         
@@ -696,46 +696,64 @@ int hist[32768];
 
 - (void)getSwatchForTarget{
     NSMutableDictionary *finalDic = [[NSMutableDictionary alloc]init];
-    PaletteColorModel *recommendColorModel;
+    PaletteColorModel *recommendColorModel = [[PaletteColorModel alloc]init];
     // 寻找不同类型的颜色
-    for (NSInteger i = 0;i<_targetArray.count;i++){
-        PaletteTarget *target = [_targetArray objectAtIndex:i];
-        [target normalizeWeights];
-        PaletteSwatch *swatch = [self getMaxScoredSwatchForTarget:target];
-        if (swatch){
-            PaletteColorModel *colorModel = [[PaletteColorModel alloc]init];
-            colorModel.imageColorString = [swatch getColorString];
-            
-            colorModel.percentage = (CGFloat)[swatch getPopulation]/(CGFloat)self.pixelCount;
-            
-            //            colorModel.titleTextColorString = [swatch getTitleTextColorString];
-            //            colorModel.bodyTextColorString = [swatch getBodyTextColorString];
-            
-            if (colorModel){
-                [finalDic setObject:colorModel forKey:[target getTargetKey]];
-            }
-            
-            if (!recommendColorModel){
-                recommendColorModel = colorModel;
-                
-                if (!_isNeedColorDic){
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        _getColorBlock(recommendColorModel,nil,nil);
-                    });
-                    return;
-                }
-            }
-            
-        }else{
-            [finalDic setObject:@"unrecognized error" forKey:[target getTargetKey]];
+    CGFloat maxPopulation = 0;
+    NSString *maxColorString;
+    for(NSInteger i = 0;i<_swatchArray.count;i++) {
+        if([_swatchArray[i] getPopulation] > maxPopulation) {
+            maxPopulation = [_swatchArray[i] getPopulation];
+            maxColorString = [_swatchArray[i] getColorString];
         }
+//        NSLog(@"%d",[_swatchArray[i] getPopulation]);
     }
+//    NSLog(@"maxPopulation:%f",maxPopulation);
+//    NSLog(@"maxColorString:%@",maxColorString);
+    recommendColorModel.imageColorString = maxColorString;
     
-    
-    NSDictionary *finalColorDic = [finalDic copy];
+    recommendColorModel.percentage = (CGFloat)maxPopulation/(CGFloat)self.pixelCount;
     dispatch_async(dispatch_get_main_queue(), ^{
-        _getColorBlock(recommendColorModel,finalColorDic,nil);
+        _getColorBlock(recommendColorModel,nil,nil);
     });
+    return;
+//    for (NSInteger i = 0;i<_targetArray.count;i++){
+//        PaletteTarget *target = [_targetArray objectAtIndex:i];
+//        [target normalizeWeights];
+//        PaletteSwatch *swatch = [self getMaxScoredSwatchForTarget:target];
+//        if (swatch){
+//            PaletteColorModel *colorModel = [[PaletteColorModel alloc]init];
+//            colorModel.imageColorString = [swatch getColorString];
+//
+//            colorModel.percentage = (CGFloat)[swatch getPopulation]/(CGFloat)self.pixelCount;
+//
+//            //            colorModel.titleTextColorString = [swatch getTitleTextColorString];
+//            //            colorModel.bodyTextColorString = [swatch getBodyTextColorString];
+//
+//            if (colorModel){
+//                [finalDic setObject:colorModel forKey:[target getTargetKey]];
+//            }
+//
+//            if (!recommendColorModel){
+//                recommendColorModel = colorModel;
+//
+//                if (!_isNeedColorDic){
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        _getColorBlock(recommendColorModel,nil,nil);
+//                    });
+//                    return;
+//                }
+//            }
+//
+//        }else{
+//            [finalDic setObject:@"unrecognized error" forKey:[target getTargetKey]];
+//        }
+//    }
+//
+//
+//    NSDictionary *finalColorDic = [finalDic copy];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        _getColorBlock(recommendColorModel,finalColorDic,nil);
+//    });
     
 }
 
